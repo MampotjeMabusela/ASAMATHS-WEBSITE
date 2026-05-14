@@ -10,17 +10,19 @@ const logoSrcWithCache = `${BRAND.logoSrc}?v=${BRAND.logoAssetVersion}`
 
 /**
  * Crest sits directly on the header/footer — no card, border, or shadow.
- * Header: no rounding + `mix-blend-multiply` so white matting blends with the light bar.
- * Footer: `rounded-2xl` on the `<img>` for a light corner trim on dark bg.
+ * Header uses a plain `<img>` so `mix-blend-multiply` composites correctly (Next `<Image fill>`
+ * wraps the bitmap in extra layers and the blend often looks like a no-op). The header crest
+ * wrapper repeats the same surface as the bar (`bg-white` / `bg-white/95` + blur) so the
+ * crest’s white matting matches the bar, including after scroll.
+ * Footer keeps Next `Image` + `rounded-2xl` on dark chrome.
  */
 const imageShell: Record<
   SiteLogoVariant,
   { wrap: string; img: string; sizes: string; quality: number; priority?: boolean }
 > = {
   header: {
-    wrap: "relative h-[3.75rem] w-[165px] shrink-0 sm:h-[3.9rem] sm:w-[185px] md:h-[4.375rem] md:w-[198px]",
-    /** Multiply knocks out white matting so the crest sits flush on white / white+blur header. */
-    img: "object-contain object-center mix-blend-multiply",
+    wrap: "relative h-[3.75rem] w-[165px] shrink-0 overflow-hidden rounded-md sm:h-[3.9rem] sm:w-[185px] md:h-[4.375rem] md:w-[198px]",
+    img: "mix-blend-multiply",
     sizes: "(max-width:768px) 250px, 300px",
     quality: 95,
     priority: true,
@@ -43,9 +45,12 @@ const placeholderShell: Record<SiteLogoVariant, string> = {
 export function SiteLogo({
   variant,
   className,
+  isScrolled = false,
 }: {
   variant: SiteLogoVariant
   className?: string
+  /** Header only: keep crest surface in sync with the fixed header (solid vs frosted). */
+  isScrolled?: boolean
 }) {
   if (BRAND.showLogoPlaceholder) {
     return (
@@ -75,17 +80,41 @@ export function SiteLogo({
     )
   }
 
-  const img = imageShell[variant]
+  const shell = imageShell[variant]
+
+  if (variant === "header") {
+    return (
+      <div
+        className={cn(
+          shell.wrap,
+          isScrolled ? "bg-white/95 backdrop-blur-md" : "bg-white",
+          "flex items-center justify-center",
+          className
+        )}
+      >
+        {/* Native img: blend mode reliably affects the real header / frosted layer behind */}
+        <img
+          src={logoSrcWithCache}
+          alt={BRAND.logoAlt}
+          width={640}
+          height={640}
+          decoding="async"
+          fetchPriority="high"
+          className={cn("max-h-full max-w-full object-contain", shell.img)}
+        />
+      </div>
+    )
+  }
+
   return (
-    <div className={cn(img.wrap, className)}>
+    <div className={cn(shell.wrap, className)}>
       <Image
         src={logoSrcWithCache}
         alt={BRAND.logoAlt}
         fill
-        className={img.img}
-        sizes={img.sizes}
-        quality={img.quality}
-        priority={img.priority}
+        className={shell.img}
+        sizes={shell.sizes}
+        quality={shell.quality}
       />
     </div>
   )

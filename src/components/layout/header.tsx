@@ -64,7 +64,7 @@ export function Header() {
             href="/"
             className="group flex min-w-0 max-w-[min(92vw,28rem)] items-center gap-3 rounded-xl py-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:max-w-none sm:gap-4"
           >
-            <SiteLogo variant="header" />
+            <SiteLogo variant="header" isScrolled={isScrolled} />
             <div className="hidden h-[3.75rem] min-w-0 flex-col justify-center border-l border-gray-200/80 pl-4 sm:flex sm:h-[3.9rem] md:h-[4.375rem] md:pl-5">
               <p className="font-display text-[1.05rem] font-semibold leading-snug tracking-tight text-primary-950 md:text-lg">
                 {SCHOOL_INFO.shortName}
