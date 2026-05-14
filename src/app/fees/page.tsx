@@ -60,9 +60,6 @@ const tuitionRows: {
   { grade: "Grade 7", monthly: "R850.00", termly: "R2550.00", yearly: "R10200.00" },
   { grade: "Grade 8", monthly: "R900.00", termly: "R2700.00", yearly: "R10800.00" },
   { grade: "Grade 9", monthly: "R900.00", termly: "R2700.00", yearly: "R10800.00" },
-  { grade: "Grade 10", monthly: "N/A", termly: "—", yearly: "—" },
-  { grade: "Grade 11", monthly: "N/A", termly: "—", yearly: "—" },
-  { grade: "Grade 12", monthly: "N/A", termly: "—", yearly: "—" },
 ]
 
 const paymentOptions = [
@@ -105,8 +102,8 @@ const faqs = [
     a: "Fees must be deposited into the school’s bank account only (see banking details on this page). Use the reference format advised so allocations are quick and accurate.",
   },
   {
-    q: "Are Grades 10–12 offered?",
-    a: "The published 2026 table lists Grades 10–12 as N/A. Contact the school for high-school placement or future phase plans.",
+    q: "When are termly or yearly fees due?",
+    a: "Option B (termly) must be paid by the 3rd as advised for each term. Option C (yearly) is due before 31 January. Confirm exact dates on the letter from the office.",
   },
 ]
 
@@ -285,7 +282,7 @@ export default function FeesPage() {
                   </table>
                 </div>
                 <p className="border-t border-gray-100 px-4 py-3 text-xs text-gray-500 sm:px-6">
-                  Grades 10–12 are shown as N/A on the published schedule. Enquire at the office for updates.
+                  Enquire at the office for term dates, payment plans, or fee-related queries.
                 </p>
               </CardContent>
             </Card>
