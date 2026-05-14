@@ -155,37 +155,6 @@ export function Header() {
               </button>
             </div>
           </div>
-
-          {/* Phone: all section links in one horizontal row — scroll, never squashed */}
-          <nav
-            className="hide-scrollbar flex gap-2 overflow-x-auto overflow-y-hidden border-t border-gray-100/90 py-2.5 touch-pan-x [-webkit-overflow-scrolling:touch] md:hidden"
-            aria-label="Page sections"
-          >
-            {NAV_LINKS.map((link) => {
-              const active = pathname === link.href
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={cn(
-                    "snap-start inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full border px-3.5 py-2.5 text-[13px] font-semibold leading-tight transition-colors sm:px-4 sm:text-sm",
-                    "min-h-[44px] min-w-0",
-                    active
-                      ? "border-primary-600 bg-primary-50 text-primary-900"
-                      : "border-gray-200 bg-white text-gray-800 hover:border-primary-300 hover:bg-primary-50/60"
-                  )}
-                >
-                  {link.label}
-                </Link>
-              )
-            })}
-            <Link
-              href="/admissions"
-              className="inline-flex h-11 min-h-[44px] shrink-0 snap-start items-center justify-center whitespace-nowrap rounded-full border border-primary-600 bg-primary-600 px-4 text-sm font-semibold text-white hover:bg-primary-700"
-            >
-              Apply
-            </Link>
-          </nav>
         </div>
       </div>
 
