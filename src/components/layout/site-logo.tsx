@@ -10,7 +10,8 @@ const logoSrcWithCache = `${BRAND.logoSrc}?v=${BRAND.logoAssetVersion}`
 
 /**
  * Crest sits directly on the header/footer — no card, border, or shadow.
- * Header & footer marks are ~25% larger than original baseline; corner trim on the `<img>` only (`rounded-2xl`).
+ * Header: no rounding + `mix-blend-multiply` so white matting blends with the light bar.
+ * Footer: `rounded-2xl` on the `<img>` for a light corner trim on dark bg.
  */
 const imageShell: Record<
   SiteLogoVariant,
@@ -18,7 +19,8 @@ const imageShell: Record<
 > = {
   header: {
     wrap: "relative h-[3.75rem] w-[165px] shrink-0 sm:h-[3.9rem] sm:w-[185px] md:h-[4.375rem] md:w-[198px]",
-    img: "object-contain object-center rounded-2xl",
+    /** Multiply knocks out white matting so the crest sits flush on white / white+blur header. */
+    img: "object-contain object-center mix-blend-multiply",
     sizes: "(max-width:768px) 250px, 300px",
     quality: 95,
     priority: true,
