@@ -1,7 +1,10 @@
+/** Printed address and map search string — keep in sync everywhere (footer, contact, fees, maps). */
+export const SCHOOL_MAP_ADDRESS = "1287, 7th Road, Winterveldt, Pretoria, Pretoria" as const
+
 export const SCHOOL_INFO = {
   name: "Asamaths Institute Of Learning – Pretoria",
   shortName: "Asamaths Institute",
-  address: "1287, 7th Road, Winterveldt, Pretoria, Pretoria",
+  address: SCHOOL_MAP_ADDRESS,
   phone: "+27 12 725 8044",
   rawPhone: "+27127258044",
   phoneAlt: "+27 11 925 8074",
@@ -17,13 +20,17 @@ export const SCHOOL_INFO = {
   city: "Pretoria",
   suburb: "Winterveldt",
   neighbourhood: "Winterveldt",
-  totalLearners: 923,
-  totalEducators: 28,
-  studentTeacherRatio: "33:1",
-  surveyYear: 2023,
-  coordinates: { lat: -25.6250, lng: 28.1000 },
-  googleMapsEmbedUrl:
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3592.5!2d28.0975!3d-25.6250!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDM3JzMwLjAiUyAyOMKwMDYnMDAuMCJF!5e0!3m2!1sen!2sza!4v1700000000000",
+  totalLearners: 1017,
+  totalEducators: 35,
+  studentTeacherRatio: "29:1",
+  surveyYear: 2026,
+  /**
+   * OSM embed pin (residential “7th Road”, Tshwane Ward 24 — OpenStreetMap way centroid).
+   * For building-level accuracy in the iframe, set `NEXT_PUBLIC_GOOGLE_MAPS_EMBED_API_KEY` so the map uses Google’s embed with `q` = `address`.
+   */
+  coordinates: { lat: -25.4600697, lng: 28.0352826 },
+  /** Google Maps search for the exact `address` (authoritative for directions). */
+  googleMapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SCHOOL_MAP_ADDRESS)}`,
 }
 
 /** Official crest — file: /public/images/logo-official.png */

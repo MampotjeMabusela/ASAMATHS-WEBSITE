@@ -123,7 +123,8 @@ export function Footer() {
                 <strong className="text-gray-300">Principal:</strong> {SCHOOL_INFO.principal}
               </li>
               <li>
-                <strong className="text-gray-300">Learners:</strong> {SCHOOL_INFO.totalLearners} (2023)
+                <strong className="text-gray-300">Learners:</strong> {SCHOOL_INFO.totalLearners} (
+                {SCHOOL_INFO.surveyYear})
               </li>
               <li>
                 <strong className="text-gray-300">Ratio:</strong> {SCHOOL_INFO.studentTeacherRatio}

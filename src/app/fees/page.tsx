@@ -35,9 +35,8 @@ export const metadata: Metadata = {
   description: `2026 school fees structure for ${SCHOOL_INFO.shortName}: registration, tuition by grade, payment options, and banking details.`,
 }
 
-/** As published on the 2026 fees schedule (office contact & address on document). */
+/** As published on the 2026 fees schedule (office contact on document). Address matches site-wide `SCHOOL_INFO.address`. */
 const FEES_OFFICE = {
-  addressLine: "1278 / 017 Seventh Road, Winterveldt, Pretoria, Gauteng 0198",
   telDisplay: "012 725 8044",
   telHref: "tel:+27127258044",
   faxDisplay: "086 4653 150",
@@ -131,7 +130,7 @@ export default function FeesPage() {
                   <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-primary-600" aria-hidden />
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-wide text-primary-700">Address</p>
-                    <p className="mt-1 text-sm leading-relaxed text-gray-700">{FEES_OFFICE.addressLine}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-gray-700">{SCHOOL_INFO.address}</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
