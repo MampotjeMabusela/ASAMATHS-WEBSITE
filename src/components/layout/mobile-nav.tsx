@@ -10,8 +10,8 @@ import type { NavLink } from "@/types"
 
 const linkClass = (active: boolean) =>
   cn(
-    "block rounded-lg px-4 py-3 text-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white",
-    active ? "bg-primary-50 text-primary-700" : "text-gray-600 hover:bg-gray-50 hover:text-primary-600"
+    "flex min-h-[52px] items-center rounded-xl px-4 py-3.5 text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:text-lg",
+    active ? "bg-primary-50 text-primary-800" : "text-gray-700 hover:bg-gray-50 hover:text-primary-700"
   )
 
 interface MobileNavProps {
@@ -20,11 +20,19 @@ interface MobileNavProps {
   links: NavLink[]
   /** External link to sibling campus site */
   sisterSchool?: { href: string; label: string }
+  /** Measured height (px) of the fixed header chrome so overlay + drawer sit flush below it */
+  anchorHeight: number
 }
 
-export function MobileNav({ isOpen, onClose, links, sisterSchool }: MobileNavProps) {
+export function MobileNav({ isOpen, onClose, links, sisterSchool, anchorHeight }: MobileNavProps) {
   const pathname = usePathname()
   const reduceMotion = useReducedMotion()
+  const top = Math.max(anchorHeight, 56)
+
+  const overlayStyle = { top } as const
+  const panelClass =
+    "fixed bottom-0 left-0 right-0 z-50 flex w-full max-w-full flex-col overflow-y-auto overflow-x-hidden bg-white shadow-2xl md:hidden " +
+    "pb-[max(1rem,env(safe-area-inset-bottom))] pt-2"
 
   return (
     <AnimatePresence mode="wait">
@@ -33,12 +41,13 @@ export function MobileNav({ isOpen, onClose, links, sisterSchool }: MobileNavPro
           {reduceMotion ? (
             <>
               <div
-                className="fixed inset-0 top-16 z-40 bg-black/50 md:hidden"
+                className="fixed right-0 z-40 bg-black/50 md:hidden"
+                style={{ ...overlayStyle, left: 0 }}
                 onClick={onClose}
                 aria-hidden
               />
-              <div className="fixed right-0 top-16 z-50 h-[calc(100vh-4rem)] w-72 overflow-y-auto bg-white shadow-2xl md:hidden">
-                <nav className="flex flex-col gap-3 p-4" aria-label="Mobile">
+              <div className={panelClass} style={{ ...overlayStyle, maxHeight: `calc(100dvh - ${top}px)` }} id="mobile-menu-panel">
+                <nav className="flex flex-col gap-2 px-4 sm:px-6" aria-label="Mobile menu">
                   {links.map((link) => (
                     <Link
                       key={link.href}
@@ -54,16 +63,16 @@ export function MobileNav({ isOpen, onClose, links, sisterSchool }: MobileNavPro
                       href={sisterSchool.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={cn(linkClass(false), "flex items-center gap-2")}
+                      className={cn(linkClass(false), "gap-2")}
                       onClick={onClose}
                     >
-                      <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
-                      {sisterSchool.label}
+                      <ExternalLink className="h-5 w-5 shrink-0" aria-hidden />
+                      <span className="leading-snug">{sisterSchool.label}</span>
                     </a>
                   ) : null}
-                  <div className="mt-6 px-2">
-                    <Link href="/admissions" onClick={onClose}>
-                      <Button className="w-full bg-primary-600 text-white hover:bg-primary-700">
+                  <div className="mt-4 border-t border-gray-100 pt-4">
+                    <Link href="/admissions" onClick={onClose} className="block">
+                      <Button className="h-12 w-full text-base sm:h-14 sm:text-lg" size="lg">
                         Apply for Admission
                       </Button>
                     </Link>
@@ -77,25 +86,29 @@ export function MobileNav({ isOpen, onClose, links, sisterSchool }: MobileNavPro
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 top-16 z-40 bg-black/50 md:hidden"
+                className="fixed right-0 z-40 bg-black/50 md:hidden"
+                style={{ ...overlayStyle, left: 0 }}
                 onClick={onClose}
                 aria-hidden
               />
 
               <motion.div
-                initial={{ x: "100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "100%" }}
-                transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="fixed right-0 top-16 z-50 h-[calc(100vh-4rem)] w-72 overflow-y-auto bg-white shadow-2xl md:hidden"
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "100%" }}
+                transition={{ type: "spring", damping: 28, stiffness: 320 }}
+                className={panelClass}
+                style={{ ...overlayStyle, maxHeight: `calc(100dvh - ${top}px)` }}
+                id="mobile-menu-panel"
               >
-                <nav className="flex flex-col gap-3 p-4" aria-label="Mobile">
+                <div className="mx-auto mb-3 h-1.5 w-10 shrink-0 rounded-full bg-gray-200" aria-hidden />
+                <nav className="flex flex-col gap-2 px-4 sm:px-6" aria-label="Mobile menu">
                   {links.map((link, i) => (
                     <motion.div
                       key={link.href}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.05 }}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.04 }}
                     >
                       <Link href={link.href} className={linkClass(pathname === link.href)} onClick={onClose}>
                         {link.label}
@@ -104,30 +117,30 @@ export function MobileNav({ isOpen, onClose, links, sisterSchool }: MobileNavPro
                   ))}
                   {sisterSchool ? (
                     <motion.div
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: links.length * 0.05 }}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: links.length * 0.04 }}
                     >
                       <a
                         href={sisterSchool.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={cn(linkClass(false), "flex items-center gap-2")}
+                        className={cn(linkClass(false), "gap-2")}
                         onClick={onClose}
                       >
-                        <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
-                        {sisterSchool.label}
+                        <ExternalLink className="h-5 w-5 shrink-0" aria-hidden />
+                        <span className="leading-snug">{sisterSchool.label}</span>
                       </a>
                     </motion.div>
                   ) : null}
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 + (sisterSchool ? 0.05 : 0) }}
-                    className="mt-6 px-2"
+                    transition={{ delay: 0.2 + (sisterSchool ? 0.04 : 0) }}
+                    className="mt-4 border-t border-gray-100 pt-4"
                   >
-                    <Link href="/admissions" onClick={onClose}>
-                      <Button className="w-full bg-primary-600 text-white hover:bg-primary-700">
+                    <Link href="/admissions" onClick={onClose} className="block">
+                      <Button className="h-12 w-full text-base sm:h-14 sm:text-lg" size="lg">
                         Apply for Admission
                       </Button>
                     </Link>
