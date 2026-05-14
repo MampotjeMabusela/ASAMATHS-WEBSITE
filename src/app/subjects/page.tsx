@@ -13,31 +13,60 @@ import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
 import { STUDENT_PHOTOS } from "@/lib/student-photos"
 
 export const metadata: Metadata = {
-  title: "Subjects & Curriculum",
-  description: `${SCHOOL_INFO.name} — curriculum overview for Grade R through Grade 7.`,
+  title: "Subjects",
+  description: `${SCHOOL_INFO.name} — subjects by grade from Grade R through Grade 9.`,
 }
 
-const foundationSubjects = ["Literacy (Home Language)", "Numeracy", "Life Skills"]
-
-const intermediateSubjects = [
-  "Home Language",
-  "First Additional Language",
-  "Mathematics",
-  "Natural Sciences and Technology",
-  "Social Sciences (History & Geography)",
-  "Life Skills (Creative Arts, Physical Education, Personal and Social Well-being)",
-]
-
-const seniorSubjects = [
-  "Home Language",
-  "First Additional Language",
-  "Mathematics",
-  "Natural Sciences",
-  "Social Sciences (History & Geography)",
-  "Technology",
-  "Economic and Management Sciences",
-  "Life Orientation",
-  "Creative Arts",
+const subjectBands: { badge: string; title: string; items: readonly string[]; imageSrc: string; imageAlt: string; imageClass: string }[] = [
+  {
+    badge: "Grade R",
+    title: "Grade R",
+    items: ["Life Skills", "English", "Mathematics"],
+    imageSrc: STUDENT_PHOTOS.foundation,
+    imageAlt: `Foundation-phase learning at ${SCHOOL_INFO.shortName}`,
+    imageClass: "object-cover object-center",
+  },
+  {
+    badge: "Grades 1–3",
+    title: "Grade 1–3",
+    items: ["Life Skills", "English", "Mathematics", "Afrikaans"],
+    imageSrc: STUDENT_PHOTOS.classroom,
+    imageAlt: `Classroom learning for Grades 1–3 at ${SCHOOL_INFO.shortName}`,
+    imageClass: "object-cover object-[center_35%]",
+  },
+  {
+    badge: "Grades 4–6",
+    title: "Grade 4–6",
+    items: [
+      "English",
+      "Mathematics",
+      "Afrikaans",
+      "Social Sciences",
+      "Natural Sciences",
+      "Life-Skills/L.O",
+    ],
+    imageSrc: STUDENT_PHOTOS.mathWhiteboardStudent,
+    imageAlt: `Intermediate-phase learners at ${SCHOOL_INFO.shortName}`,
+    imageClass: "object-cover object-[center_35%]",
+  },
+  {
+    badge: "Grades 7–9",
+    title: "Grade 7–9",
+    items: [
+      "English",
+      "Mathematics",
+      "Afrikaans",
+      "Social Sciences",
+      "Natural Sciences",
+      "Life-Skills/L.O",
+      "EMS",
+      "Creative Arts",
+      "Technology",
+    ],
+    imageSrc: STUDENT_PHOTOS.scienceLesson,
+    imageAlt: `Senior-phase science and technology learning at ${SCHOOL_INFO.shortName}`,
+    imageClass: "object-cover object-[center_45%]",
+  },
 ]
 
 export default function SubjectsPage() {
@@ -47,8 +76,8 @@ export default function SubjectsPage() {
         <div className="container-custom">
           <FadeIn>
             <SectionHeading
-              title="Subjects & Curriculum"
-              subtitle={`Learning areas from Grade R through Grade 7 at ${SCHOOL_INFO.shortName}`}
+              title="Subjects"
+              subtitle={`Learning areas by grade at ${SCHOOL_INFO.shortName}`}
             />
           </FadeIn>
 
@@ -56,7 +85,7 @@ export default function SubjectsPage() {
             <div className="relative mb-12 h-52 w-full overflow-hidden rounded-3xl shadow-xl ring-1 ring-primary-200 sm:h-56 md:h-64">
               <Image
                 src={STUDENT_PHOTOS.classroom}
-                alt={`Foundation and intermediate-phase classroom activity—learners contributing to lessons at ${SCHOOL_INFO.shortName}`}
+                alt={`Classroom activity across grades at ${SCHOOL_INFO.shortName}`}
                 fill
                 placeholder="blur"
                 blurDataURL={STUDENT_PHOTO_BLUR_DATA_URL}
@@ -65,7 +94,7 @@ export default function SubjectsPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-r from-primary-950/75 via-primary-800/45 to-primary-600/25" />
               <p className="absolute bottom-4 left-4 right-4 font-display text-xl font-bold text-white drop-shadow sm:bottom-6 sm:left-6 sm:text-2xl">
-                Curriculum with heart—Foundation through Grade 7
+                Subjects from Grade R through Grade 9
               </p>
             </div>
           </FadeIn>
@@ -76,15 +105,11 @@ export default function SubjectsPage() {
                 <BookOpen className="mt-0.5 h-6 w-6 flex-shrink-0 text-primary-600" />
                 <div className="space-y-4 text-gray-700">
                   <p className="leading-relaxed">
-                    <strong>{SCHOOL_INFO.name}</strong> offers <strong>Grade R - Grade 7</strong>. The phases
-                    below follow the broad South African General Education and Training (GET) structure:{" "}
-                    <strong>Foundation Phase</strong> (Grades R–3), <strong>Intermediate Phase</strong> (Grades
-                    4–6), and in <strong>Grade 7</strong> learners work within{" "}
-                    <strong>Senior Phase</strong> learning areas.
+                    <strong>{SCHOOL_INFO.name}</strong> lists the subjects below by grade band. For timetables,
+                    optional streams, or the latest offering, contact the school office.
                   </p>
                   <p className="text-sm leading-relaxed text-gray-600">
-                    For more information about the Subjects offered, email us or call Asamaths Institute
-                    Offices.
+                    For more information about subjects offered, email us or call Asamaths Institute offices.
                   </p>
                 </div>
               </div>
@@ -92,106 +117,32 @@ export default function SubjectsPage() {
           </FadeIn>
 
           <div className="mb-12 w-full space-y-6">
-            <FadeIn>
-              <Card className="border-gray-100">
-                <CardHeader className="pb-2">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Badge>Foundation Phase</Badge>
-                    <CardTitle className="text-lg sm:text-xl">Grades R – 3</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent className="grid gap-6 lg:grid-cols-2 lg:items-start">
-                  <SubjectList items={foundationSubjects} />
-                  <div className="relative aspect-[4/3] min-h-[200px] overflow-hidden rounded-2xl shadow-md ring-1 ring-gray-200">
-                    <Image
-                      src={STUDENT_PHOTOS.foundation}
-                      alt={`Foundation-phase home-language literacy work with teacher support at ${SCHOOL_INFO.shortName}`}
-                      fill
-                      placeholder="blur"
-                      blurDataURL={STUDENT_PHOTO_BLUR_DATA_URL}
-                      className="object-cover object-center"
-                      sizes="(max-width:1024px)100vw,50vw"
-                    />
-                  </div>
-                </CardContent>
-              </Card>
-            </FadeIn>
-
-            <FadeIn delay={0.06}>
-              <Card className="border-gray-100">
-                <CardHeader className="pb-2">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Badge variant="accent">Intermediate Phase</Badge>
-                    <CardTitle className="text-lg sm:text-xl">Grades 4 – 6</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent className="grid gap-6 lg:grid-cols-2 lg:items-start">
-                  <SubjectList items={intermediateSubjects} />
-                  <div className="relative aspect-[4/3] min-h-[200px] overflow-hidden rounded-2xl shadow-md ring-1 ring-gray-200">
-                    <Image
-                      src={STUDENT_PHOTOS.mathWhiteboardStudent}
-                      alt={`Intermediate-phase learner practising two-digit arithmetic on the whiteboard at ${SCHOOL_INFO.shortName}`}
-                      fill
-                      placeholder="blur"
-                      blurDataURL={STUDENT_PHOTO_BLUR_DATA_URL}
-                      className="object-cover object-[center_35%]"
-                      sizes="(max-width:1024px)100vw,50vw"
-                    />
-                  </div>
-                </CardContent>
-              </Card>
-            </FadeIn>
-
-            <FadeIn delay={0.09}>
-              <div className="relative min-h-[200px] w-full overflow-hidden rounded-3xl shadow-lg ring-1 ring-primary-200 md:min-h-[260px]">
-                <Image
-                  src={STUDENT_PHOTOS.mathChalkboardLesson}
-                  alt={`Mathematics educator modelling written methods on chalkboard observed by Grade R–7 learners at ${SCHOOL_INFO.shortName}`}
-                  fill
-                  placeholder="blur"
-                  blurDataURL={STUDENT_PHOTO_BLUR_DATA_URL}
-                  className="object-cover object-[center_40%]"
-                  sizes="100vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-primary-950/80 via-primary-800/55 to-transparent" />
-                <div className="absolute bottom-6 left-5 right-6 max-w-none sm:left-8 sm:bottom-8">
-                  <p className="font-display text-lg font-semibold leading-snug text-white drop-shadow-md sm:text-2xl md:text-3xl">
-                    Guided mathematics—with patient teaching and classrooms where every step counts.
-                  </p>
-                </div>
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={0.12}>
-              <Card className="border-gray-100">
-                <CardHeader className="pb-2">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Badge>Grade 7</Badge>
-                    <CardTitle className="text-lg sm:text-xl">Senior-phase learning areas</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-5">
-                  <p className="text-sm text-gray-600">
-                    Nationally the Senior Phase spans Grades 7–9; at {SCHOOL_INFO.shortName},{" "}
-                    <strong>Grade 7 is our final year</strong>. Typical learning areas at this level include:
-                  </p>
-                  <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
-                    <SubjectList items={seniorSubjects} />
+            {subjectBands.map((band, index) => (
+              <FadeIn key={band.title} delay={0.06 + index * 0.03}>
+                <Card className="border-gray-100">
+                  <CardHeader className="pb-2">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <Badge variant={index % 2 === 1 ? "accent" : "default"}>{band.badge}</Badge>
+                      <CardTitle className="text-lg sm:text-xl">{band.title}</CardTitle>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="grid gap-6 lg:grid-cols-2 lg:items-start">
+                    <NumberedSubjectList items={band.items} />
                     <div className="relative aspect-[4/3] min-h-[200px] overflow-hidden rounded-2xl shadow-md ring-1 ring-gray-200">
                       <Image
-                        src={STUDENT_PHOTOS.scienceLesson}
-                        alt={`Hands-on Natural Sciences magnetism demonstration with educator and intermediate-phase learner at ${SCHOOL_INFO.shortName}`}
+                        src={band.imageSrc}
+                        alt={band.imageAlt}
                         fill
                         placeholder="blur"
                         blurDataURL={STUDENT_PHOTO_BLUR_DATA_URL}
-                        className="object-cover object-[center_45%]"
+                        className={band.imageClass}
                         sizes="(max-width:1024px)100vw,50vw"
                       />
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </FadeIn>
+                  </CardContent>
+                </Card>
+              </FadeIn>
+            ))}
           </div>
 
           <FadeIn delay={0.18}>
@@ -199,12 +150,11 @@ export default function SubjectsPage() {
               <Info className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-700" />
               <div className="text-sm leading-relaxed text-amber-900">
                 <p className="mb-3">
-                  <strong>Important:</strong> Remember that the exact choice of subjects may vary depending on
-                  the school&apos;s resources and expertise.
+                  <strong>Important:</strong> The exact timetable and subject choices may vary depending on the
+                  school&apos;s resources and staffing.
                 </p>
                 <p>
-                  Moving on from Grade 7, families typically explore other high schools for further grades—
-                  we&apos;re happy to discuss options when you{" "}
+                  If you have questions about a specific grade,{" "}
                   <Link href="/contact" className="font-medium underline hover:text-amber-950">
                     contact us
                   </Link>
@@ -231,14 +181,14 @@ export default function SubjectsPage() {
   )
 }
 
-function SubjectList({ items }: { items: string[] }) {
+function NumberedSubjectList({ items }: { items: readonly string[] }) {
   return (
-    <ul className="list-inside list-disc space-y-1.5 text-sm text-gray-600 marker:text-primary-500 md:text-[15px]">
+    <ol className="list-decimal space-y-1.5 pl-5 text-sm text-gray-700 marker:font-semibold marker:text-primary-600 md:text-[15px]">
       {items.map((item) => (
         <li key={item} className="pl-1 leading-snug md:leading-relaxed">
           {item}
         </li>
       ))}
-    </ul>
+    </ol>
   )
 }
