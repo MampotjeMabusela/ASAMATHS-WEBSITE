@@ -48,6 +48,20 @@ export const NAV_LINKS = [
   { label: "Contact", href: "/contact" },
 ]
 
+/**
+ * Optional link to a sibling campus (duplicate site). Set in `.env.local` / Vercel:
+ * `NEXT_PUBLIC_SISTER_SCHOOL_URL` — full URL, e.g. https://other-campus.vercel.app
+ * `NEXT_PUBLIC_SISTER_SCHOOL_LABEL` — button text (default: "Our other campus")
+ */
+export const SISTER_SCHOOL_LINK = {
+  url: (process.env.NEXT_PUBLIC_SISTER_SCHOOL_URL ?? "").trim(),
+  label: (process.env.NEXT_PUBLIC_SISTER_SCHOOL_LABEL ?? "Our other campus").trim() || "Our other campus",
+} as const
+
+export function hasSisterSchoolLink(): boolean {
+  return SISTER_SCHOOL_LINK.url.length > 0
+}
+
 export const VALUES = [
   {
     title: "Excellence",

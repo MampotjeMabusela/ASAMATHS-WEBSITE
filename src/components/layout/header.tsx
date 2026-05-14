@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X, Phone } from "lucide-react"
+import { Menu, X, Phone, ExternalLink } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { BRAND, NAV_LINKS, SCHOOL_INFO } from "@/lib/constants"
+import { BRAND, NAV_LINKS, SCHOOL_INFO, hasSisterSchoolLink, SISTER_SCHOOL_LINK } from "@/lib/constants"
 import { MobileNav } from "./mobile-nav"
 import { SiteLogo } from "./site-logo"
 import { Button } from "@/components/ui/button"
@@ -105,7 +105,24 @@ export function Header() {
           </nav>
 
           {/* CTA + Mobile toggle */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            {hasSisterSchoolLink() ? (
+              <a
+                href={SISTER_SCHOOL_LINK.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden rounded-md md:inline-flex focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+              >
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="border-primary-200 text-primary-800 hover:bg-primary-50 hover:text-primary-900"
+                >
+                  <ExternalLink className="mr-1.5 h-3.5 w-3.5" aria-hidden />
+                  {SISTER_SCHOOL_LINK.label}
+                </Button>
+              </a>
+            ) : null}
             <Link href="/admissions" className="hidden rounded-md md:inline-flex focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white">
               <Button size="sm" className="bg-primary-600 text-white shadow-md hover:bg-primary-700">
                 Apply Now
@@ -128,6 +145,11 @@ export function Header() {
         isOpen={isMobileNavOpen}
         onClose={() => setIsMobileNavOpen(false)}
         links={NAV_LINKS}
+        sisterSchool={
+          hasSisterSchoolLink()
+            ? { href: SISTER_SCHOOL_LINK.url, label: SISTER_SCHOOL_LINK.label }
+            : undefined
+        }
       />
     </header>
   )

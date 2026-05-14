@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
-import { BRAND, NAV_LINKS, SCHOOL_INFO } from "@/lib/constants"
+import { BRAND, NAV_LINKS, SCHOOL_INFO, hasSisterSchoolLink, SISTER_SCHOOL_LINK } from "@/lib/constants"
 import { SiteLogo } from "./site-logo"
 
 export function Footer() {
@@ -48,6 +48,21 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              {hasSisterSchoolLink() ? (
+                <li>
+                  <a
+                    href={SISTER_SCHOOL_LINK.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-sm text-sm text-gray-400 transition hover:text-primary-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1a]"
+                  >
+                    {SISTER_SCHOOL_LINK.label}{" "}
+                    <span className="text-primary-500/90" aria-hidden>
+                      ↗
+                    </span>
+                  </a>
+                </li>
+              ) : null}
             </ul>
           </div>
 

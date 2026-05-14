@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
+import { ExternalLink } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import type { NavLink } from "@/types"
@@ -17,9 +18,11 @@ interface MobileNavProps {
   isOpen: boolean
   onClose: () => void
   links: NavLink[]
+  /** External link to sibling campus site */
+  sisterSchool?: { href: string; label: string }
 }
 
-export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
+export function MobileNav({ isOpen, onClose, links, sisterSchool }: MobileNavProps) {
   const pathname = usePathname()
   const reduceMotion = useReducedMotion()
 
@@ -46,6 +49,18 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
                       {link.label}
                     </Link>
                   ))}
+                  {sisterSchool ? (
+                    <a
+                      href={sisterSchool.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cn(linkClass(false), "flex items-center gap-2")}
+                      onClick={onClose}
+                    >
+                      <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
+                      {sisterSchool.label}
+                    </a>
+                  ) : null}
                   <div className="mt-6 px-2">
                     <Link href="/admissions" onClick={onClose}>
                       <Button className="w-full bg-primary-600 text-white hover:bg-primary-700">
@@ -87,10 +102,28 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
                       </Link>
                     </motion.div>
                   ))}
+                  {sisterSchool ? (
+                    <motion.div
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: links.length * 0.05 }}
+                    >
+                      <a
+                        href={sisterSchool.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={cn(linkClass(false), "flex items-center gap-2")}
+                        onClick={onClose}
+                      >
+                        <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
+                        {sisterSchool.label}
+                      </a>
+                    </motion.div>
+                  ) : null}
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
+                    transition={{ delay: 0.3 + (sisterSchool ? 0.05 : 0) }}
                     className="mt-6 px-2"
                   >
                     <Link href="/admissions" onClick={onClose}>
