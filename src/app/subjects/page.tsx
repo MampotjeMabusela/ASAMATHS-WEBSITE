@@ -261,8 +261,7 @@ export default function SubjectsPage() {
               <div className="text-sm leading-relaxed text-amber-900">
                 <p className="mb-3">
                   <strong>Important:</strong> The exact timetable, pacing, and subject choices may vary depending on
-                  the school&apos;s resources and staffing. Descriptions are indicative, not a legal curriculum
-                  guarantee.
+                  the school&apos;s resources and staffing.
                 </p>
                 <p>
                   If you have questions about a specific grade,{" "}
