@@ -169,23 +169,23 @@ export function CodeOfConductPartA() {
       <section id="office-hours" className="scroll-mt-32">
         <h2 className="font-display text-xl font-bold text-primary-950 md:text-2xl">9. Office Operating Hours</h2>
         <p className="mt-3 text-sm leading-relaxed text-gray-700 md:text-[15px] md:leading-relaxed">
-          The official administration operating hours is between 0730 am – 1600 pm Monday – Thursday, Fridays
-          0730 – 1500 pm.
+          The official administration operating hours is between 07:30 am – 16:00 pm Monday – Thursday, Fridays
+          07:30 – 15:00 pm.
         </p>
       </section>
 
       <section id="school-hours" className="scroll-mt-32">
         <h2 className="font-display text-xl font-bold text-primary-950 md:text-2xl">10. School Hours</h2>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-gray-700 md:text-[15px]">
-          <li>Grade R – 2: School starts at 0730 hours and ends at 1300 hours from Monday to Friday</li>
-          <li>Grade 3: School starts at 0730 hours and ends at 1330 hours from Monday to Friday</li>
-          <li>Grade 4 - 9: Monday to Friday, school starts at 0730 hours and ends at 1400 hours</li>
+          <li>Grade R – 2: School starts at 07:30 hours and ends at 13:00 hours from Monday to Friday</li>
+          <li>Grade 3: School starts at 07:30 hours and ends at 13:30 hours from Monday to Friday</li>
+          <li>Grade 4 - 9: Monday to Friday, school starts at 07:30 hours and ends at 14:00 hours</li>
           <li>The first lesson starts at 08:00 hours</li>
           <li>
             Learners have a break of 30 minutes as follows:
             <ul className="mt-2 list-disc space-y-1 pl-5">
-              <li>Foundation Phase: 1030 hours – 1100 hours</li>
-              <li>Intersen Phase: 1100 hours – 1130 hours</li>
+              <li>Foundation Phase: 10:30 hours – 11:00 hours</li>
+              <li>Intersen Phase: 11:00 hours – 11:30 hours</li>
             </ul>
           </li>
           <li>Late coming is not allowed/tolerated</li>
