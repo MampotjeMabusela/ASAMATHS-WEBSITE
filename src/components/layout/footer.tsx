@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
 import { BRAND, NAV_LINKS, SCHOOL_INFO, hasSisterSchoolLink, SISTER_SCHOOL_LINK } from "@/lib/constants"
+import { getWhatsAppUrl } from "@/lib/whatsapp"
+import { WhatsAppIcon } from "@/components/shared/whatsapp-icon"
 import { SiteLogo } from "./site-logo"
 
 export function Footer() {
@@ -83,6 +85,17 @@ export function Footer() {
                 >
                   <Phone className="h-4 w-4 flex-shrink-0 text-primary-400" />
                   {SCHOOL_INFO.phone}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={getWhatsAppUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2.5 rounded-sm text-sm text-gray-400 transition hover:text-[#25D366] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1a]"
+                >
+                  <WhatsAppIcon className="h-4 w-4 flex-shrink-0 text-[#25D366]" />
+                  WhatsApp: {SCHOOL_INFO.whatsapp}
                 </a>
               </li>
               <li>

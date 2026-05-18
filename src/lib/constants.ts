@@ -9,6 +9,9 @@ export const SCHOOL_INFO = {
   rawPhone: "+27127258044",
   phoneAlt: "+27 11 925 8074",
   rawPhoneAlt: "+27119258074",
+  whatsapp: "+27 61 530 9416",
+  /** Digits only — for https://wa.me/ links */
+  rawWhatsApp: "27615309416",
   email: "asamathsinstituteoflearning@gmail.com",
   principal: "Makeche Brighton",
   principalYear: 2023,
