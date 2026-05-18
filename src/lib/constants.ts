@@ -9,7 +9,7 @@ export const SCHOOL_INFO = {
   rawPhone: "+27127258044",
   phoneAlt: "+27 11 925 8074",
   rawPhoneAlt: "+27119258074",
-  email: "asamathsinstitueoflearning@gmail.com",
+  email: "asamathsinstituteoflearning@gmail.com",
   principal: "Makeche Brighton",
   principalYear: 2023,
   natEmis: "700400979",

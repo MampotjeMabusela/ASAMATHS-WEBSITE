@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server"
 import { Resend } from "resend"
 import { z } from "zod"
+import { SCHOOL_INFO } from "@/lib/constants"
+
+/** All contact form submissions are delivered to the school inbox. */
+const CONTACT_INBOX = SCHOOL_INFO.email
 
 const contactSchema = z.object({
   firstName: z.string().min(2),
@@ -42,7 +46,7 @@ ${data.message}
 
     const { error } = await resend.emails.send({
       from: `Asamaths Website <${process.env.CONTACT_FORM_FROM_EMAIL || "website@asamaths.co.za"}>`,
-      to: [process.env.CONTACT_FORM_TO_EMAIL || "asamathsinstitueoflearning@gmail.com"],
+      to: [CONTACT_INBOX],
       replyTo: data.email,
       subject: `Website Inquiry: ${data.subject} - ${data.firstName} ${data.lastName}`,
       text: emailContent,

@@ -138,6 +138,16 @@ export function ContactForm() {
         {errors.message && <p className="text-xs text-red-500">{errors.message.message}</p>}
       </div>
 
+      <p className="text-xs leading-relaxed text-gray-500">
+        Messages are sent securely to{" "}
+        <a
+          href={`mailto:${SCHOOL_INFO.email}`}
+          className="font-medium text-primary-700 underline decoration-primary-700/40 underline-offset-2 hover:text-primary-900"
+        >
+          {SCHOOL_INFO.email}
+        </a>
+        . We aim to reply during school hours.
+      </p>
       <p className="border-t border-gray-100 pt-4 text-xs leading-relaxed text-gray-500">
         By sending this message, you consent to <strong>{SCHOOL_INFO.shortName}</strong> using the details
         above to respond to your enquiry and related administration (for example placements or fee
