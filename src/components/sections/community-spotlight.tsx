@@ -10,7 +10,7 @@ export function CommunitySpotlight() {
       <div className="relative h-[200px] w-full md:h-[280px] lg:h-[300px]">
         <Image
           src={STUDENT_PHOTOS.classroomCelebration}
-          alt={`Intermediate-phase classmates celebrating participation during a lesson at ${SCHOOL_INFO.shortName}`}
+          alt={`Learners in class with educational posters at ${SCHOOL_INFO.shortName}, ${SCHOOL_INFO.suburb}`}
           fill
           placeholder="blur"
           blurDataURL={STUDENT_PHOTO_BLUR_DATA_URL}

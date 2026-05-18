@@ -29,7 +29,7 @@ export function Values() {
           <div className="relative aspect-[16/11] overflow-hidden rounded-3xl shadow-xl ring-1 ring-gray-200/80">
             <Image
               src={STUDENT_PHOTOS.smile}
-              alt={`Smiling learner in uniform during a Grade R–7 class moment at ${SCHOOL_INFO.shortName}`}
+              alt={`Learners in school uniform during a focused classroom lesson at ${SCHOOL_INFO.shortName}, ${SCHOOL_INFO.suburb}`}
               fill
               placeholder="blur"
               blurDataURL={STUDENT_PHOTO_BLUR_DATA_URL}
@@ -44,7 +44,7 @@ export function Values() {
             </p>
             <p className="mt-3 text-sm leading-relaxed sm:text-base">
               From the classroom to the playground, we nurture discipline, curiosity, and belonging—so every
-              child can thrive in Winterveldt and beyond.
+              child can thrive in {SCHOOL_INFO.suburb} and beyond.
             </p>
           </div>
         </FadeIn>

@@ -17,7 +17,7 @@ function HeroStudentImage({ className }: { className?: string }) {
     >
       <Image
         src={STUDENT_PHOTOS.hero}
-        alt={`Grade R–7 learner participating confidently in a whole-class lesson at ${SCHOOL_INFO.shortName}`}
+        alt={`Two primary learners in Asamaths uniform enjoying a moment together at ${SCHOOL_INFO.shortName}, ${SCHOOL_INFO.suburb}`}
         fill
         placeholder="blur"
         blurDataURL={STUDENT_PHOTO_BLUR_DATA_URL}

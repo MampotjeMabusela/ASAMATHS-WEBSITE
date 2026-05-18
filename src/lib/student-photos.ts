@@ -28,15 +28,15 @@ export type GalleryItem = {
 export const GALLERY_ITEMS: GalleryItem[] = [
   {
     src: STUDENT_PHOTOS.hero,
-    title: "Engaged in class",
-    caption: "Learners ready to participate in lessons.",
-    alt: "Primary-phase learner confidently taking part in a whole-class lesson with hand raised.",
+    title: "Our learners",
+    caption: "Proud, happy faces in the Asamaths family.",
+    alt: "Two primary learners in school uniform smiling together outdoors at Asamaths Institute.",
   },
   {
     src: STUDENT_PHOTOS.classroom,
-    title: "Active learning",
-    caption: "Hands up, minds on—collaborative classroom moments.",
-    alt: "Group of intermediate-phase learners with hands raised during an interactive lesson.",
+    title: "Learning together",
+    caption: "Focused classrooms across the phases.",
+    alt: "Primary-phase learners in uniform working diligently at their desks in a bright classroom.",
   },
   {
     src: STUDENT_PHOTOS.reading,
@@ -54,7 +54,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     src: STUDENT_PHOTOS.smile,
     title: "Proud moment",
     caption: "Confidence grows with every small success.",
-    alt: "Smiling learner in school uniform reflecting a confident classroom moment.",
+    alt: "Learners in grey and blue school uniform during a calm, focused lesson in class.",
   },
   {
     src: STUDENT_PHOTOS.foundation,
@@ -66,19 +66,19 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     src: STUDENT_PHOTOS.playground,
     title: "Play and movement",
     caption: "Break time energy and teamwork outdoors.",
-    alt: "Learners outdoors on the playground during break with space for play and movement.",
+    alt: "Learners in school uniform playing on the outdoor playground with a red slide.",
   },
   {
     src: STUDENT_PHOTOS.sports,
-    title: "On the field",
-    caption: "Physical education and sporty afternoons.",
-    alt: "Learners during physical-education-style activity with open grass and sunshine.",
+    title: "Guided learning",
+    caption: "Educators and learners working side by side.",
+    alt: "Educators reviewing work with learners at a desk in a well-equipped classroom.",
   },
   {
     src: STUDENT_PHOTOS.joy,
     title: "Together we grow",
     caption: "Friendships and smiles across the phases we offer.",
-    alt: "Cheerful group of classmates celebrating learning together indoors.",
+    alt: "Senior-phase learners in uniform seated at desks during an attentive classroom lesson.",
   },
   {
     src: STUDENT_PHOTOS.scienceLesson,
@@ -108,6 +108,6 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     src: STUDENT_PHOTOS.classroomCelebration,
     title: "We celebrate progress",
     caption: "Joint success when effort turns into breakthrough moments.",
-    alt: "Classmates smiling and cheering during a participatory classroom celebration.",
+    alt: "Busy classroom of learners in uniform with colourful educational posters on the walls.",
   },
 ]
