@@ -27,8 +27,9 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion"
 import { SCHOOL_INFO } from "@/lib/constants"
+import { PageBanner } from "@/components/shared/page-banner"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
-import { STUDENT_PHOTOS } from "@/lib/student-photos"
+import { CAMPUS_PHOTOS } from "@/lib/student-photos"
 
 export const metadata: Metadata = {
   title: "School Fees — 2026",
@@ -122,6 +123,19 @@ export default function FeesPage() {
             />
           </FadeIn>
 
+          <FadeIn delay={0.03}>
+            <PageBanner
+              src={CAMPUS_PHOTOS.adminOffice}
+              alt={`School administration office at ${SCHOOL_INFO.shortName} supporting fee enquiries`}
+              headline="Clear fees, fair options — invest in your child's year with confidence"
+              subline={`Questions about deposits, payment plans, or banking references? Our office team is ready to help.`}
+              badge="Fees & finance"
+              variant="compact"
+              objectPosition="center 35%"
+              className="mb-8"
+            />
+          </FadeIn>
+
           {/* Office strip — matches letterhead-style info from the schedule */}
           <FadeIn delay={0.04}>
             <Card className="mb-8 border-primary-100 bg-white/90 shadow-sm ring-1 ring-primary-100/80">
@@ -211,23 +225,22 @@ export default function FeesPage() {
               </Card>
             </FadeIn>
 
-            {/* Decorative panel */}
-            <FadeIn delay={0.08} className="hidden lg:col-span-7 lg:block">
-              <div className="relative h-full min-h-[280px] overflow-hidden rounded-2xl border border-gray-200 shadow-md ring-1 ring-primary-100">
+            {/* Office panel — visible on all breakpoints beside registration */}
+            <FadeIn delay={0.08} className="lg:col-span-7">
+              <div className="relative h-full min-h-[240px] overflow-hidden rounded-2xl border border-gray-200 shadow-md ring-1 ring-primary-100 sm:min-h-[280px]">
                 <Image
-                  src={STUDENT_PHOTOS.mathChalkboardLesson}
-                  alt=""
+                  src={CAMPUS_PHOTOS.adminOffice}
+                  alt={`Administrator at ${SCHOOL_INFO.shortName} office ready to assist with fee enquiries`}
                   fill
-                  className="object-cover object-[center_45%]"
-                  sizes="(max-width:1024px)0px,58vw"
+                  className="object-cover object-[center_35%]"
+                  sizes="(max-width:1024px)100vw,58vw"
                   placeholder="blur"
                   blurDataURL={STUDENT_PHOTO_BLUR_DATA_URL}
-                  aria-hidden
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary-950/85 via-primary-900/35 to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <p className="font-display text-lg font-semibold leading-snug text-white drop-shadow md:text-xl">
-                    Clear fees, fair options — invest in your child&apos;s year with confidence.
+                <div className="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6">
+                  <p className="font-display text-base font-semibold leading-snug text-white drop-shadow sm:text-lg md:text-xl">
+                    Visit or call the office for payment plans and proof of deposit.
                   </p>
                   <p className="mt-2 text-sm text-primary-100/95">
                     {SCHOOL_INFO.shortName} · {SCHOOL_INFO.suburb}, {SCHOOL_INFO.city}
@@ -356,7 +369,7 @@ export default function FeesPage() {
             <div className="relative isolate mx-auto mt-10 w-full overflow-hidden rounded-3xl border border-gray-100 bg-white/95 p-6 shadow-sm ring-1 ring-primary-100 md:p-8">
               <div className="pointer-events-none absolute inset-0 -z-10">
                 <Image
-                  src={STUDENT_PHOTOS.classroom}
+                  src={CAMPUS_PHOTOS.building}
                   alt=""
                   fill
                   placeholder="blur"

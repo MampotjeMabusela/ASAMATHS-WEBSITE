@@ -9,8 +9,9 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { SCHOOL_INFO } from "@/lib/constants"
+import { PageBanner } from "@/components/shared/page-banner"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
-import { STUDENT_PHOTOS } from "@/lib/student-photos"
+import { CAMPUS_PHOTOS, STUDENT_PHOTOS } from "@/lib/student-photos"
 
 export const metadata: Metadata = {
   title: "Subjects",
@@ -78,8 +79,8 @@ const subjectBands: SubjectBand[] = [
           "As First Additional Language, Afrikaans introduces listening stories, songs, basic vocabulary, short phrases, and early reading and writing so learners can communicate in everyday classroom and community settings.",
       },
     ],
-    imageSrc: STUDENT_PHOTOS.classroom,
-    imageAlt: `Classroom learning for Grades 1–3 at ${SCHOOL_INFO.shortName}`,
+    imageSrc: CAMPUS_PHOTOS.literacyNotebook,
+    imageAlt: `Learner writing in a notebook during an English literacy lesson at ${SCHOOL_INFO.shortName}`,
     imageClass: "object-cover object-[center_35%]",
   },
   {
@@ -117,9 +118,9 @@ const subjectBands: SubjectBand[] = [
           "Life Orientation–style learning brings together personal and social well-being, study habits, health and safety, physical education, and creative expression so learners develop resilience, respect, and healthy routines.",
       },
     ],
-    imageSrc: STUDENT_PHOTOS.mathWhiteboardStudent,
-    imageAlt: `Intermediate-phase learners at ${SCHOOL_INFO.shortName}`,
-    imageClass: "object-cover object-[center_35%]",
+    imageSrc: CAMPUS_PHOTOS.classroomGroup,
+    imageAlt: `Intermediate-phase learners in class at ${SCHOOL_INFO.shortName}`,
+    imageClass: "object-cover object-[center_40%]",
   },
   {
     badge: "Grades 7–9",
@@ -190,21 +191,16 @@ export default function SubjectsPage() {
           </FadeIn>
 
           <FadeIn delay={0.04}>
-            <div className="relative mb-12 h-52 w-full overflow-hidden rounded-3xl shadow-xl ring-1 ring-primary-200 sm:h-56 md:h-64">
-              <Image
-                src={STUDENT_PHOTOS.classroom}
-                alt={`Classroom activity across grades at ${SCHOOL_INFO.shortName}`}
-                fill
-                placeholder="blur"
-                blurDataURL={STUDENT_PHOTO_BLUR_DATA_URL}
-                className="object-cover object-[center_35%]"
-                sizes="100vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-primary-950/75 via-primary-800/45 to-primary-600/25" />
-              <p className="absolute bottom-4 left-4 right-4 font-display text-xl font-bold text-white drop-shadow sm:bottom-6 sm:left-6 sm:text-2xl">
-                Subjects from Grade R through Grade 9
-              </p>
-            </div>
+            <PageBanner
+              src={CAMPUS_PHOTOS.classroomGroup}
+              alt={`Learners in uniform during a classroom lesson at ${SCHOOL_INFO.shortName}`}
+              headline="Subjects from Grade R through Grade 9"
+              subline="Structured learning across foundation, intermediate, and senior phases."
+              badge="Curriculum"
+              variant="wide"
+              objectPosition="center 40%"
+              className="mb-12"
+            />
           </FadeIn>
 
           <FadeIn delay={0.05}>
@@ -229,7 +225,7 @@ export default function SubjectsPage() {
           <div className="mb-12 w-full space-y-6">
             {subjectBands.map((band, index) => (
               <FadeIn key={band.title} delay={0.06 + index * 0.03}>
-                <Card className="border-gray-100">
+                <Card className="border-gray-100 shadow-sm transition-shadow hover:shadow-md">
                   <CardHeader className="pb-2">
                     <div className="flex flex-wrap items-center gap-2">
                       <Badge variant={index % 2 === 1 ? "accent" : "default"}>{band.badge}</Badge>

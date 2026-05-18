@@ -2,7 +2,10 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { FadeIn } from "@/components/shared/fade-in"
+import { GalleryFeatured } from "@/components/gallery/gallery-featured"
 import { GalleryGrid } from "@/components/gallery/gallery-grid"
+import { PageBanner } from "@/components/shared/page-banner"
+import { CAMPUS_PHOTOS } from "@/lib/student-photos"
 import { CTABanner } from "@/components/sections/cta-banner"
 import { SCHOOL_INFO } from "@/lib/constants"
 import { GALLERY_ITEMS } from "@/lib/student-photos"
@@ -20,6 +23,20 @@ export default function GalleryPage() {
           <FadeIn>
             <SectionHeading title="Our Gallery" subtitle="A glimpse into life at Asamaths Institute" />
           </FadeIn>
+
+          <FadeIn delay={0.04}>
+            <PageBanner
+              src={CAMPUS_PHOTOS.building}
+              alt={`Campus buildings and courtyard at ${SCHOOL_INFO.shortName}, ${SCHOOL_INFO.suburb}`}
+              headline="Campus, classrooms, and community"
+              subline="Tap any photo below to view it larger."
+              variant="compact"
+              objectPosition="center 45%"
+              className="mb-8"
+            />
+          </FadeIn>
+
+          <GalleryFeatured />
 
           <GalleryGrid items={GALLERY_ITEMS} />
 

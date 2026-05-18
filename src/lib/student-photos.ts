@@ -17,6 +17,16 @@ export const STUDENT_PHOTOS = {
   classroomCelebration: "/images/students/classroom-celebration.png",
 } as const
 
+/** Campus and page-specific photography (see /public/images/campus). */
+export const CAMPUS_PHOTOS = {
+  friends: "/images/campus/campus-friends.png",
+  courtyardWalk: "/images/campus/campus-courtyard-walk.png",
+  adminOffice: "/images/campus/admin-office.png",
+  building: "/images/campus/campus-building.png",
+  classroomGroup: "/images/campus/classroom-group.png",
+  literacyNotebook: "/images/campus/literacy-notebook.png",
+} as const
+
 export type GalleryItem = {
   src: string
   title: string
@@ -25,7 +35,47 @@ export type GalleryItem = {
   alt: string
 }
 
+export const CAMPUS_GALLERY_ITEMS: GalleryItem[] = [
+  {
+    src: CAMPUS_PHOTOS.building,
+    title: "Our campus",
+    caption: "Brick buildings, courtyards, and space to learn and play.",
+    alt: "Exterior view of Asamaths Institute brick school buildings and paved courtyard under a clear sky.",
+  },
+  {
+    src: CAMPUS_PHOTOS.friends,
+    title: "Friendships at school",
+    caption: "Learners who support and encourage one another every day.",
+    alt: "Two primary learners in Asamaths tracksuit uniform smiling together in a bright classroom.",
+  },
+  {
+    src: CAMPUS_PHOTOS.courtyardWalk,
+    title: "Life on campus",
+    caption: "Staff and learners moving between lessons with purpose.",
+    alt: "Educator and learner walking across the school courtyard in uniform, carrying books and folders.",
+  },
+  {
+    src: CAMPUS_PHOTOS.classroomGroup,
+    title: "Focused classrooms",
+    caption: "Structured lessons across the foundation and intermediate phases.",
+    alt: "Group of learners in grey school sweaters seated at desks during an attentive classroom lesson.",
+  },
+  {
+    src: CAMPUS_PHOTOS.literacyNotebook,
+    title: "Literacy in action",
+    caption: "Confident reading and writing in every grade.",
+    alt: "Smiling learner in blue school jacket writing in an open notebook during an English lesson.",
+  },
+  {
+    src: CAMPUS_PHOTOS.adminOffice,
+    title: "Here to help",
+    caption: "Our office team supports admissions, fees, and family enquiries.",
+    alt: "School administrator working at a desk in the Asamaths Institute office with awards displayed nearby.",
+  },
+]
+
 export const GALLERY_ITEMS: GalleryItem[] = [
+  ...CAMPUS_GALLERY_ITEMS,
   {
     src: STUDENT_PHOTOS.hero,
     title: "Our learners",
