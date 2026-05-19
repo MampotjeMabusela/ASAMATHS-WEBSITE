@@ -53,4 +53,29 @@
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
+  .banner-shimmer {
+    animation: banner-shimmer 8s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .banner-shimmer {
+      animation: none;
+    }
+  }
+}
+
+@keyframes banner-shimmer {
+  0%,
+  100% {
+    transform: translateX(-120%) rotate(12deg);
+    opacity: 0;
+  }
+  45% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(220%) rotate(12deg);
+    opacity: 0.6;
+  }
 }

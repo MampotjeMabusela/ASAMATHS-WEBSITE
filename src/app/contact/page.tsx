@@ -56,7 +56,8 @@ export default function ContactPage() {
               badge="Get in touch"
               variant="compact"
               imageFit="contain"
-              objectPosition="center"
+              imageOffsetX={5}
+              enhanced
               className="mb-10"
             />
           </FadeIn>
