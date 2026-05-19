@@ -2,6 +2,7 @@ import Image from "next/image"
 import type { ReactNode } from "react"
 import { cn } from "@/lib/utils"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
+import { photoSrc } from "@/lib/student-photos"
 
 type PageBannerVariant = "hero" | "wide" | "compact"
 
@@ -58,7 +59,7 @@ export function PageBanner({
     <BannerFrame variant={variant} className={className} enhanced={enhanced}>
       {enhanced ? <BannerBackdrop /> : null}
       <Image
-        src={src}
+        src={photoSrc(src)}
         alt={alt}
         fill
         priority={priority}
@@ -69,7 +70,7 @@ export function PageBanner({
             ? cn(
                 "object-contain p-6 sm:p-10",
                 enhanced
-                  ? "z-[1] bg-transparent drop-shadow-[0_10px_40px_rgba(30,64,175,0.22)] contrast-[1.07] saturate-[1.12] brightness-[1.03]"
+                  ? "z-[1] bg-transparent drop-shadow-[0_10px_40px_rgba(30,64,175,0.22)]"
                   : "bg-white",
               )
             : "object-cover",

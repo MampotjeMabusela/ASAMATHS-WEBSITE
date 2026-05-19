@@ -20,7 +20,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { PageBanner } from "@/components/shared/page-banner"
 import { SCHOOL_INFO } from "@/lib/constants"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
-import { CAMPUS_PHOTOS } from "@/lib/student-photos"
+import { CAMPUS_PHOTOS, photoSrc } from "@/lib/student-photos"
 
 export const metadata: Metadata = {
   title: "Admissions",
@@ -187,7 +187,7 @@ export default function AdmissionsPage() {
             <div className="grid gap-8 lg:grid-cols-5 lg:items-center">
               <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg ring-1 ring-primary-100 lg:col-span-2">
                 <Image
-                  src={CAMPUS_PHOTOS.friends}
+                  src={photoSrc(CAMPUS_PHOTOS.friends)}
                   alt={`Learners in Asamaths uniform at ${SCHOOL_INFO.shortName}`}
                   fill
                   placeholder="blur"

@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { SCHOOL_INFO } from "@/lib/constants"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
-import { STUDENT_PHOTOS } from "@/lib/student-photos"
+import { STUDENT_PHOTOS, photoSrc } from "@/lib/student-photos"
 
 function HeroStudentImage({ className }: { className?: string }) {
   return (
@@ -16,7 +16,7 @@ function HeroStudentImage({ className }: { className?: string }) {
       className={`relative aspect-[4/5] w-full max-w-none overflow-hidden rounded-3xl border border-white/25 bg-primary-900/40 shadow-2xl lg:max-h-[min(620px,72vh)] ${className ?? ""}`}
     >
       <Image
-        src={STUDENT_PHOTOS.hero}
+        src={photoSrc(STUDENT_PHOTOS.hero)}
         alt={`Two primary learners in Asamaths uniform enjoying a moment together at ${SCHOOL_INFO.shortName}, ${SCHOOL_INFO.suburb}`}
         fill
         placeholder="blur"
@@ -54,7 +54,7 @@ export function Hero() {
       {/* Optional depth: classroom layer (very subtle, right side) */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.14]">
         <Image
-          src={STUDENT_PHOTOS.classroom}
+          src={photoSrc(STUDENT_PHOTOS.classroom)}
           alt=""
           fill
           placeholder="blur"

@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
+import { photoSrc } from "@/lib/student-photos"
 
 export type PagePhotoStripItem = {
   src: string
@@ -24,7 +25,7 @@ export function PagePhotoStrip({
           className="group relative aspect-[4/3] overflow-hidden rounded-2xl shadow-md ring-1 ring-gray-200/90 transition-shadow hover:shadow-lg"
         >
           <Image
-            src={item.src}
+            src={photoSrc(item.src)}
             alt={item.alt}
             fill
             placeholder="blur"

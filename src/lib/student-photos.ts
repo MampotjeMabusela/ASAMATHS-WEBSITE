@@ -18,11 +18,19 @@ export const STUDENT_PHOTOS = {
   classroomCelebration: "/images/students/classroom-celebration.png",
 } as const
 
-/** Bump when gallery images change so browsers fetch fresh files. */
-export const GALLERY_PHOTOS_VERSION = "3"
+/** Bump when any public site photo is reprocessed so browsers fetch fresh files. */
+export const SITE_PHOTOS_VERSION = "4k2"
+
+export function photoSrc(path: string): string {
+  const base = path.split("?")[0] ?? path
+  return `${base}?v=${SITE_PHOTOS_VERSION}`
+}
+
+/** @deprecated Use photoSrc — kept for gallery imports */
+export const GALLERY_PHOTOS_VERSION = SITE_PHOTOS_VERSION
 
 export function galleryPhotoSrc(path: string): string {
-  return `${path}?v=${GALLERY_PHOTOS_VERSION}`
+  return photoSrc(path)
 }
 
 /** Campus and page-specific photography (see /public/images/campus). */

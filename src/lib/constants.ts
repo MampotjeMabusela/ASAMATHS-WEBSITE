@@ -42,7 +42,7 @@ export const SCHOOL_INFO = {
 export const BRAND = {
   logoSrc: "/images/logo-official.png",
   /** Bust browser/CDN cache when the crest file is replaced. */
-  logoAssetVersion: "7",
+  logoAssetVersion: "8",
   logoAlt:
     "Asamath's Institute of Learning — official crest: Knowledge, Wisdom, Humanity",
   motto: "Knowledge · Wisdom · Humanity",

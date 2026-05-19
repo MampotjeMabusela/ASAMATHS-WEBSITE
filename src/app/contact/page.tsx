@@ -11,7 +11,7 @@ import { WhatsAppIcon } from "@/components/shared/whatsapp-icon"
 import { BRAND, SCHOOL_INFO } from "@/lib/constants"
 import { getWhatsAppUrl } from "@/lib/whatsapp"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
-import { CAMPUS_PHOTOS } from "@/lib/student-photos"
+import { CAMPUS_PHOTOS, photoSrc } from "@/lib/student-photos"
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -107,7 +107,7 @@ export default function ContactPage() {
 
                 <figure className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-md ring-1 ring-primary-100">
                   <Image
-                    src={CAMPUS_PHOTOS.building}
+                    src={photoSrc(CAMPUS_PHOTOS.building)}
                     alt={`Exterior of ${SCHOOL_INFO.shortName} campus in ${SCHOOL_INFO.suburb}`}
                     fill
                     placeholder="blur"

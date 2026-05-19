@@ -29,7 +29,7 @@ import {
 import { SCHOOL_INFO } from "@/lib/constants"
 import { PageBanner } from "@/components/shared/page-banner"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
-import { CAMPUS_PHOTOS } from "@/lib/student-photos"
+import { CAMPUS_PHOTOS, photoSrc } from "@/lib/student-photos"
 
 export const metadata: Metadata = {
   title: "School Fees — 2026",
@@ -229,7 +229,7 @@ export default function FeesPage() {
             <FadeIn delay={0.08} className="lg:col-span-7">
               <div className="relative h-full min-h-[240px] overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md ring-1 ring-primary-100 sm:min-h-[280px]">
                 <Image
-                  src={CAMPUS_PHOTOS.bankLogos}
+                  src={photoSrc(CAMPUS_PHOTOS.bankLogos)}
                   alt="South African bank logos: Nedbank, Capitec, FNB, Standard Bank, and Absa — common channels for school fee payments"
                   fill
                   className="object-contain object-center p-4 sm:p-6"
@@ -372,7 +372,7 @@ export default function FeesPage() {
             <div className="relative isolate mx-auto mt-10 w-full overflow-hidden rounded-3xl border border-gray-100 bg-white/95 p-6 shadow-sm ring-1 ring-primary-100 md:p-8">
               <div className="pointer-events-none absolute inset-0 -z-10">
                 <Image
-                  src={CAMPUS_PHOTOS.building}
+                  src={photoSrc(CAMPUS_PHOTOS.building)}
                   alt=""
                   fill
                   placeholder="blur"

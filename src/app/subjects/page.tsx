@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { SCHOOL_INFO } from "@/lib/constants"
 import { PageBanner } from "@/components/shared/page-banner"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
-import { CAMPUS_PHOTOS, STUDENT_PHOTOS } from "@/lib/student-photos"
+import { CAMPUS_PHOTOS, STUDENT_PHOTOS, photoSrc } from "@/lib/student-photos"
 
 export const metadata: Metadata = {
   title: "Subjects",
@@ -236,7 +236,7 @@ export default function SubjectsPage() {
                     <NumberedSubjectList items={band.items} bandKey={band.title} />
                     <div className="relative aspect-[4/3] min-h-[200px] overflow-hidden rounded-2xl shadow-md ring-1 ring-gray-200 lg:sticky lg:top-28">
                       <Image
-                        src={band.imageSrc}
+                        src={photoSrc(band.imageSrc)}
                         alt={band.imageAlt}
                         fill
                         placeholder="blur"

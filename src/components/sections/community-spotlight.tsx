@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { SCHOOL_INFO } from "@/lib/constants"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
-import { STUDENT_PHOTOS } from "@/lib/student-photos"
+import { STUDENT_PHOTOS, photoSrc } from "@/lib/student-photos"
 
 /** Full-width celebratory strip — complements existing hero/media without replacing them. */
 export function CommunitySpotlight() {
@@ -9,7 +9,7 @@ export function CommunitySpotlight() {
     <section className="relative isolate w-full overflow-hidden" aria-label="Community spotlight">
       <div className="relative h-[200px] w-full md:h-[280px] lg:h-[300px]">
         <Image
-          src={STUDENT_PHOTOS.classroomCelebration}
+          src={photoSrc(STUDENT_PHOTOS.classroomCelebration)}
           alt={`Learners in class with educational posters at ${SCHOOL_INFO.shortName}, ${SCHOOL_INFO.suburb}`}
           fill
           placeholder="blur"

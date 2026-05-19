@@ -7,7 +7,7 @@ import { FadeIn } from "@/components/shared/fade-in"
 import { Card, CardContent } from "@/components/ui/card"
 import { SCHOOL_INFO, VALUES } from "@/lib/constants"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
-import { STUDENT_PHOTOS } from "@/lib/student-photos"
+import { STUDENT_PHOTOS, photoSrc } from "@/lib/student-photos"
 
 const iconMap: Record<string, LucideIcon> = {
   Trophy,
@@ -28,7 +28,7 @@ export function Values() {
         <FadeIn className="mb-12 grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           <div className="relative aspect-[16/11] overflow-hidden rounded-3xl shadow-xl ring-1 ring-gray-200/80">
             <Image
-              src={STUDENT_PHOTOS.smile}
+              src={photoSrc(STUDENT_PHOTOS.smile)}
               alt={`Learners in school uniform during a focused classroom lesson at ${SCHOOL_INFO.shortName}, ${SCHOOL_INFO.suburb}`}
               fill
               placeholder="blur"

@@ -5,7 +5,7 @@ import { Users, UserCheck, Building2, Award } from "lucide-react"
 import { FadeIn } from "@/components/shared/fade-in"
 import { SCHOOL_INFO } from "@/lib/constants"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
-import { STUDENT_PHOTOS } from "@/lib/student-photos"
+import { STUDENT_PHOTOS, photoSrc } from "@/lib/student-photos"
 
 const stats = [
   {
@@ -39,7 +39,7 @@ export function StatsBanner() {
     >
       <div className="pointer-events-none absolute inset-0 -z-10">
         <Image
-          src={STUDENT_PHOTOS.playground}
+          src={photoSrc(STUDENT_PHOTOS.playground)}
           alt=""
           fill
           placeholder="blur"

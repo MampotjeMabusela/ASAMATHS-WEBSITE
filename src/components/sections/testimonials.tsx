@@ -7,14 +7,14 @@ import { FadeIn } from "@/components/shared/fade-in"
 import { Card, CardContent } from "@/components/ui/card"
 import { TESTIMONIALS } from "@/lib/constants"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
-import { STUDENT_PHOTOS } from "@/lib/student-photos"
+import { STUDENT_PHOTOS, photoSrc } from "@/lib/student-photos"
 
 export function Testimonials() {
   return (
     <section id="asa-home-testimonials" className="relative scroll-mt-24 overflow-hidden py-20">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <Image
-          src={STUDENT_PHOTOS.joy}
+          src={photoSrc(STUDENT_PHOTOS.joy)}
           alt=""
           fill
           placeholder="blur"

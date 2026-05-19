@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
-import { CAMPUS_PHOTOS } from "@/lib/student-photos"
+import { CAMPUS_PHOTOS, photoSrc } from "@/lib/student-photos"
 import { FadeIn } from "@/components/shared/fade-in"
 
 const featured = [
@@ -44,7 +44,7 @@ export function GalleryFeatured() {
             className={`relative min-h-[140px] overflow-hidden rounded-2xl shadow-md ring-1 ring-primary-200/70 sm:min-h-[160px] ${item.className}`}
           >
             <Image
-              src={item.src}
+              src={photoSrc(item.src)}
               alt={item.alt}
               fill
               placeholder="blur"

@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SCHOOL_INFO } from "@/lib/constants"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
-import { STUDENT_PHOTOS } from "@/lib/student-photos"
+import { STUDENT_PHOTOS, photoSrc } from "@/lib/student-photos"
 
 interface CTABannerProps {
   title?: string
@@ -26,7 +26,7 @@ export function CTABanner({
     >
       <div className="absolute inset-0 -z-10">
         <Image
-          src={STUDENT_PHOTOS.sports}
+          src={photoSrc(STUDENT_PHOTOS.sports)}
           alt=""
           fill
           placeholder="blur"
