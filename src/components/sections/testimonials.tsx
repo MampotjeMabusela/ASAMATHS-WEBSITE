@@ -27,53 +27,51 @@ export function Testimonials() {
       </div>
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gray-50/88 backdrop-blur-[2px]" />
 
-      <div className="container-custom relative z-10">
-        <div className="rounded-3xl border border-gray-200/90 bg-white/97 px-6 py-10 text-gray-900 shadow-lg ring-1 ring-primary-100/60 sm:px-10 sm:py-12">
-          <SectionHeading
-            eyebrow="Community voices"
-            title="What Our Community Says"
-            subtitle="Comments from parents and former learners (names used with permission)"
-            className="[&_h2]:text-gray-950 [&>p:first-child]:text-primary-800 [&>p:nth-child(3)]:text-gray-800"
-          />
-          <div className="grid gap-6 md:grid-cols-3">
-            {TESTIMONIALS.map((t, i) => (
-              <FadeIn key={t.name} delay={i * 0.15}>
-                <Card className="h-full border-gray-200/90 bg-white shadow-md">
-                  <CardContent className="pt-8">
-                    <div className="mb-4 flex items-center gap-3">
-                      <div
-                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary-600 font-display text-sm font-bold text-white shadow-md ring-2 ring-primary-100"
-                        aria-hidden
-                      >
-                        {t.initials}
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-sm font-semibold text-gray-950">{t.name}</p>
-                        <div className="mt-1 flex flex-wrap gap-1.5">
-                          <Badge
-                            variant="secondary"
-                            className="text-[10px] font-semibold uppercase tracking-wide text-gray-900"
-                          >
-                            {t.role}
-                          </Badge>
-                          <Badge variant="default" className="text-[10px] text-primary-900">
-                            {t.roleDetail}
-                          </Badge>
-                        </div>
+      <div className="container-custom relative z-10 text-gray-900">
+        <SectionHeading
+          eyebrow="Community voices"
+          title="What Our Community Says"
+          subtitle="Comments from parents and former learners (names used with permission)"
+          className="[&_h2]:text-gray-950 [&>p:first-child]:text-primary-800 [&>p:nth-child(3)]:text-gray-800"
+        />
+        <div className="grid gap-6 md:grid-cols-3">
+          {TESTIMONIALS.map((t, i) => (
+            <FadeIn key={t.name} delay={i * 0.15}>
+              <Card className="h-full border-gray-200/90 bg-white shadow-md">
+                <CardContent className="pt-8">
+                  <div className="mb-4 flex items-center gap-3">
+                    <div
+                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary-600 font-display text-sm font-bold text-white shadow-md ring-2 ring-primary-100"
+                      aria-hidden
+                    >
+                      {t.initials}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-gray-950">{t.name}</p>
+                      <div className="mt-1 flex flex-wrap gap-1.5">
+                        <Badge
+                          variant="secondary"
+                          className="text-[10px] font-semibold uppercase tracking-wide text-gray-900"
+                        >
+                          {t.role}
+                        </Badge>
+                        <Badge variant="default" className="text-[10px] text-primary-900">
+                          {t.roleDetail}
+                        </Badge>
                       </div>
                     </div>
-                    <Quote className="mb-3 h-7 w-7 text-primary-500" aria-hidden />
-                    <p className="mb-4 italic leading-relaxed text-gray-800">&quot;{t.text}&quot;</p>
-                    <div className="flex items-center gap-1" aria-label={`${t.rating} out of 5 stars`}>
-                      {Array.from({ length: t.rating }).map((_, j) => (
-                        <Star key={j} className="h-4 w-4 fill-accent-500 text-accent-600" />
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </FadeIn>
-            ))}
-          </div>
+                  </div>
+                  <Quote className="mb-3 h-7 w-7 text-primary-500" aria-hidden />
+                  <p className="mb-4 italic leading-relaxed text-gray-800">&quot;{t.text}&quot;</p>
+                  <div className="flex items-center gap-1" aria-label={`${t.rating} out of 5 stars`}>
+                    {Array.from({ length: t.rating }).map((_, j) => (
+                      <Star key={j} className="h-4 w-4 fill-accent-500 text-accent-600" />
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </FadeIn>
+          ))}
         </div>
       </div>
     </section>
