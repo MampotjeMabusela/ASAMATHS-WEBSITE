@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 import { MapPin, Phone, Mail, User, Calendar } from "lucide-react"
-import { SectionHeading } from "@/components/shared/section-heading"
 import { FadeIn } from "@/components/shared/fade-in"
+import { PageIntro } from "@/components/shared/page-intro"
+import { AtAGlanceStrip } from "@/components/shared/at-a-glance-strip"
 import { PageBanner } from "@/components/shared/page-banner"
 import { PagePhotoStrip } from "@/components/shared/page-photo-strip"
 import { CTABanner } from "@/components/sections/cta-banner"
@@ -29,11 +30,15 @@ export default function AboutPage() {
     <>
       <section className="bg-gradient-to-br from-primary-50 to-white pb-16 pt-32">
         <div className="container-custom">
-          <FadeIn>
-            <SectionHeading
-              title="About Our School"
-              subtitle="Discover the story behind Asamaths Institute Of Learning – Pretoria"
-            />
+          <PageIntro
+            eyebrow="Who we are"
+            title="About Our School"
+            subtitle="Discover the story behind Asamaths Institute Of Learning – Pretoria"
+            breadcrumbs={[{ label: "About" }]}
+          />
+
+          <FadeIn delay={0.04}>
+            <AtAGlanceStrip />
           </FadeIn>
 
           <FadeIn delay={0.04}>

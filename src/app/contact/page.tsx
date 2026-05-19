@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import type { LucideIcon } from "lucide-react"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
-import { SectionHeading } from "@/components/shared/section-heading"
 import { FadeIn } from "@/components/shared/fade-in"
+import { PageIntro } from "@/components/shared/page-intro"
 import { PageBanner } from "@/components/shared/page-banner"
 import { ContactForm } from "@/components/forms/contact-form"
 import { GoogleMap } from "@/components/shared/google-map"
@@ -40,12 +40,12 @@ export default function ContactPage() {
     <>
       <section className="bg-gradient-to-br from-primary-50 to-white pb-16 pt-32">
         <div className="container-custom">
-          <FadeIn>
-            <SectionHeading
-              title="Contact Us"
-              subtitle="We'd love to hear from you. Reach out via any of the channels below."
-            />
-          </FadeIn>
+          <PageIntro
+            eyebrow="Reach out"
+            title="Contact Us"
+            subtitle="We'd love to hear from you. Reach out via any of the channels below."
+            breadcrumbs={[{ label: "Contact" }]}
+          />
 
           <FadeIn delay={0.06}>
             <PageBanner

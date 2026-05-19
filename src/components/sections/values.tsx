@@ -21,6 +21,7 @@ export function Values() {
     <section id="asa-home-values" className="scroll-mt-24 py-20">
       <div className="container-custom">
         <SectionHeading
+          eyebrow="What we stand for"
           title="Our Core Values"
           subtitle="The principles that guide every aspect of life at Asamaths Institute"
         />

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next"
 import { Inter, Playfair_Display } from "next/font/google"
 import "./globals.css"
 import { Header } from "@/components/layout/header"
+import { SkipLink } from "@/components/shared/skip-link"
 import { Footer } from "@/components/layout/footer"
 import { ScrollToTop } from "@/components/shared/scroll-to-top"
 import { AsaChat } from "@/components/shared/asa-chat"
@@ -67,8 +68,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body className="flex min-h-screen min-w-0 flex-col font-sans">
+        <SkipLink />
         <Header />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1 scroll-mt-28" tabIndex={-1}>
+          {children}
+        </main>
         <Footer />
         <ScrollToTop />
         <WhatsAppFloat />

@@ -50,15 +50,34 @@ export const BRAND = {
   showLogoPlaceholder: false,
 }
 
-export const NAV_LINKS = [
-  { label: "Home", href: "/" },
+export type NavLinkItem = {
+  label: string
+  href: string
+  highlight?: boolean
+}
+
+export const NAV_HOME: NavLinkItem = { label: "Home", href: "/" }
+
+export const NAV_LEARN: NavLinkItem[] = [
   { label: "About", href: "/about" },
-  { label: "Admissions", href: "/admissions" },
-  { label: "Fees", href: "/fees" },
   { label: "Subjects", href: "/subjects" },
   { label: "Gallery", href: "/gallery" },
-  { label: "Code of Conduct", href: "/code-of-conduct" },
+]
+
+export const NAV_JOIN: NavLinkItem[] = [
+  { label: "Admissions", href: "/admissions", highlight: true },
+  { label: "Fees", href: "/fees" },
   { label: "Contact", href: "/contact" },
+]
+
+export const NAV_CONDUCT: NavLinkItem = { label: "Code of Conduct", href: "/code-of-conduct" }
+
+/** Flat list for footer and legacy consumers */
+export const NAV_LINKS: NavLinkItem[] = [
+  NAV_HOME,
+  ...NAV_LEARN,
+  ...NAV_JOIN,
+  NAV_CONDUCT,
 ]
 
 /**
@@ -68,7 +87,7 @@ export const NAV_LINKS = [
  */
 export const SISTER_SCHOOL_LINK = {
   url: (process.env.NEXT_PUBLIC_SISTER_SCHOOL_URL ?? "").trim(),
-  label: (process.env.NEXT_PUBLIC_SISTER_SCHOOL_LABEL ?? "Our other campus").trim() || "Our other campus",
+  label: (process.env.NEXT_PUBLIC_SISTER_SCHOOL_LABEL ?? "Thembisa campus").trim() || "Thembisa campus",
 } as const
 
 export function hasSisterSchoolLink(): boolean {
@@ -103,19 +122,25 @@ export const VALUES = [
 export const TESTIMONIALS = [
   {
     name: "Nomsa M.",
-    role: "Parent · Grade R",
+    initials: "NM",
+    role: "Parent",
+    roleDetail: "Grade R",
     text: "Asamaths has transformed my child's educational journey. The dedicated teachers and structured environment make all the difference.",
     rating: 5,
   },
   {
     name: "Thabo N.",
+    initials: "TN",
     role: "Former learner",
+    roleDetail: "Alumni",
     text: "The foundation I received at Asamaths prepared me exceptionally well for high school. I'm forever grateful.",
     rating: 5,
   },
   {
     name: "Nomvula S.",
-    role: "Parent · Grade 6",
+    initials: "NS",
+    role: "Parent",
+    roleDetail: "Grade 6",
     text: "This school is a pillar of the Winterveldt community, providing quality education to our children.",
     rating: 5,
   },

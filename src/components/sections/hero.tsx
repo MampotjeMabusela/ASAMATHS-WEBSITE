@@ -49,7 +49,7 @@ export function Hero() {
   return (
     <section
       id="asa-home-hero"
-      className="relative flex min-h-[90vh] items-center overflow-hidden bg-gradient-to-br from-primary-950 via-primary-900 to-primary-800 pt-24 scroll-mt-24"
+      className="relative flex min-h-[85svh] items-center overflow-hidden bg-gradient-to-br from-primary-950 via-primary-900 to-primary-800 pt-24 scroll-mt-24 supports-[min-height:100dvh]:min-h-[85dvh]"
     >
       {/* Optional depth: classroom layer (very subtle, right side) */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.14]">
@@ -90,7 +90,7 @@ export function Hero() {
               {SCHOOL_INFO.sector} {SCHOOL_INFO.phase}
             </Badge>
 
-            <h1 className="font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="text-balance font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
               Shaping Future
               <br />
               <span className="text-accent-400">Leaders</span> with
@@ -120,7 +120,7 @@ export function Hero() {
                 </Button>
               </Link>
               <Link href="/about">
-                <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                <Button size="lg" variant="outlineOnDark">
                   Learn More
                 </Button>
               </Link>

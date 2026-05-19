@@ -13,8 +13,10 @@ import {
   Calendar,
   type LucideIcon,
 } from "lucide-react"
-import { SectionHeading } from "@/components/shared/section-heading"
 import { FadeIn } from "@/components/shared/fade-in"
+import { PageIntro } from "@/components/shared/page-intro"
+import { AtAGlanceStrip } from "@/components/shared/at-a-glance-strip"
+import { StickyMobileCta } from "@/components/shared/sticky-mobile-cta"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { PageBanner } from "@/components/shared/page-banner"
@@ -89,13 +91,17 @@ const steps = [
 export default function AdmissionsPage() {
   return (
     <>
-      <section id="asa-admissions" className="scroll-mt-28 bg-gradient-to-br from-primary-50 to-white pb-16 pt-32">
+      <section id="asa-admissions" className="scroll-mt-28 bg-gradient-to-br from-primary-50 to-white pb-24 pt-32 md:pb-16">
         <div className="container-custom">
-          <FadeIn>
-            <SectionHeading
-              title="Admissions"
-              subtitle="Your child's journey to quality education begins here"
-            />
+          <PageIntro
+            eyebrow="Join us"
+            title="Admissions"
+            subtitle="Your child's journey to quality education begins here"
+            breadcrumbs={[{ label: "Admissions" }]}
+          />
+
+          <FadeIn delay={0.04}>
+            <AtAGlanceStrip />
           </FadeIn>
 
           <FadeIn delay={0.08}>
@@ -239,6 +245,7 @@ export default function AdmissionsPage() {
           </FadeIn>
         </div>
       </section>
+      <StickyMobileCta enquireLabel="Apply enquiry" />
     </>
   )
 }

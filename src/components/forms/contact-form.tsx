@@ -27,6 +27,15 @@ type FormStatus = {
   message: string
 }
 
+function FieldError({ id, message }: { id: string; message?: string }) {
+  if (!message) return null
+  return (
+    <p id={id} role="alert" className="text-xs text-red-600">
+      {message}
+    </p>
+  )
+}
+
 export function ContactForm() {
   const [status, setStatus] = useState<FormStatus>({ type: null, message: "" })
 
@@ -66,6 +75,7 @@ export function ContactForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
       {status.type && (
         <div
+          role="status"
           className={`flex items-center gap-2 rounded-lg p-4 text-sm ${
             status.type === "success"
               ? "border border-green-200 bg-green-50 text-green-700"
@@ -84,26 +94,52 @@ export function ContactForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="firstName">First Name *</Label>
-          <Input id="firstName" {...register("firstName")} placeholder="John" />
-          {errors.firstName && <p className="text-xs text-red-500">{errors.firstName.message}</p>}
+          <Input
+            id="firstName"
+            placeholder="John"
+            aria-invalid={errors.firstName ? true : undefined}
+            aria-describedby={errors.firstName ? "firstName-error" : undefined}
+            {...register("firstName")}
+          />
+          <FieldError id="firstName-error" message={errors.firstName?.message} />
         </div>
         <div className="space-y-2">
           <Label htmlFor="lastName">Last Name *</Label>
-          <Input id="lastName" {...register("lastName")} placeholder="Doe" />
-          {errors.lastName && <p className="text-xs text-red-500">{errors.lastName.message}</p>}
+          <Input
+            id="lastName"
+            placeholder="Doe"
+            aria-invalid={errors.lastName ? true : undefined}
+            aria-describedby={errors.lastName ? "lastName-error" : undefined}
+            {...register("lastName")}
+          />
+          <FieldError id="lastName-error" message={errors.lastName?.message} />
         </div>
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="email">Email *</Label>
-          <Input id="email" type="email" {...register("email")} placeholder="john@example.com" />
-          {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
+          <Input
+            id="email"
+            type="email"
+            placeholder="john@example.com"
+            aria-invalid={errors.email ? true : undefined}
+            aria-describedby={errors.email ? "email-error" : undefined}
+            {...register("email")}
+          />
+          <FieldError id="email-error" message={errors.email?.message} />
         </div>
         <div className="space-y-2">
           <Label htmlFor="phone">Phone *</Label>
-          <Input id="phone" type="tel" {...register("phone")} placeholder="+27 12 345 6789" />
-          {errors.phone && <p className="text-xs text-red-500">{errors.phone.message}</p>}
+          <Input
+            id="phone"
+            type="tel"
+            placeholder="+27 12 345 6789"
+            aria-invalid={errors.phone ? true : undefined}
+            aria-describedby={errors.phone ? "phone-error" : undefined}
+            {...register("phone")}
+          />
+          <FieldError id="phone-error" message={errors.phone?.message} />
         </div>
       </div>
 
@@ -128,14 +164,26 @@ export function ContactForm() {
 
       <div className="space-y-2">
         <Label htmlFor="subject">Subject *</Label>
-        <Input id="subject" {...register("subject")} placeholder="Admission inquiry" />
-        {errors.subject && <p className="text-xs text-red-500">{errors.subject.message}</p>}
+        <Input
+          id="subject"
+          placeholder="Admission inquiry"
+          aria-invalid={errors.subject ? true : undefined}
+          aria-describedby={errors.subject ? "subject-error" : undefined}
+          {...register("subject")}
+        />
+        <FieldError id="subject-error" message={errors.subject?.message} />
       </div>
 
       <div className="space-y-2">
         <Label htmlFor="message">Message *</Label>
-        <Textarea id="message" {...register("message")} placeholder="Tell us about your inquiry..." />
-        {errors.message && <p className="text-xs text-red-500">{errors.message.message}</p>}
+        <Textarea
+          id="message"
+          placeholder="Tell us about your inquiry..."
+          aria-invalid={errors.message ? true : undefined}
+          aria-describedby={errors.message ? "message-error" : undefined}
+          {...register("message")}
+        />
+        <FieldError id="message-error" message={errors.message?.message} />
       </div>
 
       <p className="text-xs leading-relaxed text-gray-500">

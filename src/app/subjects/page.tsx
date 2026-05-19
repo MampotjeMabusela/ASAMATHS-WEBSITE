@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, BookOpen, Info } from "lucide-react"
-import { SectionHeading } from "@/components/shared/section-heading"
 import { FadeIn } from "@/components/shared/fade-in"
+import { PageIntro } from "@/components/shared/page-intro"
 import { CTABanner } from "@/components/sections/cta-banner"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -183,12 +183,12 @@ export default function SubjectsPage() {
     <>
       <section id="asa-subjects" className="scroll-mt-28 bg-gradient-to-br from-primary-50 to-white pb-16 pt-32">
         <div className="container-custom">
-          <FadeIn>
-            <SectionHeading
-              title="Subjects"
-              subtitle={`Learning areas by grade at ${SCHOOL_INFO.shortName}`}
-            />
-          </FadeIn>
+          <PageIntro
+            eyebrow="Curriculum"
+            title="Subjects"
+            subtitle={`Learning areas by grade at ${SCHOOL_INFO.shortName}`}
+            breadcrumbs={[{ label: "Subjects" }]}
+          />
 
           <FadeIn delay={0.04}>
             <PageBanner

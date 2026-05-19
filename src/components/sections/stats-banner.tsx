@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { Users, UserCheck, Building2, Award } from "lucide-react"
 import { FadeIn } from "@/components/shared/fade-in"
+import { AnimatedStatValue } from "@/components/shared/animated-stat-value"
 import { SCHOOL_INFO } from "@/lib/constants"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
 import { STUDENT_PHOTOS, photoSrc } from "@/lib/student-photos"
@@ -59,8 +60,7 @@ export function StatsBanner() {
                 <stat.icon className="h-6 w-6" />
               </div>
               <p className="font-display text-3xl font-bold text-gray-900 sm:text-4xl">
-                {stat.value}
-                {stat.suffix}
+                <AnimatedStatValue value={stat.value} suffix={stat.suffix} />
               </p>
               <p className="mt-1 text-sm font-medium text-gray-600">{stat.label}</p>
             </FadeIn>

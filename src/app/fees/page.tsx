@@ -14,11 +14,11 @@ import {
   Printer,
   Smartphone,
 } from "lucide-react"
-import { SectionHeading } from "@/components/shared/section-heading"
 import { FadeIn } from "@/components/shared/fade-in"
+import { PageIntro } from "@/components/shared/page-intro"
+import { StickyMobileCta } from "@/components/shared/sticky-mobile-cta"
 import { CTABanner } from "@/components/sections/cta-banner"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import {
   Accordion,
@@ -110,18 +110,14 @@ const faqs = [
 export default function FeesPage() {
   return (
     <>
-      <section id="asa-fees" className="scroll-mt-28 bg-gradient-to-br from-primary-50 to-white pb-16 pt-32">
+      <section id="asa-fees" className="scroll-mt-28 bg-gradient-to-br from-primary-50 to-white pb-24 pt-32 md:pb-16">
         <div className="container-custom">
-          <FadeIn>
-            <div className="mb-4 flex flex-wrap items-center gap-2">
-              <Badge className="bg-primary-800 text-white hover:bg-primary-800">2026</Badge>
-              <span className="text-sm font-medium text-primary-700">Official fee schedule</span>
-            </div>
-            <SectionHeading
-              title="School Fees"
-              subtitle="2026 fees structure — registration, tuition, payment options, and banking details"
-            />
-          </FadeIn>
+          <PageIntro
+            eyebrow="2026 fee schedule"
+            title="School Fees"
+            subtitle="Registration, tuition, payment options, and banking details"
+            breadcrumbs={[{ label: "Fees" }]}
+          />
 
           <FadeIn delay={0.03}>
             <PageBanner
@@ -420,6 +416,7 @@ export default function FeesPage() {
         </div>
       </section>
       <CTABanner />
+      <StickyMobileCta enquireLabel="Fee enquiry" />
     </>
   )
 }

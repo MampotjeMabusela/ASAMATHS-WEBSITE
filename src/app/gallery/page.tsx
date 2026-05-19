@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { SectionHeading } from "@/components/shared/section-heading"
 import { FadeIn } from "@/components/shared/fade-in"
+import { PageIntro } from "@/components/shared/page-intro"
 import { GalleryFeatured } from "@/components/gallery/gallery-featured"
 import { GalleryGrid } from "@/components/gallery/gallery-grid"
 import { PageBanner } from "@/components/shared/page-banner"
@@ -21,7 +21,12 @@ export default function GalleryPage() {
       <section id="asa-gallery" className="scroll-mt-28 bg-gradient-to-br from-primary-50 to-white pb-16 pt-32">
         <div className="container-custom">
           <FadeIn>
-            <SectionHeading title="Our Gallery" subtitle="A glimpse into life at Asamaths Institute" />
+            <PageIntro
+              eyebrow="Campus life"
+              title="Our Gallery"
+              subtitle="A glimpse into life at Asamaths Institute"
+              breadcrumbs={[{ label: "Gallery" }]}
+            />
           </FadeIn>
 
           <FadeIn delay={0.04}>

@@ -51,16 +51,25 @@ export function Footer() {
                 </li>
               ))}
               {hasSisterSchoolLink() ? (
-                <li>
+                <li className="pt-2">
+                  <p className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-primary-400/90">
+                    Our campuses
+                  </p>
                   <a
                     href={SISTER_SCHOOL_LINK.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-sm text-sm text-gray-400 transition hover:text-primary-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1a]"
+                    className="inline-flex items-center gap-1.5 rounded-sm text-sm font-medium text-gray-300 transition hover:text-primary-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1a]"
                   >
-                    {SISTER_SCHOOL_LINK.label}{" "}
-                    <span className="text-primary-500/90" aria-hidden>
-                      ↗
+                    Pretoria (this site)
+                    <span className="text-gray-500" aria-hidden>
+                      ·
+                    </span>
+                    <span>
+                      {SISTER_SCHOOL_LINK.label}
+                      <span className="ml-0.5 text-primary-500/90" aria-hidden>
+                        ↗
+                      </span>
                     </span>
                   </a>
                 </li>

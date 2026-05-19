@@ -5,7 +5,17 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu, X, Phone, ExternalLink } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { BRAND, NAV_LINKS, SCHOOL_INFO, hasSisterSchoolLink, SISTER_SCHOOL_LINK } from "@/lib/constants"
+import {
+  BRAND,
+  NAV_CONDUCT,
+  NAV_HOME,
+  NAV_JOIN,
+  NAV_LEARN,
+  NAV_LINKS,
+  SCHOOL_INFO,
+  hasSisterSchoolLink,
+  SISTER_SCHOOL_LINK,
+} from "@/lib/constants"
 import { MobileNav } from "./mobile-nav"
 import { SiteLogo } from "./site-logo"
 import { Button } from "@/components/ui/button"
@@ -41,7 +51,9 @@ export function Header() {
     <header
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-300",
-        isScrolled ? "bg-white/95 shadow-lg backdrop-blur-md" : "bg-white"
+        isScrolled
+          ? "border-b border-primary-100 bg-white/95 shadow-lg shadow-primary-900/5 backdrop-blur-md"
+          : "border-b border-transparent bg-white"
       )}
     >
       <div ref={headerChromeRef} className="w-full">
@@ -98,22 +110,34 @@ export function Header() {
               </div>
             </Link>
 
-            {/* Desktop nav */}
-            <nav className="hidden flex-1 items-center justify-end gap-0.5 md:flex lg:gap-1">
-              {NAV_LINKS.map((link) => (
-                <Link
+            {/* Desktop nav — Learn | Join | Conduct */}
+            <nav
+              className="hidden flex-1 items-center justify-end gap-1 md:flex lg:gap-1.5"
+              aria-label="Main navigation"
+            >
+              <NavLink href={NAV_HOME.href} label={NAV_HOME.label} pathname={pathname} />
+              <span className="mx-0.5 hidden h-5 w-px bg-gray-200 lg:inline" aria-hidden />
+              <span className="hidden px-1 text-[10px] font-semibold uppercase tracking-wider text-gray-400 lg:inline">
+                Learn
+              </span>
+              {NAV_LEARN.map((link) => (
+                <NavLink key={link.href} href={link.href} label={link.label} pathname={pathname} />
+              ))}
+              <span className="mx-0.5 hidden h-5 w-px bg-gray-200 lg:inline" aria-hidden />
+              <span className="hidden px-1 text-[10px] font-semibold uppercase tracking-wider text-gray-400 lg:inline">
+                Join
+              </span>
+              {NAV_JOIN.map((link) => (
+                <NavLink
                   key={link.href}
                   href={link.href}
-                  className={cn(
-                    "shrink-0 rounded-lg px-2 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white lg:px-3 lg:text-sm",
-                    pathname === link.href
-                      ? "bg-primary-50 text-primary-700"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-primary-600"
-                  )}
-                >
-                  {link.label}
-                </Link>
+                  label={link.label}
+                  pathname={pathname}
+                  highlight={link.highlight}
+                />
               ))}
+              <span className="mx-0.5 hidden h-5 w-px bg-gray-200 lg:inline" aria-hidden />
+              <NavLink href={NAV_CONDUCT.href} label={NAV_CONDUCT.label} pathname={pathname} />
             </nav>
 
             {/* CTA + Mobile toggle */}
@@ -123,12 +147,16 @@ export function Header() {
                   href={SISTER_SCHOOL_LINK.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hidden rounded-md lg:inline-flex focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                  className="hidden flex-col items-end rounded-md lg:inline-flex focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                  title={`Visit our ${SISTER_SCHOOL_LINK.label}`}
                 >
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-400">
+                    Our campuses
+                  </span>
                   <Button
                     size="sm"
                     variant="outline"
-                    className="border-primary-200 text-primary-800 hover:bg-primary-50 hover:text-primary-900"
+                    className="mt-0.5 border-primary-200 text-primary-800 hover:bg-primary-50 hover:text-primary-900"
                   >
                     <ExternalLink className="mr-1.5 h-3.5 w-3.5" aria-hidden />
                     <span className="max-w-[10rem] truncate">{SISTER_SCHOOL_LINK.label}</span>
@@ -170,5 +198,45 @@ export function Header() {
         }
       />
     </header>
+  )
+}
+
+function NavLink({
+  href,
+  label,
+  pathname,
+  highlight,
+}: {
+  href: string
+  label: string
+  pathname: string
+  highlight?: boolean
+}) {
+  const active = pathname === href
+  if (highlight) {
+    return (
+      <Link
+        href={href}
+        className={cn(
+          "shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white lg:text-sm",
+          active
+            ? "bg-primary-700 text-white shadow-md"
+            : "bg-primary-600 text-white shadow-sm hover:bg-primary-700",
+        )}
+      >
+        {label}
+      </Link>
+    )
+  }
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "shrink-0 rounded-lg px-2 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white lg:px-3 lg:text-sm",
+        active ? "bg-primary-50 text-primary-700" : "text-gray-600 hover:bg-gray-50 hover:text-primary-600",
+      )}
+    >
+      {label}
+    </Link>
   )
 }

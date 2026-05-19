@@ -39,7 +39,7 @@ export function CTABanner({
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary-950/95 via-primary-900/92 to-primary-950/95" />
 
       <div className="container-custom relative z-10 text-center">
-        <h2 className="font-display text-3xl font-bold text-white sm:text-4xl">{title}</h2>
+        <h2 className="text-balance font-display text-3xl font-bold text-white sm:text-4xl">{title}</h2>
         <p className="mx-auto mt-4 w-full max-w-none px-2 text-lg text-primary-100 md:px-4">
           {description}
         </p>
@@ -51,7 +51,7 @@ export function CTABanner({
             </Button>
           </Link>
           <Link href={`tel:${SCHOOL_INFO.rawPhone}`}>
-            <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
+            <Button size="lg" variant="outlineOnDark">
               Call {SCHOOL_INFO.phone}
             </Button>
           </Link>
