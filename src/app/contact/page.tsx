@@ -8,7 +8,7 @@ import { PageBanner } from "@/components/shared/page-banner"
 import { ContactForm } from "@/components/forms/contact-form"
 import { GoogleMap } from "@/components/shared/google-map"
 import { WhatsAppIcon } from "@/components/shared/whatsapp-icon"
-import { SCHOOL_INFO } from "@/lib/constants"
+import { BRAND, SCHOOL_INFO } from "@/lib/constants"
 import { getWhatsAppUrl } from "@/lib/whatsapp"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
 import { CAMPUS_PHOTOS } from "@/lib/student-photos"
@@ -49,13 +49,14 @@ export default function ContactPage() {
 
           <FadeIn delay={0.06}>
             <PageBanner
-              src={CAMPUS_PHOTOS.adminOffice}
-              alt={`School office team at ${SCHOOL_INFO.shortName} ready to answer enquiries`}
+              src={`${BRAND.logoSrc}?v=${BRAND.logoAssetVersion}`}
+              alt={BRAND.logoAlt}
               headline="Questions about enrolment? We're here to help"
               subline="Call, email, or send a message—our office responds during school hours."
               badge="Get in touch"
               variant="compact"
-              objectPosition="center 30%"
+              imageFit="contain"
+              objectPosition="center"
               className="mb-10"
             />
           </FadeIn>

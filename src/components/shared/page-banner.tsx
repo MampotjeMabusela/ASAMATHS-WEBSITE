@@ -13,6 +13,8 @@ export type PageBannerProps = {
   badge?: string
   variant?: PageBannerVariant
   objectPosition?: string
+  /** Use contain for logos or artwork with padding; default is cover for photos. */
+  imageFit?: "cover" | "contain"
   className?: string
   priority?: boolean
 }
@@ -31,11 +33,14 @@ export function PageBanner({
   badge,
   variant = "wide",
   objectPosition = "center",
+  imageFit = "cover",
   className,
   priority = false,
 }: PageBannerProps) {
-  const gradient =
-    variant === "compact"
+  const isLogoBanner = imageFit === "contain"
+  const gradient = isLogoBanner
+    ? "from-primary-950/55 via-primary-900/15 to-transparent"
+    : variant === "compact"
       ? "from-primary-950/70 via-primary-900/35 to-primary-800/20"
       : "from-primary-950/80 via-primary-900/45 to-primary-700/25"
 
@@ -48,7 +53,9 @@ export function PageBanner({
         priority={priority}
         placeholder="blur"
         blurDataURL={STUDENT_PHOTO_BLUR_DATA_URL}
-        className="object-cover"
+        className={cn(
+          imageFit === "contain" ? "object-contain bg-white p-6 sm:p-10" : "object-cover",
+        )}
         style={{ objectPosition }}
         sizes="100vw"
       />
