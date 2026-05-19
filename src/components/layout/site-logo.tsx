@@ -11,8 +11,8 @@ const logoSrcWithCache = `${BRAND.logoSrc}?v=${BRAND.logoAssetVersion}`
 const FOOTER_BG = "#0a0f1a"
 
 /**
- * Crest on header/footer with no card, border, ring, or shadow.
- * `mix-blend-multiply` drops the white matting onto the surface behind (white header / dark footer).
+ * Crest on header/footer — no card, border, ring, or shadow.
+ * Logo PNG uses a transparent background so colours stay visible on white (header) and dark (footer).
  */
 const shell: Record<
   SiteLogoVariant,
@@ -21,12 +21,12 @@ const shell: Record<
   header: {
     wrap: "relative flex h-[3.75rem] w-[168px] shrink-0 items-center justify-center sm:h-[4rem] sm:w-[188px] md:h-[4.25rem] md:w-[200px]",
     surface: "bg-white",
-    img: "max-h-full max-w-full object-contain object-center mix-blend-multiply",
+    img: "max-h-full max-w-full object-contain object-center",
   },
   footer: {
     wrap: "relative flex h-[4.5rem] w-[192px] shrink-0 items-center justify-center sm:h-[4.25rem] sm:w-[210px]",
     surface: "bg-[#0a0f1a]",
-    img: "max-h-full max-w-full object-contain object-center mix-blend-multiply",
+    img: "max-h-full max-w-full object-contain object-center",
   },
 }
 
@@ -95,7 +95,10 @@ export function SiteLogo({
         height={640}
         decoding="async"
         fetchPriority={variant === "header" ? "high" : undefined}
-        className={styles.img}
+        className={cn(
+          styles.img,
+          variant === "footer" && "drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)]"
+        )}
       />
     </div>
   )

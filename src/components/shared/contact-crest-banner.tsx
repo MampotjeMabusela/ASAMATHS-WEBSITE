@@ -55,7 +55,7 @@ export function ContactCrestBanner() {
             alt={BRAND.logoAlt}
             width={520}
             height={520}
-            className="h-[7.5rem] w-auto max-w-[min(100%,220px)] object-contain mix-blend-multiply sm:h-[8.5rem] sm:max-w-[240px]"
+            className="h-[7.5rem] w-auto max-w-[min(100%,220px)] object-contain sm:h-[8.5rem] sm:max-w-[240px]"
           />
         </motion.div>
 
