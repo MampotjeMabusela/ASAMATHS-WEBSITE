@@ -13,6 +13,8 @@ export const SCHOOL_INFO = {
   /** Digits only — for https://wa.me/ links */
   rawWhatsApp: "27615309416",
   email: "asamathsinstituteoflearning@gmail.com",
+  officeHours: "Mon–Fri: 06:45 – 16:00",
+  officeHoursLong: "Monday – Friday: 06:45 – 16:00",
   principal: "Makeche Brighton",
   principalYear: 2023,
   natEmis: "700400979",

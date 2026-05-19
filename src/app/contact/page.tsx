@@ -20,7 +20,7 @@ const contactDetails = [
   { icon: Phone, label: "Phone (main)", value: SCHOOL_INFO.phone, href: `tel:${SCHOOL_INFO.rawPhone}` },
   { icon: Phone, label: "Phone (additional)", value: SCHOOL_INFO.phoneAlt, href: `tel:${SCHOOL_INFO.rawPhoneAlt}` },
   { icon: Mail, label: "Email", value: SCHOOL_INFO.email, href: `mailto:${SCHOOL_INFO.email}` },
-  { icon: Clock, label: "Hours", value: "Monday – Friday: 07:30 – 15:00" },
+  { icon: Clock, label: "Hours", value: SCHOOL_INFO.officeHoursLong },
 ]
 
 export default function ContactPage() {

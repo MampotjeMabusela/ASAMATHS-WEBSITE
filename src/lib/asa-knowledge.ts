@@ -40,7 +40,7 @@ export function getAsaKnowledgeBase(): AsaKnowledgeEntry[] {
       id: "contact",
       keywords: ["contact", "email", "message", "form", "write", "reach", "website form"],
       buildAnswer: () =>
-        `Email us at **${SCHOOL_INFO.email}** or phone **${SCHOOL_INFO.phone}** / **${SCHOOL_INFO.phoneAlt}**. Office hours: **Monday–Friday, 07:30–15:00**. The **Contact** page has our enquiry form.`,
+        `Email us at **${SCHOOL_INFO.email}** or phone **${SCHOOL_INFO.phone}** / **${SCHOOL_INFO.phoneAlt}**. Office hours: **${SCHOOL_INFO.officeHoursLong}**. The **Contact** page has our enquiry form.`,
       navigateTo: "/contact#asa-contact-form",
       linkLabel: "Contact page",
     },
@@ -164,7 +164,7 @@ export function getAsaKnowledgeBase(): AsaKnowledgeEntry[] {
     {
       id: "hours",
       keywords: ["hours", "open", "closing", "time", "when open", "office hours"],
-      buildAnswer: () => `The school operates **Monday–Friday, 07:30–15:00** (general hours shown on site).`,
+      buildAnswer: () => `The school operates **${SCHOOL_INFO.officeHoursLong}** (general hours shown on site).`,
       navigateTo: "/contact#asa-contact-form",
       linkLabel: "Contact",
     },
