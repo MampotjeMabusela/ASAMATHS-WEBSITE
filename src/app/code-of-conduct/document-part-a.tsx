@@ -169,17 +169,17 @@ export function CodeOfConductPartA() {
       <section id="office-hours" className="scroll-mt-32">
         <h2 className="font-display text-xl font-bold text-primary-950 md:text-2xl">9. Office Operating Hours</h2>
         <p className="mt-3 text-sm leading-relaxed text-gray-700 md:text-[15px] md:leading-relaxed">
-          The official administration operating hours is between 07:30 am – 16:00 pm Monday – Thursday, Fridays
-          07:30 – 15:00 pm.
+          The official administration operating hours is between 06:45 am – 16:00 pm Monday – Thursday, Fridays
+          06:45 – 15:00 pm.
         </p>
       </section>
 
       <section id="school-hours" className="scroll-mt-32">
         <h2 className="font-display text-xl font-bold text-primary-950 md:text-2xl">10. School Hours</h2>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-gray-700 md:text-[15px]">
-          <li>Grade R – 2: School starts at 07:30 hours and ends at 13:00 hours from Monday to Friday</li>
-          <li>Grade 3: School starts at 07:30 hours and ends at 13:30 hours from Monday to Friday</li>
-          <li>Grade 4 - 9: Monday to Friday, school starts at 07:30 hours and ends at 14:00 hours</li>
+          <li>Grade R – 2: School starts at 06:45 hours and ends at 13:00 hours from Monday to Friday</li>
+          <li>Grade 3: School starts at 06:45 hours and ends at 13:30 hours from Monday to Friday</li>
+          <li>Grade 4 - 9: Monday to Friday, school starts at 06:45 hours and ends at 14:00 hours</li>
           <li>The first lesson starts at 08:00 hours</li>
           <li>
             Learners have a break of 30 minutes as follows:
