@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useCallback, useState } from "react"
 import { FadeIn } from "@/components/shared/fade-in"
 import type { GalleryItem } from "@/lib/student-photos"
+import { galleryPhotoSrc } from "@/lib/student-photos"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
 import {
   Dialog,
@@ -35,7 +36,7 @@ export function GalleryGrid({ items }: GalleryGridProps) {
               <figure className="overflow-hidden rounded-2xl">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
-                    src={item.src}
+                    src={galleryPhotoSrc(item.src)}
                     alt={item.alt}
                     fill
                     placeholder="blur"
@@ -66,7 +67,7 @@ export function GalleryGrid({ items }: GalleryGridProps) {
               <DialogDescription className="sr-only">{active.alt}</DialogDescription>
               <div className="relative mx-auto aspect-[4/3] w-full max-h-[min(78vh,640px)] min-h-[180px] rounded-lg bg-gray-100 ring-1 ring-gray-100">
                 <Image
-                  src={active.src}
+                  src={galleryPhotoSrc(active.src)}
                   alt={active.alt}
                   fill
                   placeholder="blur"

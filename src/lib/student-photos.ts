@@ -14,8 +14,16 @@ export const STUDENT_PHOTOS = {
   studentReadingPortrait: "/images/students/student-reading-portrait.png",
   mathWhiteboardStudent: "/images/students/math-whiteboard-student.png",
   mathChalkboardLesson: "/images/students/math-chalkboard-lesson.png",
+  productiveCollaborations: "/images/students/productive-collaborations.png",
   classroomCelebration: "/images/students/classroom-celebration.png",
 } as const
+
+/** Bump when gallery images change so browsers fetch fresh files. */
+export const GALLERY_PHOTOS_VERSION = "3"
+
+export function galleryPhotoSrc(path: string): string {
+  return `${path}?v=${GALLERY_PHOTOS_VERSION}`
+}
 
 /** Campus and page-specific photography (see /public/images/campus). */
 export const CAMPUS_PHOTOS = {
@@ -25,6 +33,8 @@ export const CAMPUS_PHOTOS = {
   building: "/images/campus/campus-building.png",
   classroomGroup: "/images/campus/classroom-group.png",
   literacyNotebook: "/images/campus/literacy-notebook.png",
+  /** Fees page — major SA bank brands (payment context) */
+  bankLogos: "/images/campus/fee-bank-logos.png",
 } as const
 
 export type GalleryItem = {
@@ -89,12 +99,6 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     alt: "Primary-phase learners in uniform working diligently at their desks in a bright classroom.",
   },
   {
-    src: STUDENT_PHOTOS.reading,
-    title: "Focus on literacy",
-    caption: "Building strong reading habits every day.",
-    alt: "Learner concentrating on literacy work at a desk in a bright classroom.",
-  },
-  {
     src: STUDENT_PHOTOS.focus,
     title: "Learning spaces",
     caption: "Bright, structured environments for study.",
@@ -132,27 +136,15 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   },
   {
     src: STUDENT_PHOTOS.scienceLesson,
-    title: "Science in action",
-    caption: "Hands-on investigations with educators alongside our learners.",
-    alt: "Natural sciences exploration: educator and learner with magnets during a lesson.",
+    title: "Senior-phase classroom",
+    caption: "Focused lessons across Grades 7–9 with educators at the front of the room.",
+    alt: "Senior-phase learners in blue school uniform seated at desks during a lesson while an educator writes on the chalkboard.",
   },
   {
-    src: STUDENT_PHOTOS.studentReadingPortrait,
-    title: "Every reader matters",
-    caption: "Confident literacy habits in calm, purposeful classrooms.",
-    alt: "Portrait-style photo of a primary learner reading attentively from a book.",
-  },
-  {
-    src: STUDENT_PHOTOS.mathWhiteboardStudent,
-    title: "Numeracy confidence",
-    caption: "Learners practising mathematics with focus and perseverance.",
-    alt: "Learner solving two-digit addition on a classroom whiteboard for numeracy practice.",
-  },
-  {
-    src: STUDENT_PHOTOS.mathChalkboardLesson,
-    title: "Mathematics explained",
-    caption: "Clear teaching guided by caring, experienced educators.",
-    alt: "Mathematics educator pointing to sums on the chalkboard while learners look on.",
+    src: STUDENT_PHOTOS.productiveCollaborations,
+    title: "Productive Collaborations",
+    caption: "Learners working together, sharing ideas, and supporting one another in class.",
+    alt: "Senior-phase learners in school uniform collaborating at their desks during a positive classroom lesson.",
   },
   {
     src: STUDENT_PHOTOS.classroomCelebration,

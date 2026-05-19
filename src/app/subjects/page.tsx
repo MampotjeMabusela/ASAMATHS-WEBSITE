@@ -173,7 +173,7 @@ const subjectBands: SubjectBand[] = [
       },
     ],
     imageSrc: STUDENT_PHOTOS.scienceLesson,
-    imageAlt: `Senior-phase science and technology learning at ${SCHOOL_INFO.shortName}`,
+    imageAlt: `Senior-phase learners in uniform during a classroom lesson at ${SCHOOL_INFO.shortName}`,
     imageClass: "object-cover object-[center_45%]",
   },
 ]

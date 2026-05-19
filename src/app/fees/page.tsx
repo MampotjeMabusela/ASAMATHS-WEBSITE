@@ -227,17 +227,20 @@ export default function FeesPage() {
 
             {/* Office panel — visible on all breakpoints beside registration */}
             <FadeIn delay={0.08} className="lg:col-span-7">
-              <div className="relative h-full min-h-[240px] overflow-hidden rounded-2xl border border-gray-200 shadow-md ring-1 ring-primary-100 sm:min-h-[280px]">
+              <div className="relative h-full min-h-[240px] overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md ring-1 ring-primary-100 sm:min-h-[280px]">
                 <Image
-                  src={CAMPUS_PHOTOS.adminOffice}
-                  alt={`Administrator at ${SCHOOL_INFO.shortName} office ready to assist with fee enquiries`}
+                  src={CAMPUS_PHOTOS.bankLogos}
+                  alt="South African bank logos: Nedbank, Capitec, FNB, Standard Bank, and Absa — common channels for school fee payments"
                   fill
-                  className="object-cover object-[center_35%]"
+                  className="object-contain object-center p-4 sm:p-6"
                   sizes="(max-width:1024px)100vw,58vw"
                   placeholder="blur"
                   blurDataURL={STUDENT_PHOTO_BLUR_DATA_URL}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary-950/85 via-primary-900/35 to-transparent" />
+                <div
+                  className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(10,15,26,0.92)_0%,rgba(10,15,26,0.45)_28%,transparent_52%)]"
+                  aria-hidden
+                />
                 <div className="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6">
                   <p className="font-display text-base font-semibold leading-snug text-white drop-shadow sm:text-lg md:text-xl">
                     Visit or call the office for payment plans and proof of deposit.
