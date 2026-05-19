@@ -10,11 +10,11 @@ export function CommunitySpotlight() {
       <div className="relative h-[200px] w-full md:h-[280px] lg:h-[300px]">
         <Image
           src={photoSrc(STUDENT_PHOTOS.classroomCelebration)}
-          alt={`Learners in school uniform smiling together on the playground at ${SCHOOL_INFO.shortName}, ${SCHOOL_INFO.suburb}`}
+          alt={`Learners in school uniform learning and playing together outdoors at ${SCHOOL_INFO.shortName}, ${SCHOOL_INFO.suburb}`}
           fill
           placeholder="blur"
           blurDataURL={STUDENT_PHOTO_BLUR_DATA_URL}
-          className="object-cover object-[center_35%]"
+          className="object-cover object-[center_40%]"
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary-950/82 via-primary-800/65 to-primary-600/55" />

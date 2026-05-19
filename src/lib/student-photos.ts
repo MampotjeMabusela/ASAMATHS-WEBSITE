@@ -19,7 +19,7 @@ export const STUDENT_PHOTOS = {
 } as const
 
 /** Bump when any public site photo is reprocessed so browsers fetch fresh files. */
-export const SITE_PHOTOS_VERSION = "4k3"
+export const SITE_PHOTOS_VERSION = "4k4"
 
 export function photoSrc(path: string): string {
   const base = path.split("?")[0] ?? path
