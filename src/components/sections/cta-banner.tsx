@@ -16,8 +16,8 @@ interface CTABannerProps {
 export function CTABanner({
   title = "Ready to Join Our Community?",
   description = `Contact ${SCHOOL_INFO.shortName} today to learn more about our admission process, fees, and how we can partner in your child's educational journey.`,
-  buttonText = "Get in Touch",
-  buttonHref = "/contact",
+  buttonText = "Send an Inquiry",
+  buttonHref = "/contact#asa-contact-form",
 }: CTABannerProps) {
   return (
     <section

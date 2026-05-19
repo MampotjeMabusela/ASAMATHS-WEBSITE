@@ -56,11 +56,19 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       })
-      const json = await res.json()
-      if (!res.ok) throw new Error(json.error || "Something went wrong")
+      const json = (await res.json()) as { error?: string; message?: string; fallbackEmail?: string }
+      if (!res.ok) {
+        const fallback = json.fallbackEmail || SCHOOL_INFO.email
+        throw new Error(
+          json.error ||
+            `Something went wrong. Please email ${fallback} directly.`
+        )
+      }
       setStatus({
         type: "success",
-        message: "Message sent successfully! We'll get back to you soon.",
+        message:
+          json.message ||
+          `Your inquiry was sent to ${SCHOOL_INFO.email}. We will reply during school hours.`,
       })
       reset()
     } catch (err) {
@@ -210,7 +218,7 @@ export function ContactForm() {
             Sending...
           </>
         ) : (
-          "Send Message"
+          "Send Inquiry"
         )}
       </Button>
     </form>

@@ -130,7 +130,7 @@ export default function ContactPage() {
                 id="asa-contact-form"
                 className="scroll-mt-28 rounded-2xl border border-gray-200 bg-white p-6 shadow-md ring-1 ring-primary-100/60 sm:p-8"
               >
-                <h3 className="mb-2 font-display text-2xl font-bold text-gray-900">Send Us a Message</h3>
+                <h3 className="mb-2 font-display text-2xl font-bold text-gray-900">Send an Inquiry</h3>
                 <p className="mb-6 text-sm text-gray-500">
                   We typically reply within one to two school days during term time.
                 </p>
