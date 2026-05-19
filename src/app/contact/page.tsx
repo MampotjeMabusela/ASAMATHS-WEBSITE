@@ -4,11 +4,11 @@ import type { LucideIcon } from "lucide-react"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
 import { FadeIn } from "@/components/shared/fade-in"
 import { PageIntro } from "@/components/shared/page-intro"
-import { PageBanner } from "@/components/shared/page-banner"
+import { ContactCrestBanner } from "@/components/shared/contact-crest-banner"
 import { ContactForm } from "@/components/forms/contact-form"
 import { GoogleMap } from "@/components/shared/google-map"
 import { WhatsAppIcon } from "@/components/shared/whatsapp-icon"
-import { BRAND, SCHOOL_INFO } from "@/lib/constants"
+import { SCHOOL_INFO } from "@/lib/constants"
 import { getWhatsAppUrl } from "@/lib/whatsapp"
 import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
 import { CAMPUS_PHOTOS, photoSrc } from "@/lib/student-photos"
@@ -48,18 +48,7 @@ export default function ContactPage() {
           />
 
           <FadeIn delay={0.06}>
-            <PageBanner
-              src={`${BRAND.logoSrc}?v=${BRAND.logoAssetVersion}`}
-              alt={BRAND.logoAlt}
-              headline="Questions about enrolment? We're here to help"
-              subline="Call, email, or send a message—our office responds during school hours."
-              badge="Get in touch"
-              variant="compact"
-              imageFit="contain"
-              imageOffsetX={5}
-              enhanced
-              className="mb-10"
-            />
+            <ContactCrestBanner />
           </FadeIn>
 
           <div className="grid gap-12 lg:grid-cols-2">

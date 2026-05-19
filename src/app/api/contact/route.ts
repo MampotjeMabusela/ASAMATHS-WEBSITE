@@ -1,12 +1,6 @@
 import { NextResponse } from "next/server"
-import { Resend } from "resend"
 import { z } from "zod"
-import {
-  buildContactEmailContent,
-  getContactFromAddress,
-  getContactInbox,
-  isContactEmailConfigured,
-} from "@/lib/contact-email"
+import { getInquiryInbox, isWeb3FormsConfigured, submitInquiryToWeb3Forms } from "@/lib/web3forms"
 import { SCHOOL_INFO } from "@/lib/constants"
 
 const contactSchema = z.object({
@@ -21,13 +15,11 @@ const contactSchema = z.object({
 
 export async function POST(request: Request) {
   try {
-    if (!isContactEmailConfigured()) {
-      console.error(
-        "Contact form: missing RESEND_API_KEY and/or CONTACT_FORM_FROM_EMAIL (verified sender in Resend)"
-      )
+    if (!isWeb3FormsConfigured()) {
+      console.error("Contact form: WEB3FORMS_ACCESS_KEY is not set")
       return NextResponse.json(
         {
-          error: `Email service is not configured yet. Please email us directly at ${SCHOOL_INFO.email}.`,
+          error: `Inquiry form is not configured yet. Please email ${SCHOOL_INFO.email} directly.`,
           fallbackEmail: SCHOOL_INFO.email,
         },
         { status: 503 }
@@ -36,28 +28,16 @@ export async function POST(request: Request) {
 
     const body = await request.json()
     const data = contactSchema.parse(body)
-    const inbox = getContactInbox()
-    const from = getContactFromAddress()!
-    const { subject, text, html } = buildContactEmailContent(data)
+    const inbox = getInquiryInbox()
+    const result = await submitInquiryToWeb3Forms(data)
 
-    const resend = new Resend(process.env.RESEND_API_KEY!)
-    const { error } = await resend.emails.send({
-      from,
-      to: [inbox],
-      replyTo: data.email,
-      subject,
-      text,
-      html,
-    })
-
-    if (error) {
-      console.error("Resend error:", error)
+    if (!result.ok) {
       return NextResponse.json(
         {
-          error: `We could not send your message. Please email ${SCHOOL_INFO.email} or call ${SCHOOL_INFO.phone}.`,
-          fallbackEmail: SCHOOL_INFO.email,
+          error: `${result.detail} You can also email ${inbox}.`,
+          fallbackEmail: inbox,
         },
-        { status: 500 }
+        { status: result.status && result.status >= 400 ? result.status : 502 }
       )
     }
 
@@ -66,13 +46,16 @@ export async function POST(request: Request) {
       message: `Your inquiry was sent to ${inbox}. We will reply during school hours.`,
     })
   } catch (err) {
-    console.error("Contact form error:", err)
+    console.error("Contact API error:", err)
     if (err instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: "Invalid form data", details: err.issues },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: "Invalid form data", details: err.issues }, { status: 400 })
     }
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+    return NextResponse.json(
+      {
+        error: `Something went wrong. Please email ${SCHOOL_INFO.email} directly.`,
+        fallbackEmail: SCHOOL_INFO.email,
+      },
+      { status: 500 }
+    )
   }
 }

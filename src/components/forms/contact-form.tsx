@@ -11,6 +11,11 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import type { ContactFormData } from "@/types"
 import { SCHOOL_INFO } from "@/lib/constants"
+import {
+  getInquiryInbox,
+  getWeb3FormsPublicAccessKey,
+  submitInquiryToWeb3FormsClient,
+} from "@/lib/web3forms"
 
 const contactSchema = z.object({
   firstName: z.string().min(2, "First name is required"),
@@ -50,31 +55,54 @@ export function ContactForm() {
 
   const onSubmit = async (data: ContactFormData) => {
     setStatus({ type: null, message: "" })
+    const inbox = getInquiryInbox()
     try {
+      // Web3Forms recommends browser-side submit; fall back to /api/contact if only server key is set.
+      const publicKey = getWeb3FormsPublicAccessKey()
+      if (publicKey) {
+        const result = await submitInquiryToWeb3FormsClient(data)
+        if (!result.ok) {
+          throw new Error(`${result.detail} You can also email ${inbox} directly.`)
+        }
+        setStatus({
+          type: "success",
+          message: `Your inquiry was sent to ${inbox}. We will reply during school hours.`,
+        })
+        reset()
+        return
+      }
+
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       })
       const json = (await res.json()) as { error?: string; message?: string; fallbackEmail?: string }
+
       if (!res.ok) {
-        const fallback = json.fallbackEmail || SCHOOL_INFO.email
-        throw new Error(
-          json.error ||
-            `Something went wrong. Please email ${fallback} directly.`
-        )
+        const fallback = json.fallbackEmail || inbox
+        throw new Error(json.error || `Could not send your inquiry. Please email ${fallback} directly.`)
       }
+
       setStatus({
         type: "success",
         message:
           json.message ||
-          `Your inquiry was sent to ${SCHOOL_INFO.email}. We will reply during school hours.`,
+          `Your inquiry was sent to ${inbox}. We will reply during school hours.`,
       })
       reset()
     } catch (err) {
+      const fallback = inbox
+      const isNetwork =
+        err instanceof TypeError ||
+        (err instanceof Error && /failed to fetch/i.test(err.message))
       setStatus({
         type: "error",
-        message: err instanceof Error ? err.message : "Failed to send. Please try again.",
+        message: isNetwork
+          ? `Connection problem. Check your internet and try again, or email ${fallback} directly.`
+          : err instanceof Error
+            ? err.message
+            : `Failed to send. Please email ${fallback} directly.`,
       })
     }
   }

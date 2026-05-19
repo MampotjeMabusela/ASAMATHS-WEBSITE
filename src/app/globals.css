@@ -63,6 +63,12 @@
       animation: none;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-crest-motion * {
+      animation: none !important;
+    }
+  }
 }
 
 @keyframes banner-shimmer {
