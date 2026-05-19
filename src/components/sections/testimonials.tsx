@@ -27,12 +27,12 @@ export function Testimonials() {
       </div>
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gray-50/88 backdrop-blur-[2px]" />
 
-      <div className="container-custom relative z-10 text-gray-900">
+      <div className="container-custom relative z-10">
         <SectionHeading
           eyebrow="Community voices"
           title="What Our Community Says"
           subtitle="Comments from parents and former learners (names used with permission)"
-          className="[&_h2]:text-gray-950 [&>p:first-child]:text-primary-800 [&>p:nth-child(3)]:text-gray-800"
+          className="[&_h2]:text-white [&>p]:text-white/95 [&>div:last-child]:bg-white"
         />
         <div className="grid gap-6 md:grid-cols-3">
           {TESTIMONIALS.map((t, i) => (
