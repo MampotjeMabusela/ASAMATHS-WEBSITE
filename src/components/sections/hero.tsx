@@ -18,7 +18,7 @@ function HeroStudentSlideshow({ className }: { className?: string }) {
   const reduceMotion = useReducedMotion()
   const [index, setIndex] = useState(0)
   const slideCount = HERO_SLIDESHOW.length
-  const slide = HERO_SLIDESHOW[index] ?? HERO_SLIDESHOW[0]
+  const slide = HERO_SLIDESHOW[index]
 
   useEffect(() => {
     if (reduceMotion || slideCount <= 1) return
@@ -34,6 +34,10 @@ function HeroStudentSlideshow({ className }: { className?: string }) {
     const img = new window.Image()
     img.src = photoSrc(next.src)
   }, [index, slideCount])
+
+  if (!slide) {
+    return null
+  }
 
   return (
     <div

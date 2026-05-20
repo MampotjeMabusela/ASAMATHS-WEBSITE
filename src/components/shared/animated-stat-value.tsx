@@ -9,6 +9,15 @@ type AnimatedStatValueProps = {
   className?: string
 }
 
+/** Stable thousands grouping (space) — avoids server/client `toLocaleString` hydration mismatches. */
+function formatStatNumber(n: number): string {
+  const rounded = Math.round(n)
+  const negative = rounded < 0
+  const digits = Math.abs(rounded).toString()
+  const grouped = digits.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+  return negative ? `-${grouped}` : grouped
+}
+
 function parseNumericValue(raw: string): number | null {
   const digits = raw.replace(/[^\d]/g, "")
   if (!digits) return null
@@ -21,15 +30,21 @@ export function AnimatedStatValue({ value, suffix = "", className }: AnimatedSta
   const inView = useInView(ref, { once: true, margin: "-40px" })
   const reduceMotion = useReducedMotion()
   const numeric = parseNumericValue(value)
-  const [display, setDisplay] = useState(numeric ?? 0)
+  const [mounted, setMounted] = useState(false)
+  const [display, setDisplay] = useState(() => (numeric ?? 0))
 
   useEffect(() => {
-    if (numeric === null) return
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted || numeric === null) return
     if (reduceMotion || !inView) {
       setDisplay(numeric)
       return
     }
 
+    setDisplay(0)
     const duration = 1400
     const start = performance.now()
     let frame = 0
@@ -43,7 +58,7 @@ export function AnimatedStatValue({ value, suffix = "", className }: AnimatedSta
 
     frame = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(frame)
-  }, [inView, numeric, reduceMotion])
+  }, [mounted, inView, numeric, reduceMotion])
 
   if (numeric === null) {
     return (
@@ -54,9 +69,11 @@ export function AnimatedStatValue({ value, suffix = "", className }: AnimatedSta
     )
   }
 
+  const shown = mounted && inView && !reduceMotion ? display : numeric
+
   return (
     <span ref={ref} className={className}>
-      {display.toLocaleString("en-ZA")}
+      {formatStatNumber(shown)}
       {suffix}
     </span>
   )
