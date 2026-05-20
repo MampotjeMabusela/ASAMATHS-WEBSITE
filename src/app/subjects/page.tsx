@@ -192,8 +192,8 @@ export default function SubjectsPage() {
 
           <FadeIn delay={0.04}>
             <PageBanner
-              src={CAMPUS_PHOTOS.classroomGroup}
-              alt={`Learners in uniform during a classroom lesson at ${SCHOOL_INFO.shortName}`}
+              src={CAMPUS_PHOTOS.curriculumPlayground}
+              alt={`Learners in uniform playing together at ${SCHOOL_INFO.shortName}`}
               headline="Subjects from Grade R through Grade 9"
               subline="Structured learning across foundation, intermediate, and senior phases."
               badge="Curriculum"
