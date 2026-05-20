@@ -1,5 +1,3 @@
-import { SCHOOL_INFO } from "@/lib/constants"
-
 /** Public paths for on-site student photography (see /public/images/students). */
 
 export const STUDENT_PHOTOS = {
@@ -172,36 +170,8 @@ export type HeroSlide = {
   objectPosition?: string
 }
 
-/** Home hero slideshow — every campus & student photo once (no logos or duplicates). */
+/** Home hero slideshow — gallery photos only (last five bonus slides removed per site request). */
 function buildHeroSlideshow(): HeroSlide[] {
-  const short = SCHOOL_INFO.shortName
-  const extras: HeroSlide[] = [
-    {
-      src: STUDENT_PHOTOS.reading,
-      alt: `Learner reading during a literacy lesson at ${short}`,
-      objectPosition: "center 30%",
-    },
-    {
-      src: STUDENT_PHOTOS.studentReadingPortrait,
-      alt: `Learner reading at ${short} in Winterveldt, Pretoria`,
-      objectPosition: "center 30%",
-    },
-    {
-      src: STUDENT_PHOTOS.mathWhiteboardStudent,
-      alt: `Learner at the mathematics whiteboard during a lesson at ${short}`,
-      objectPosition: "center 35%",
-    },
-    {
-      src: STUDENT_PHOTOS.mathChalkboardLesson,
-      alt: `Mathematics lesson with chalkboard work at ${short}`,
-      objectPosition: "center 40%",
-    },
-    {
-      src: CAMPUS_PHOTOS.curriculumPlayground,
-      alt: `Learners in uniform playing together in the sandpit at ${short}`,
-      objectPosition: "center 35%",
-    },
-  ]
   const seen = new Set<string>()
   const slides: HeroSlide[] = []
 
@@ -214,9 +184,6 @@ function buildHeroSlideshow(): HeroSlide[] {
 
   for (const item of GALLERY_ITEMS) {
     add(item.src, item.alt)
-  }
-  for (const extra of extras) {
-    add(extra.src, extra.alt, extra.objectPosition)
   }
 
   return slides
