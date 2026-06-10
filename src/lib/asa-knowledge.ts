@@ -169,11 +169,14 @@ export function getAsaKnowledgeBase(): AsaKnowledgeEntry[] {
         "new student",
         "join the school",
         "how do i apply",
+        "online application",
+        "apply online",
+        "application form",
       ],
       buildAnswer: () =>
-        `Here's the usual **admissions** path:\n\n1. **Contact** the school to express interest\n2. Submit documents (birth certificate, recent reports, transfer card if applicable)\n3. **Interview or assessment** for placement\n4. **Enrolment** once accepted — fees and registration apply\n\nEvery family is different, so the office can walk you through the latest steps.`,
-      navigateTo: "/admissions#asa-admissions",
-      linkLabel: "Admissions page",
+        `You can **apply online** on Admissions (step-by-step form with uploads) or **download the printable PDF** application with our logo and contact details.\n\nBoth go to **${SCHOOL_INFO.email}**. After that: admissions review → **interview or assessment** → **enrolment** if accepted.\n\nPrefer to talk first? Call or use the contact form.`,
+      navigateTo: "/admissions#asa-print-application",
+      linkLabel: "Admissions & PDF form",
       suggestions: ["School fees", "Contact details", "What grades?"],
     },
     {

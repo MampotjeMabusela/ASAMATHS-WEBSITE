@@ -91,7 +91,7 @@ function resolveNavigationIntent(query: string): AsaKnowledgeEntry | null {
 
 function menuReply(): AsaReply {
   return {
-    text: `Here’s what I can help with:\n\n• **Admissions** — how to apply and what documents you need\n• **Fees** — payments and the fee schedule\n• **Subjects** — grades **R to 7** and learning areas\n• **Contact** — phone, email, WhatsApp, and our enquiry form\n• **About** — location, principal, and school facts\n• **Gallery** — photos of campus life\n\nTap a suggestion below, or ask in your own words.`,
+    text: `Here’s what I can help with:\n\n• **Admissions** — apply online with documents, or ask how enrolment works\n• **Fees** — payments and the fee schedule\n• **Subjects** — grades **R to 7** and learning areas\n• **Contact** — phone, email, WhatsApp, and our enquiry form\n• **About** — location, principal, and school facts\n• **Gallery** — photos of campus life\n\nTap a suggestion below, or ask in your own words.`,
     topicId: "greeting",
     suggestions: [
       "How do I apply?",
