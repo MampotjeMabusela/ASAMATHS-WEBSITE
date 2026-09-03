@@ -1,8 +1,10 @@
+export const runtime = "nodejs"
+
 import { NextResponse } from "next/server"
 import { applicationFormSchema, validateApplicationFiles } from "@/lib/application-schema"
 import type { ApplicationDocumentKey } from "@/lib/application-constants"
 import { getInquiryInbox, isWeb3FormsConfigured } from "@/lib/web3forms"
-import { submitApplicationToWeb3Forms } from "@/lib/web3forms-application"
+import { submitApplicationWithPdf } from "@/lib/submit-application-email"
 import { createApplicationReference } from "@/lib/application-schema"
 import { SCHOOL_INFO } from "@/lib/constants"
 import type { ApplicationFiles, ApplicationFormValues } from "@/types/application"
@@ -112,7 +114,7 @@ export async function POST(request: Request) {
     const reference =
       String(form.get("applicationReference") ?? "").trim() || createApplicationReference()
     const inbox = getInquiryInbox()
-    const result = await submitApplicationToWeb3Forms(parsed.data, files, reference)
+    const result = await submitApplicationWithPdf(parsed.data, files, reference)
 
     if (!result.ok) {
       return NextResponse.json(

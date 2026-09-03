@@ -10,66 +10,36 @@ const FILE_FIELD_MAP: Record<keyof ApplicationFiles, string> = {
 }
 
 function buildApplicationMessage(data: ApplicationFormValues, reference: string): string {
-  const g2 = data.includeSecondGuardian
-    ? [
-        "",
-        "--- Second guardian ---",
-        `Name: ${data.guardian2FirstName} ${data.guardian2LastName}`,
-        `Phone: ${data.guardian2Phone}`,
-        data.guardian2Email ? `Email: ${data.guardian2Email}` : "",
-        data.guardian2Relationship ? `Relationship: ${data.guardian2Relationship}` : "",
-      ]
-        .filter(Boolean)
-        .join("\n")
-    : ""
+  const learnerName = `${data.learnerFirstName} ${data.learnerLastName}`.trim()
+  const guardianName = `${data.guardian1FirstName} ${data.guardian1LastName}`.trim()
+  const submittedAt = new Date().toLocaleString("en-ZA", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  })
 
   return [
+    "Online admission application received.",
+    "",
     `Reference: ${reference}`,
     `School year: ${data.schoolYear}`,
+    `Learner: ${learnerName} (${data.gradeApplyingFor})`,
+    `Primary guardian: ${guardianName}`,
+    `Contact: ${data.guardian1Email} · ${data.guardian1Phone}`,
+    `Submitted: ${submittedAt}`,
     "",
-    "--- Primary guardian ---",
-    `Name: ${data.guardian1FirstName} ${data.guardian1LastName}`,
-    `Relationship: ${data.guardian1Relationship}`,
-    `Email: ${data.guardian1Email}`,
-    `Phone: ${data.guardian1Phone}`,
-    data.guardian1IdNumber ? `ID: ${data.guardian1IdNumber}` : "",
-    g2,
+    "The completed application is attached as a PDF — same layout as the printable admission form.",
     "",
-    "--- Learner ---",
-    `Name: ${data.learnerFirstName} ${data.learnerLastName}`,
-    `Date of birth: ${data.learnerDateOfBirth}`,
-    data.learnerGender ? `Gender: ${data.learnerGender}` : "",
-    data.learnerIdNumber ? `Learner ID: ${data.learnerIdNumber}` : "",
-    `Current grade: ${data.currentGrade}`,
-    `Applying for: ${data.gradeApplyingFor}`,
-    `Current / previous school: ${data.currentSchoolName}`,
-    `Previous reports available: ${data.hasPreviousSchoolReports === "yes" ? "Yes" : "No"}`,
-    "",
-    "--- Home address ---",
-    data.physicalAddress,
-    `${data.suburb}, ${data.city}, ${data.postalCode}`,
-    "",
-    "--- Emergency contact ---",
-    `${data.emergencyContactName} (${data.emergencyContactRelationship})`,
-    data.emergencyContactPhone,
-    "",
-    "--- Medical & additional ---",
-    data.allergies ? `Allergies: ${data.allergies}` : "Allergies: None stated",
-    data.medicalConditions ? `Conditions: ${data.medicalConditions}` : "Conditions: None stated",
-    data.medication ? `Medication: ${data.medication}` : "Medication: None stated",
-    data.specialNeeds ? `Special needs: ${data.specialNeeds}` : "Special needs: None stated",
-    `Heard about us: ${data.referralSource}`,
-    data.additionalNotes ? `Notes: ${data.additionalNotes}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n")
+    "Supporting documents (birth certificate, school report, transfer letter, ID copy) can be brought to the school office or emailed separately with this reference.",
+  ].join("\n")
 }
 
 export function buildApplicationFormData(
   data: ApplicationFormValues,
   files: ApplicationFiles,
   accessKey: string,
-  reference: string
+  reference: string,
+  pdfBlob?: Blob,
+  pdfFilename?: string
 ): FormData {
   const formData = new FormData()
   const learnerName = `${data.learnerFirstName} ${data.learnerLastName}`.trim()
@@ -87,6 +57,10 @@ export function buildApplicationFormData(
   formData.append("grade_applying", data.gradeApplyingFor)
   formData.append("message", buildApplicationMessage(data, reference))
   formData.append("botcheck", "")
+
+  if (pdfBlob && pdfFilename) {
+    formData.append("application_form", pdfBlob, pdfFilename)
+  }
 
   for (const [key, file] of Object.entries(files) as [keyof ApplicationFiles, File | null][]) {
     if (file) {
@@ -147,7 +121,7 @@ export async function submitApplicationToWeb3Forms(
   files: ApplicationFiles,
   reference: string
 ): Promise<{ ok: true } | { ok: false; status?: number; detail: string }> {
-  const accessKey = getWeb3FormsAccessKey()
+  const accessKey = getWeb3FormsAccessKey() || getWeb3FormsPublicAccessKey()
   if (!accessKey) {
     return { ok: false, detail: "Application form is not configured yet." }
   }

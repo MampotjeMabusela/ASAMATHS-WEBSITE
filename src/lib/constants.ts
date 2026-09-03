@@ -61,7 +61,10 @@ export const NAV_HOME: NavLinkItem = { label: "Home", href: "/" }
 export const NAV_LEARN: NavLinkItem[] = [
   { label: "About", href: "/about" },
   { label: "Subjects", href: "/subjects" },
+  { label: "Sports", href: "/sports" },
+  { label: "Culture", href: "/culture" },
   { label: "Gallery", href: "/gallery" },
+  { label: "Uniform Catalog", href: "/uniform-catalog" },
 ]
 
 export const NAV_JOIN: NavLinkItem[] = [

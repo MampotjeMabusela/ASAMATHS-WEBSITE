@@ -35,9 +35,8 @@ import {
   applicationFormSchema,
   createApplicationReference,
 } from "@/lib/application-schema"
-import { getInquiryInbox, getWeb3FormsPublicAccessKey, isWeb3FormsConfigured } from "@/lib/web3forms"
-import { submitApplicationToWeb3FormsClient } from "@/lib/web3forms-application"
-import type { ApplicationFiles, ApplicationFormValues } from "@/types/application"
+import { getInquiryInbox, isWeb3FormsConfigured } from "@/lib/web3forms"
+import type { ApplicationFormValues } from "@/types/application"
 import { cn } from "@/lib/utils"
 
 const STEPS: { id: keyof typeof APPLICATION_STEP_FIELDS | "review"; title: string; icon: LucideIcon }[] = [
@@ -47,13 +46,6 @@ const STEPS: { id: keyof typeof APPLICATION_STEP_FIELDS | "review"; title: strin
   { id: "medical", title: "Details", icon: HeartPulse },
   { id: "review", title: "Submit", icon: ClipboardCheck },
 ]
-
-const EMPTY_FILES: ApplicationFiles = {
-  birthCertificate: null,
-  latestReport: null,
-  transferLetter: null,
-  guardianIdCopy: null,
-}
 
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null
@@ -168,25 +160,17 @@ export function ApplicationForm() {
     setReference(ref)
 
     try {
-      const publicKey = getWeb3FormsPublicAccessKey()
-      if (publicKey) {
-        const result = await submitApplicationToWeb3FormsClient(data, EMPTY_FILES, ref)
-        if (!result.ok) {
-          throw new Error(`${result.detail} You can also email ${inbox} with reference ${ref}.`)
-        }
-      } else {
-        const body = new FormData()
-        Object.entries(data).forEach(([k, val]) => {
-          if (typeof val === "boolean") body.append(k, val ? "true" : "false")
-          else body.append(k, String(val ?? ""))
-        })
-        body.append("applicationReference", ref)
+      const body = new FormData()
+      Object.entries(data).forEach(([k, val]) => {
+        if (typeof val === "boolean") body.append(k, val ? "true" : "false")
+        else body.append(k, String(val ?? ""))
+      })
+      body.append("applicationReference", ref)
 
-        const res = await fetch("/api/application", { method: "POST", body })
-        const json = (await res.json()) as { error?: string; message?: string; reference?: string }
-        if (!res.ok) {
-          throw new Error(json.error || `Could not send application. Email ${inbox}.`)
-        }
+      const res = await fetch("/api/application", { method: "POST", body })
+      const json = (await res.json()) as { error?: string; message?: string; reference?: string }
+      if (!res.ok) {
+        throw new Error(json.error || `Could not send application. Email ${inbox}.`)
       }
 
       setStatus({
@@ -600,10 +584,11 @@ export function ApplicationForm() {
             Submitting sends your application securely to{" "}
             <a href={`mailto:${inbox}`} className="font-medium text-primary-700 underline">
               {inbox}
-            </a>
-            . You will receive a reference number on screen. Supporting documents (birth
-            certificate, school report, transfer letter) can be brought to the school office or
-            emailed separately with your reference.
+            </a>{" "}
+            as a professional PDF (same layout as the downloadable form). You will receive a
+            reference number on screen. Supporting documents (birth certificate, school report,
+            transfer letter) can be brought to the school office or emailed separately with your
+            reference.
           </p>
         </div>
       )}
