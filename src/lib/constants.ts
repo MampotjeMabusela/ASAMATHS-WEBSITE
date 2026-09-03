@@ -27,7 +27,7 @@ export const SCHOOL_INFO = {
   neighbourhood: "Winterveldt",
   totalLearners: 1017,
   totalEducators: 35,
-  studentTeacherRatio: "29:1",
+  studentTeacherRatio: "29 : 1",
   surveyYear: 2026,
   /**
    * OSM embed pin (residential “7th Road”, Tshwane Ward 24 — OpenStreetMap way centroid).
