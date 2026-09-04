@@ -22,7 +22,7 @@ export type UniformPriceList = {
 }
 
 /** Bump when any public uniform item image changes so browsers fetch fresh files. */
-export const UNIFORM_IMAGES_VERSION = "35"
+export const UNIFORM_IMAGES_VERSION = "36"
 
 export function uniformItemSrc(path: string): string {
   const base = path.split("?")[0] ?? path
@@ -260,3 +260,11 @@ export const UNIFORM_POLICY_NOTES = [
   "Stock and sizes are subject to availability. Confirm sizing at the school office before purchasing.",
   "Item names and prices match the official school price list and may be updated by the office without notice on this website.",
 ] as const
+
+/** Reference photo shown between the Grade R–6 and Grade 7–9 price lists. */
+export const UNIFORM_CATALOG_MID_IMAGE = {
+  src: uniformItemSrc("/images/uniform/uniform-jersey-pullover-guide.jpg"),
+  alt: "School jersey and pullover with red stripes and Asamaths logo",
+  width: 1024,
+  height: 819,
+} as const
