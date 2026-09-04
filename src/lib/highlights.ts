@@ -15,6 +15,12 @@ export type Highlight = {
   description: string
   /** Optional — e.g. "Wed 4 Sep" or "This Friday, 14:00" */
   when?: string
+  /** ISO start date (YYYY-MM-DD) — used by the Calendar page */
+  startDate?: string
+  /** ISO end date for multi-day highlights */
+  endDate?: string
+  /** 24-hour time HH:mm */
+  time?: string
 }
 
 export type HighlightsWeek = {
@@ -45,6 +51,8 @@ export const CURRENT_HIGHLIGHTS: HighlightsWeek = {
       title: "Inter-house athletics trials",
       description: "Trials for the upcoming athletics season. All learners in sports uniform.",
       when: "Wed 2 Sep · 08:00",
+      startDate: "2026-09-02",
+      time: "08:00",
     },
     {
       id: "culture-heritage",
@@ -52,6 +60,8 @@ export const CURRENT_HIGHLIGHTS: HighlightsWeek = {
       title: "Heritage Day dress rehearsal",
       description: "Cultural groups rehearse performances for Heritage Day celebrations.",
       when: "Fri 4 Sep · 13:30",
+      startDate: "2026-09-04",
+      time: "13:30",
     },
     {
       id: "academic-grade12",
@@ -59,6 +69,8 @@ export const CURRENT_HIGHLIGHTS: HighlightsWeek = {
       title: "Grade 12 prelim timetable",
       description: "The September preliminary examination timetable is now available from the office.",
       when: "From Mon 31 Aug",
+      startDate: "2026-08-31",
+      endDate: "2026-09-04",
     },
     {
       id: "general-parents",
@@ -66,6 +78,8 @@ export const CURRENT_HIGHLIGHTS: HighlightsWeek = {
       title: "Parents' information meeting",
       description: "Term updates, fee reminders, and Q&A with the principal and SGB.",
       when: "Thu 3 Sep · 15:00",
+      startDate: "2026-09-03",
+      time: "15:00",
     },
   ],
 }
