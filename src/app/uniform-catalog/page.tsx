@@ -13,6 +13,7 @@ import { SCHOOL_INFO } from "@/lib/constants"
 import { TEMPORARY_VISIBILITY } from "@/lib/feature-flags"
 import {
   UNIFORM_CATALOG_MID_IMAGE,
+  UNIFORM_CATALOG_TOP_IMAGE,
   UNIFORM_POLICY_NOTES,
   UNIFORM_PRICE_LISTS,
 } from "@/lib/uniform-catalog"
@@ -97,6 +98,18 @@ export default function UniformCatalogPage() {
               if (list.id !== "grade-r-6") return [table]
 
               return [
+                <FadeIn key="uniform-catalog-top-image" delay={0.1 + index * 0.04 - 0.02}>
+                  <figure className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md ring-1 ring-gray-100">
+                    <Image
+                      src={UNIFORM_CATALOG_TOP_IMAGE.src}
+                      alt={UNIFORM_CATALOG_TOP_IMAGE.alt}
+                      width={UNIFORM_CATALOG_TOP_IMAGE.width}
+                      height={UNIFORM_CATALOG_TOP_IMAGE.height}
+                      className="mx-auto h-auto w-full object-contain"
+                      sizes="(max-width: 768px) 100vw, 896px"
+                    />
+                  </figure>
+                </FadeIn>,
                 table,
                 <FadeIn key="uniform-catalog-mid-image" delay={0.1 + index * 0.04 + 0.02}>
                   <figure className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md ring-1 ring-gray-100">
