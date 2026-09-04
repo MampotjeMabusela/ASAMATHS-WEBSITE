@@ -22,7 +22,7 @@ export type UniformPriceList = {
 }
 
 /** Bump when any public uniform item image changes so browsers fetch fresh files. */
-export const UNIFORM_IMAGES_VERSION = "28"
+export const UNIFORM_IMAGES_VERSION = "30"
 
 export function uniformItemSrc(path: string): string {
   const base = path.split("?")[0] ?? path
@@ -168,6 +168,13 @@ const GRAY_SKIRT_IMAGES: UniformItemImage[] = [
   },
 ]
 
+const GRAY_SKIRT_G79_IMAGES: UniformItemImage[] = [
+  {
+    src: uniformItemSrc("/images/uniform/items/gray-skirt-g79.png"),
+    alt: "Grey school skirt with maroon trim",
+  },
+]
+
 const PLEATED_SKIRT_IMAGES: UniformItemImage[] = [
   {
     src: uniformItemSrc("/images/uniform/items/pleated-skirt.png"),
@@ -217,7 +224,7 @@ export const UNIFORM_PRICE_LISTS: UniformPriceList[] = [
       { id: "gray-red-socks", name: "Gray and Red Socks", price: "R100.00", images: GRAY_RED_SOCKS_IMAGES },
       { id: "sun-hat", name: "Sun hat", price: "R200.00", images: SUN_HAT_IMAGES, showImages: true },
       { id: "winter-woollen-hat", name: "Winter woollen hat", price: "R200.00", images: WINTER_WOOLLEN_HAT_IMAGES, showImages: true },
-      { id: "gray-skirt", name: "Gray Skirt", price: "R200.00", images: GRAY_SKIRT_IMAGES },
+      { id: "gray-skirt", name: "Gray Skirt", price: "R200.00", images: GRAY_SKIRT_IMAGES, showImages: true },
       { id: "sports-white-shorts", name: "Sports White Shorts", price: "R200.00", images: SPORTS_WHITE_SHORTS_IMAGES, showImages: true },
     ],
   },
@@ -239,7 +246,7 @@ export const UNIFORM_PRICE_LISTS: UniformPriceList[] = [
       { id: "g79-maroon-socks", name: "Maroon Socks", price: "R100.00", images: MAROON_SOCKS_IMAGES, showImages: true },
       { id: "g79-sun-hat", name: "Sun hat", price: "R200.00", images: SUN_HAT_G79_IMAGES, showImages: true },
       { id: "g79-winter-woollen-hat", name: "Winter woollen hat", price: "R200.00", images: WINTER_WOOLLEN_HAT_IMAGES, showImages: true },
-      { id: "g79-gray-skirt", name: "Gray Skirt", price: "R200.00", images: GRAY_SKIRT_IMAGES },
+      { id: "g79-gray-skirt", name: "Gray Skirt", price: "R200.00", images: GRAY_SKIRT_G79_IMAGES, showImages: true },
       { id: "g79-pleated-skirt", name: "Pleated Skirt", price: "R340.00", images: PLEATED_SKIRT_IMAGES, showImages: true },
       { id: "g79-sports-white-shorts", name: "Sports White Shorts", price: "R200.00", images: SPORTS_WHITE_SHORTS_G79_IMAGES, showImages: true },
     ],
