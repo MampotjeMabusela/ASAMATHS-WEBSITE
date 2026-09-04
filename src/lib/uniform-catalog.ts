@@ -22,7 +22,7 @@ export type UniformPriceList = {
 }
 
 /** Bump when any public uniform item image changes so browsers fetch fresh files. */
-export const UNIFORM_IMAGES_VERSION = "25"
+export const UNIFORM_IMAGES_VERSION = "27"
 
 export function uniformItemSrc(path: string): string {
   const base = path.split("?")[0] ?? path
@@ -98,6 +98,13 @@ const BLAZER_IMAGES: UniformItemImage[] = [
   },
 ]
 
+const BLAZER_G79_IMAGES: UniformItemImage[] = [
+  {
+    src: uniformItemSrc("/images/uniform/items/blazer-g79.png"),
+    alt: "Grey school blazer with maroon trim and Asamaths crest",
+  },
+]
+
 const RED_DRIMAC_IMAGES: UniformItemImage[] = [
   {
     src: uniformItemSrc("/images/uniform/items/red-drimac.png"),
@@ -114,11 +121,7 @@ const MAROON_DRIMAC_IMAGES: UniformItemImage[] = [
 
 const GRAY_RED_TIE_IMAGES: UniformItemImage[] = [
   {
-    src: uniformItemSrc("/images/uniform/items/gray-red-tie-striped.png"),
-    alt: "Grey and red striped school tie",
-  },
-  {
-    src: uniformItemSrc("/images/uniform/items/gray-red-tie-stripe.png"),
+    src: uniformItemSrc("/images/uniform/items/gray-red-tie.png"),
     alt: "Grey school tie with red stripe",
   },
 ]
@@ -201,9 +204,9 @@ export const UNIFORM_PRICE_LISTS: UniformPriceList[] = [
       { id: "summer-tracksuit", name: "Summer Tracksuit", price: "R670.00", images: SUMMER_TRACKSUIT_IMAGES, showImages: true },
       { id: "winter-tracksuit", name: "Winter Tracksuit", price: "R750.00", images: WINTER_TRACKSUIT_IMAGES, showImages: true },
       { id: "red-drimac", name: "Red Drimac", price: "R450.00", images: RED_DRIMAC_IMAGES, showImages: true },
-      { id: "blazer", name: "Blazer", price: "R750.00", images: BLAZER_IMAGES },
+      { id: "blazer", name: "Blazer", price: "R750.00", images: BLAZER_IMAGES, showImages: true },
       { id: "tunic", name: "Tunic", price: "R400.00", images: TUNIC_IMAGES },
-      { id: "gray-red-tie", name: "Gray and Red Tie", price: "R150.00", images: GRAY_RED_TIE_IMAGES },
+      { id: "gray-red-tie", name: "Gray and Red Tie", price: "R150.00", images: GRAY_RED_TIE_IMAGES, showImages: true },
       { id: "gray-red-socks", name: "Gray and Red Socks", price: "R100.00", images: GRAY_RED_SOCKS_IMAGES },
       { id: "sun-hat", name: "Sun hat", price: "R200.00", images: SUN_HAT_IMAGES },
       { id: "winter-woollen-hat", name: "Winter woollen hat", price: "R200.00", images: WINTER_WOOLLEN_HAT_IMAGES, showImages: true },
@@ -224,8 +227,8 @@ export const UNIFORM_PRICE_LISTS: UniformPriceList[] = [
       { id: "g79-summer-tracksuit", name: "Summer Tracksuit", price: "R670.00", images: SUMMER_TRACKSUIT_G79_IMAGES, showImages: true },
       { id: "g79-winter-tracksuit", name: "Winter Tracksuit", price: "R750.00", images: WINTER_TRACKSUIT_G79_IMAGES, showImages: true },
       { id: "g79-red-drimac", name: "Maroon Drimac", price: "R450.00", images: MAROON_DRIMAC_IMAGES, showImages: true },
-      { id: "g79-blazer", name: "Blazer", price: "R750.00", images: BLAZER_IMAGES },
-      { id: "g79-gray-red-tie", name: "Gray and Red Tie", price: "R150.00", images: GRAY_RED_TIE_IMAGES },
+      { id: "g79-blazer", name: "Blazer", price: "R750.00", images: BLAZER_G79_IMAGES, showImages: true },
+      { id: "g79-gray-red-tie", name: "Gray and Red Tie", price: "R150.00", images: GRAY_RED_TIE_IMAGES, showImages: true },
       { id: "g79-maroon-socks", name: "Maroon Socks", price: "R100.00", images: MAROON_SOCKS_IMAGES, showImages: true },
       { id: "g79-sun-hat", name: "Sun hat", price: "R200.00", images: SUN_HAT_IMAGES },
       { id: "g79-winter-woollen-hat", name: "Winter woollen hat", price: "R200.00", images: WINTER_WOOLLEN_HAT_IMAGES, showImages: true },
