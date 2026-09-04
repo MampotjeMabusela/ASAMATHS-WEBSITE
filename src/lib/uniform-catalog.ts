@@ -22,7 +22,7 @@ export type UniformPriceList = {
 }
 
 /** Bump when any public uniform item image changes so browsers fetch fresh files. */
-export const UNIFORM_IMAGES_VERSION = "30"
+export const UNIFORM_IMAGES_VERSION = "35"
 
 export function uniformItemSrc(path: string): string {
   const base = path.split("?")[0] ?? path
