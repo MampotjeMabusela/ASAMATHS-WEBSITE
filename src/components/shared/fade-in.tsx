@@ -1,7 +1,8 @@
 "use client"
 
-import { motion, useReducedMotion, type Variants } from "framer-motion"
+import { motion, type Variants } from "framer-motion"
 import type { ReactNode } from "react"
+import { useHydratedReducedMotion } from "@/lib/use-hydrated-reduced-motion"
 
 interface FadeInProps {
   children: ReactNode
@@ -39,7 +40,7 @@ export function FadeIn({
   className,
   once = true,
 }: FadeInProps) {
-  const reduceMotion = useReducedMotion()
+  const reduceMotion = useHydratedReducedMotion()
 
   if (reduceMotion) {
     return <div className={className}>{children}</div>

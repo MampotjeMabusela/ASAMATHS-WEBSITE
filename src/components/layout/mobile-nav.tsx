@@ -3,7 +3,8 @@
 import { useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
+import { useHydratedReducedMotion } from "@/lib/use-hydrated-reduced-motion"
 import { ExternalLink } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -26,7 +27,7 @@ interface MobileNavProps {
 
 export function MobileNav({ isOpen, onClose, sisterSchool, anchorHeight }: MobileNavProps) {
   const pathname = usePathname()
-  const reduceMotion = useReducedMotion()
+  const reduceMotion = useHydratedReducedMotion()
   const top = Math.max(anchorHeight, 56)
 
   useEffect(() => {

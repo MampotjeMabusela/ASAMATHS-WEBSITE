@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
+import { useHydratedReducedMotion } from "@/lib/use-hydrated-reduced-motion"
 import { prefersReducedMotion } from "@/lib/motion-preference"
 import { ArrowUp } from "lucide-react"
 
@@ -10,7 +11,7 @@ const scrollBtnClass =
 
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false)
-  const reduceMotion = useReducedMotion()
+  const reduceMotion = useHydratedReducedMotion()
 
   useEffect(() => {
     const toggle = () => setIsVisible(window.scrollY > 500)

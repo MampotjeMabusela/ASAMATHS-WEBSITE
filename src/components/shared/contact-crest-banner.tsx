@@ -1,12 +1,13 @@
 "use client"
 
-import { motion, useReducedMotion } from "framer-motion"
+import { motion } from "framer-motion"
+import { useHydratedReducedMotion } from "@/lib/use-hydrated-reduced-motion"
 import { BRAND } from "@/lib/constants"
 
 const logoSrc = `${BRAND.logoSrc}?v=${BRAND.logoAssetVersion}`
 
 export function ContactCrestBanner() {
-  const reduceMotion = useReducedMotion()
+  const reduceMotion = useHydratedReducedMotion()
 
   return (
     <motion.div className="contact-crest-motion relative mb-10 overflow-hidden rounded-2xl bg-gradient-to-br from-primary-50 via-white to-accent-50/40">

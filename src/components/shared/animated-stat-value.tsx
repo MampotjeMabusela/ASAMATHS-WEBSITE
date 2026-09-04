@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { useInView, useReducedMotion } from "framer-motion"
+import { useInView } from "framer-motion"
+import { useHydratedReducedMotion } from "@/lib/use-hydrated-reduced-motion"
 
 type AnimatedStatValueProps = {
   value: string
@@ -31,7 +32,7 @@ function parseNumericValue(raw: string): number | null {
 export function AnimatedStatValue({ value, suffix = "", className }: AnimatedStatValueProps) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: "-40px" })
-  const reduceMotion = useReducedMotion()
+  const reduceMotion = useHydratedReducedMotion()
   const numeric = parseNumericValue(value)
   const [mounted, setMounted] = useState(false)
   const [display, setDisplay] = useState(() => (numeric ?? 0))

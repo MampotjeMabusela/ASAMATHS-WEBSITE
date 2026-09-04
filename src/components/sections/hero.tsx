@@ -2,7 +2,8 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useReducedMotion } from "framer-motion"
+import { motion } from "framer-motion"
+import { useHydratedReducedMotion } from "@/lib/use-hydrated-reduced-motion"
 import { ArrowRight, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -13,7 +14,7 @@ import { STUDENT_PHOTOS, photoSrc } from "@/lib/student-photos"
 import { HighlightsBox } from "@/components/sections/highlights-box"
 
 export function Hero() {
-  const reduceMotion = useReducedMotion()
+  const reduceMotion = useHydratedReducedMotion()
   const textMotionTransition = reduceMotion
     ? { duration: 0 }
     : { duration: 0.8, ease: "easeOut" as const }

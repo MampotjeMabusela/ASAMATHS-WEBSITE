@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
 import { useRouter, usePathname } from "next/navigation"
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
+import { useHydratedReducedMotion } from "@/lib/use-hydrated-reduced-motion"
 import {
   Bot,
   MapPin,
@@ -91,7 +92,7 @@ function navigateWithHash(router: ReturnType<typeof useRouter>, dest: string, cu
 export function AsaChat() {
   const router = useRouter()
   const pathname = usePathname()
-  const reduceMotion = useReducedMotion()
+  const reduceMotion = useHydratedReducedMotion()
   const panelId = useId()
   const scrollRef = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(false)
