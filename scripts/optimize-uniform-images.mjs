@@ -1,6 +1,7 @@
 /**
- * Enhance individual uniform product images for the catalog page.
- * Usage: node scripts/optimize-uniform-images.mjs
+ * Export uniform product images without cropping or colour changes.
+ * Keeps the full attached frame; only applies EXIF rotation and optional downscale
+ * for very large files. Usage: node scripts/optimize-uniform-images.mjs
  */
 import fs from "node:fs"
 import path from "node:path"
@@ -13,67 +14,59 @@ const sourcesDir = path.join(root, "scripts", "_uniform-sources")
 const outDir = path.join(root, "public", "images", "uniform", "items")
 
 const ITEMS = [
-  { id: "shirt-long-sleeve", file: "shirt-long-sleeve.jpg" },
-  { id: "shirt-short-sleeve", file: "shirt-short-sleeve.jpg" },
-  { id: "sports-tshirt", file: "sports-tshirt.jpg" },
-  { id: "jersey-red-stripes", file: "jersey-red-stripes.jpg" },
-  { id: "pullover-red-stripes", file: "pullover-red-stripes.jpg" },
-  { id: "summer-tracksuit", file: "summer-tracksuit.jpg" },
-  { id: "winter-tracksuit", file: "winter-tracksuit.jpg" },
-  { id: "blazer", file: "blazer.jpg" },
-  { id: "red-drimac", file: "red-drimac.jpg" },
-  { id: "gray-red-tie-striped", file: "gray-red-tie-striped.jpg" },
-  { id: "gray-red-tie-stripe", file: "gray-red-tie-stripe.jpg" },
-  { id: "gray-red-socks", file: "gray-red-socks.jpg" },
-  { id: "sun-hat", file: "sun-hat.jpg" },
-  { id: "winter-woollen-hat", file: "winter-woollen-hat.jpg" },
-  { id: "gray-skirt", file: "gray-skirt.jpg" },
-  { id: "sports-white-shorts", file: "sports-white-shorts.jpg" },
-  { id: "tunic", file: "tunic.jpg" },
-  { id: "girls-skirt", file: "girls-skirt.png" },
-  { id: "boys-pants", file: "boys-pants.png" },
-  { id: "girls-jersey", file: "girls-jersey.png" },
-  { id: "boys-jersey", file: "boys-jersey.png" },
-  { id: "school-tie", file: "school-tie.png" },
-  { id: "school-socks", file: "school-socks.png" },
-  { id: "grey-trousers", file: "grey-trousers.png" },
-  { id: "golf-tshirt", file: "golf-tshirt.png" },
-  { id: "track-suit", file: "track-suit.png" },
+  { id: "shirt-long-sleeve", outExt: ".png" },
+  { id: "shirt-short-sleeve", outExt: ".png" },
+  { id: "sports-tshirt", outExt: ".jpg" },
+  { id: "jersey-red-stripes", outExt: ".png" },
+  { id: "pullover-red-stripes", outExt: ".png" },
+  { id: "summer-tracksuit", outExt: ".png" },
+  { id: "winter-tracksuit", outExt: ".png" },
+  { id: "blazer", outExt: ".png" },
+  { id: "red-drimac", outExt: ".png" },
+  { id: "gray-red-tie-striped", outExt: ".png" },
+  { id: "gray-red-tie-stripe", outExt: ".png" },
+  { id: "gray-red-socks", outExt: ".png" },
+  { id: "sun-hat", outExt: ".png" },
+  { id: "winter-woollen-hat", outExt: ".png" },
+  { id: "gray-skirt", outExt: ".png" },
+  { id: "sports-white-shorts", outExt: ".png" },
+  { id: "tunic", outExt: ".png" },
+  { id: "girls-skirt", outExt: ".png" },
+  { id: "boys-pants", outExt: ".png" },
+  { id: "girls-jersey", outExt: ".png" },
+  { id: "boys-jersey", outExt: ".png" },
+  { id: "school-tie", outExt: ".png" },
+  { id: "school-socks", outExt: ".png" },
+  { id: "grey-trousers", outExt: ".png" },
+  { id: "golf-tshirt", outExt: ".png" },
+  { id: "track-suit", outExt: ".png" },
 ]
 
-const TARGET_WIDTH = 1200
+const TARGET_MAX_WIDTH = 1600
 
-async function enhanceUniformImage(inputPath, outputPath) {
+/** Preserve the full attached frame — no trim, crop, colour shifts, or sharpening. */
+async function preserveUniformImage(inputPath, outputPath) {
   const tmp = `${outputPath}.tmp`
   const meta = await sharp(inputPath).metadata()
   const width = meta.width ?? 0
 
-  let pipeline = sharp(inputPath, { failOn: "none" })
-    .rotate()
-    .trim({ threshold: 12 })
-    .flatten({ background: "#ffffff" })
+  let pipeline = sharp(inputPath, { failOn: "none" }).rotate()
 
-  if (width > 0 && width < TARGET_WIDTH) {
+  if (width > TARGET_MAX_WIDTH) {
     pipeline = pipeline.resize({
-      width: TARGET_WIDTH,
-      withoutEnlargement: false,
-      fit: "inside",
-      kernel: sharp.kernel.lanczos3,
-    })
-  } else if (width > TARGET_WIDTH) {
-    pipeline = pipeline.resize({
-      width: TARGET_WIDTH,
+      width: TARGET_MAX_WIDTH,
       withoutEnlargement: true,
       fit: "inside",
       kernel: sharp.kernel.lanczos3,
     })
   }
 
-  await pipeline
-    .normalize()
-    .sharpen({ sigma: 1.1, m1: 0.6, m2: 2.8, x1: 2, y2: 10, y3: 20 })
-    .png({ compressionLevel: 8, effort: 10, palette: false })
-    .toFile(tmp)
+  const ext = path.extname(outputPath).toLowerCase()
+  if (ext === ".jpg" || ext === ".jpeg") {
+    await pipeline.jpeg({ quality: 92, mozjpeg: true }).toFile(tmp)
+  } else {
+    await pipeline.png({ compressionLevel: 6, effort: 6, palette: false }).toFile(tmp)
+  }
 
   fs.renameSync(tmp, outputPath)
   const out = await sharp(outputPath).metadata()
@@ -81,22 +74,33 @@ async function enhanceUniformImage(inputPath, outputPath) {
   return { from: `${meta.width}x${meta.height}`, to: `${out.width}x${out.height}`, kb }
 }
 
+function resolveSourceFile(id) {
+  for (const ext of [".png", ".jpg", ".jpeg", ".webp"]) {
+    const candidate = path.join(sourcesDir, `${id}${ext}`)
+    if (fs.existsSync(candidate)) return candidate
+  }
+  return null
+}
+
 fs.mkdirSync(outDir, { recursive: true })
 
 async function main() {
-  console.log("Enhancing uniform item images...\n")
+  console.log("Preserving uniform item images (no crop)...\n")
   for (const item of ITEMS) {
-    const input = path.join(sourcesDir, item.file)
-    if (!fs.existsSync(input)) throw new Error(`Missing source: ${input}`)
-    const output = path.join(outDir, `${item.id}.png`)
-    const result = await enhanceUniformImage(input, output)
+    const input = resolveSourceFile(item.id)
+    if (!input) {
+      console.log(`${item.id}: skipped (no source file)`)
+      continue
+    }
+    const output = path.join(outDir, `${item.id}${item.outExt}`)
+    const result = await preserveUniformImage(input, output)
     console.log(`${item.id}: ${result.from} → ${result.to} (${result.kb} KB)`)
   }
 
   const catalogInput = path.join(sourcesDir, "uniform-catalog.png")
   if (fs.existsSync(catalogInput)) {
     const catalogOut = path.join(root, "public", "images", "uniform", "uniform-catalog.png")
-    const result = await enhanceUniformImage(catalogInput, catalogOut)
+    const result = await preserveUniformImage(catalogInput, catalogOut)
     console.log(`uniform-catalog: ${result.from} → ${result.to} (${result.kb} KB)`)
   }
 
