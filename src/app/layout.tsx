@@ -30,6 +30,9 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 }
 
+/** Re-render server pages daily so dates and school years stay current. */
+export const revalidate = 86400
+
 export const metadata: Metadata = {
   title: {
     default: `${SCHOOL_INFO.name} | Independent Combined School in Pretoria`,

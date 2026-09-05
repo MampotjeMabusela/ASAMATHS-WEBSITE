@@ -2,12 +2,13 @@ import { z } from "zod"
 import {
   ACCEPTED_FILE_TYPES,
   APPLICATION_GRADES,
-  APPLICATION_SCHOOL_YEARS,
+  getApplicationSchoolYears,
   GUARDIAN_RELATIONSHIPS,
   MAX_APPLICATION_FILE_BYTES,
   MAX_APPLICATION_TOTAL_BYTES,
   type ApplicationDocumentKey,
 } from "@/lib/application-constants"
+import { SCHOOL_INFO } from "@/lib/constants"
 
 export type ApplicationFiles = Record<ApplicationDocumentKey, File | null>
 
@@ -30,7 +31,9 @@ const gradeEnum = z.enum(APPLICATION_GRADES as unknown as [string, ...string[]])
 
 export const applicationFormSchema = z
   .object({
-    schoolYear: z.enum(APPLICATION_SCHOOL_YEARS as unknown as [string, ...string[]]),
+    schoolYear: z.string().refine((val) => getApplicationSchoolYears().includes(val), {
+      message: "Select a valid school year",
+    }),
 
     guardian1FirstName: z.string().min(2, "First name is required"),
     guardian1LastName: z.string().min(2, "Last name is required"),
@@ -154,8 +157,9 @@ export const APPLICATION_STEP_FIELDS = {
   consent: ["popiaConsent", "declarationAccurate"],
 } as const satisfies Record<string, readonly (keyof ApplicationFormValues)[]>
 
-export const APPLICATION_DEFAULT_VALUES: ApplicationFormValues = {
-  schoolYear: APPLICATION_SCHOOL_YEARS[0],
+export function getApplicationDefaultValues(): ApplicationFormValues {
+  return {
+    schoolYear: getApplicationSchoolYears()[0],
   guardian1FirstName: "",
   guardian1LastName: "",
   guardian1Email: "",
@@ -179,7 +183,7 @@ export const APPLICATION_DEFAULT_VALUES: ApplicationFormValues = {
   hasPreviousSchoolReports: "yes",
   physicalAddress: "",
   suburb: "",
-  city: "Pretoria",
+  city: SCHOOL_INFO.city,
   postalCode: "",
   emergencyContactName: "",
   emergencyContactPhone: "",
@@ -191,7 +195,8 @@ export const APPLICATION_DEFAULT_VALUES: ApplicationFormValues = {
   referralSource: "",
   additionalNotes: "",
   popiaConsent: false,
-  declarationAccurate: false,
+    declarationAccurate: false,
+  }
 }
 
 export function createApplicationReference(): string {
