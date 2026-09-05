@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowRight,
@@ -21,10 +20,7 @@ import { AtAGlanceStrip } from "@/components/shared/at-a-glance-strip"
 import { StickyMobileCta } from "@/components/shared/sticky-mobile-cta"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { PageBanner } from "@/components/shared/page-banner"
 import { SCHOOL_INFO } from "@/lib/constants"
-import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
-import { CAMPUS_PHOTOS, photoSrc } from "@/lib/student-photos"
 
 export const metadata: Metadata = {
   title: "Admissions",
@@ -106,19 +102,6 @@ export default function AdmissionsPage() {
             <AtAGlanceStrip />
           </FadeIn>
 
-          <FadeIn delay={0.08}>
-            <PageBanner
-              src={CAMPUS_PHOTOS.courtyardWalk}
-              alt={`Educator and learner on the school courtyard at ${SCHOOL_INFO.shortName}, ${SCHOOL_INFO.suburb}`}
-              headline="A welcoming path into our school family"
-              subline="A place where your child is known, supported, and challenged to grow."
-              badge="Admissions"
-              variant="wide"
-              objectPosition="center 40%"
-              className="mb-12"
-            />
-          </FadeIn>
-
           <FadeIn delay={0.2}>
             <div className="mb-12 w-full text-center">
               <p className="text-lg text-gray-600">
@@ -192,23 +175,10 @@ export default function AdmissionsPage() {
           </FadeIn>
 
           <FadeIn delay={0.24} className="mb-12">
-            <div className="grid gap-8 lg:grid-cols-5 lg:items-center">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg ring-1 ring-primary-100 lg:col-span-2">
-                <Image
-                  src={photoSrc(CAMPUS_PHOTOS.friends)}
-                  alt={`Learners in Asamaths uniform at ${SCHOOL_INFO.shortName}`}
-                  fill
-                  placeholder="blur"
-                  blurDataURL={STUDENT_PHOTO_BLUR_DATA_URL}
-                  className="object-cover object-[center_30%]"
-                  sizes="(max-width:1024px)100vw,40vw"
-                />
-              </div>
-              <p className="text-center text-base leading-relaxed text-gray-600 lg:col-span-3 lg:text-left">
-                Every enrolment begins with a conversation. We take time to understand your child&apos;s
-                strengths, needs, and goals—so placement in the right grade feels confident from day one.
-              </p>
-            </div>
+            <p className="mx-auto max-w-3xl text-center text-base leading-relaxed text-gray-600">
+              Every enrolment begins with a conversation. We take time to understand your child&apos;s
+              strengths, needs, and goals—so placement in the right grade feels confident from day one.
+            </p>
           </FadeIn>
 
           <div className="mb-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
