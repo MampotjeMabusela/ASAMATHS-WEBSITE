@@ -5,7 +5,6 @@ import Link from "next/link"
 import { ArrowRight, Info, ShoppingBag } from "lucide-react"
 import { FadeIn } from "@/components/shared/fade-in"
 import { PageIntro } from "@/components/shared/page-intro"
-import { PageBanner } from "@/components/shared/page-banner"
 import { CTABanner } from "@/components/sections/cta-banner"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -18,7 +17,6 @@ import {
   UNIFORM_PRICE_LISTS,
 } from "@/lib/uniform-catalog"
 import { UniformPriceListSection } from "@/components/uniform/uniform-price-list"
-import { CAMPUS_PHOTOS } from "@/lib/student-photos"
 
 export const metadata: Metadata = {
   title: "Uniform Catalog",
@@ -41,18 +39,6 @@ export default function UniformCatalogPage() {
               title="Uniform Catalog"
               subtitle="Official uniform price lists by grade band for Asamaths learners"
               breadcrumbs={[{ label: "Uniform Catalog" }]}
-            />
-          </FadeIn>
-
-          <FadeIn delay={0.04}>
-            <PageBanner
-              src={CAMPUS_PHOTOS.friends}
-              alt={`Learners in school uniform at ${SCHOOL_INFO.shortName}, ${SCHOOL_INFO.suburb}`}
-              headline="Neat, proud, and ready to learn"
-              subline="Our uniform reflects discipline, identity, and belonging."
-              variant="compact"
-              objectPosition="center 40%"
-              className="mb-10"
             />
           </FadeIn>
 
