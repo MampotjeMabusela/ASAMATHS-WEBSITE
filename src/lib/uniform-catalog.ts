@@ -22,7 +22,7 @@ export type UniformPriceList = {
 }
 
 /** Bump when any public uniform item image changes so browsers fetch fresh files. */
-export const UNIFORM_IMAGES_VERSION = "38"
+export const UNIFORM_IMAGES_VERSION = "39"
 
 export function uniformItemSrc(path: string): string {
   const base = path.split("?")[0] ?? path
@@ -226,7 +226,7 @@ export const UNIFORM_PRICE_LISTS: UniformPriceList[] = [
       { id: "winter-tracksuit", name: "Winter Tracksuit", price: "R750.00", images: WINTER_TRACKSUIT_IMAGES, showImages: true },
       { id: "red-drimac", name: "Red Drimac", price: "R450.00", images: RED_DRIMAC_IMAGES, showImages: true },
       { id: "blazer", name: "Blazer", price: "R750.00", images: BLAZER_IMAGES, showImages: true },
-      { id: "tunic", name: "Tunic", price: "R400.00", images: TUNIC_IMAGES },
+      { id: "tunic", name: "Tunic", price: "R400.00", images: TUNIC_IMAGES, showImages: true },
       { id: "gray-red-tie", name: "Gray and Red Tie", price: "R150.00", images: GRAY_RED_TIE_IMAGES, showImages: true },
       { id: "gray-red-socks", name: "Gray and Red Socks", price: "R100.00", images: GRAY_RED_SOCKS_IMAGES },
       { id: "sun-hat", name: "Sun hat", price: "R200.00", images: SUN_HAT_IMAGES, showImages: true },
