@@ -85,11 +85,11 @@ export async function submitInquiryToWeb3FormsClient(
   }
 }
 
-/** Submit from API route (requires WEB3FORMS_ACCESS_KEY on the server). */
+/** Submit from API route (server or public Web3Forms key). */
 export async function submitInquiryToWeb3Forms(
   data: ContactFormData
 ): Promise<{ ok: true } | { ok: false; status?: number; detail: string }> {
-  const accessKey = getWeb3FormsAccessKey()
+  const accessKey = getWeb3FormsAccessKey() || getWeb3FormsPublicAccessKey()
   if (!accessKey) {
     return { ok: false, detail: "Inquiry form is not configured yet." }
   }

@@ -55,10 +55,12 @@ export const HIGHLIGHT_ITEMS: Highlight[] = [
     description: "",
   },
   {
-    id: "academic-none",
+    id: "academic-prize-giving-day",
     category: "academic",
-    title: "No Updates",
+    title: "Prize Giving Day",
     description: "",
+    startDate: "2026-10-23",
+    endDate: "2026-10-23",
   },
   {
     id: "general-port-elizabeth-trip",

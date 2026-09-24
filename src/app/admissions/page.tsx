@@ -21,6 +21,7 @@ import { StickyMobileCta } from "@/components/shared/sticky-mobile-cta"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { SCHOOL_INFO } from "@/lib/constants"
+import { isWeb3FormsConfigured } from "@/lib/web3forms"
 
 export const metadata: Metadata = {
   title: "Admissions",
@@ -225,7 +226,7 @@ export default function AdmissionsPage() {
                   admissions team will follow up to arrange an interview and confirm placement.
                 </p>
               </div>
-              <ApplicationForm />
+              <ApplicationForm formsEnabled={isWeb3FormsConfigured()} />
             </div>
           </FadeIn>
 
