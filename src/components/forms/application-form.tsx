@@ -35,7 +35,8 @@ import {
   applicationFormSchema,
   createApplicationReference,
 } from "@/lib/application-schema"
-import { getInquiryInbox } from "@/lib/web3forms"
+import { getInquiryInbox, getWeb3FormsPublicAccessKey } from "@/lib/web3forms"
+import { submitApplicationToWeb3FormsClient } from "@/lib/web3forms-application"
 import type { ApplicationFormValues } from "@/types/application"
 import { cn } from "@/lib/utils"
 
@@ -168,17 +169,24 @@ export function ApplicationForm({ formsEnabled = true }: ApplicationFormProps) {
     setReference(ref)
 
     try {
-      const body = new FormData()
-      Object.entries(data).forEach(([k, val]) => {
-        if (typeof val === "boolean") body.append(k, val ? "true" : "false")
-        else body.append(k, String(val ?? ""))
-      })
-      body.append("applicationReference", ref)
+      // Text-only JSON — same approach as Contact (no PDF / file attachments).
+      let sent = false
+      const publicKey = getWeb3FormsPublicAccessKey()
+      if (publicKey) {
+        const result = await submitApplicationToWeb3FormsClient(data, ref)
+        if (result.ok) sent = true
+      }
 
-      const res = await fetch("/api/application", { method: "POST", body })
-      const json = (await res.json()) as { error?: string; message?: string; reference?: string }
-      if (!res.ok) {
-        throw new Error(json.error || `Could not send application. Email ${inbox}.`)
+      if (!sent) {
+        const res = await fetch("/api/application", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({ ...data, applicationReference: ref }),
+        })
+        const json = (await res.json()) as { error?: string; message?: string; reference?: string }
+        if (!res.ok) {
+          throw new Error(json.error || `Could not send application. Email ${inbox}.`)
+        }
       }
 
       setStatus({
