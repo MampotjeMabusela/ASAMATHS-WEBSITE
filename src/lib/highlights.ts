@@ -49,10 +49,13 @@ export const HIGHLIGHT_ITEMS: Highlight[] = [
     description: "",
   },
   {
-    id: "culture-none",
+    id: "culture-merry-christmas",
     category: "culture",
-    title: "No Updates",
-    description: "",
+    title: "Merry Christmas to all parents and students",
+    description: "Wishing our school family a joyful Christmas season.",
+    when: "25 Dec 2026",
+    startDate: "2026-12-25",
+    endDate: "2026-12-25",
   },
   {
     id: "academic-prize-giving-day",
@@ -71,6 +74,15 @@ export const HIGHLIGHT_ITEMS: Highlight[] = [
     when: "15–18 Oct 2026",
     startDate: "2026-10-15",
     endDate: "2026-10-18",
+  },
+  {
+    id: "general-happy-new-year-2027",
+    category: "general",
+    title: "Happy New Year 2027",
+    description: "Warm New Year wishes to all parents and students.",
+    when: "1 Jan 2027",
+    startDate: "2027-01-01",
+    endDate: "2027-01-01",
   },
 ]
 
