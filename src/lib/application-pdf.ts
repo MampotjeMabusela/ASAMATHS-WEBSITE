@@ -14,8 +14,12 @@ const MARGIN_L = 14
 const MARGIN_R = 196
 const CONTENT_W = MARGIN_R - MARGIN_L
 /** Reserved bottom band so body text never collides with the footer. */
-const FOOTER_BAND = 16
+const FOOTER_BAND = 22
 const PAGE_BOTTOM = 297 - FOOTER_BAND
+
+function schoolDescription(): string {
+  return `An independent ${SCHOOL_INFO.phase.toLowerCase()} in ${SCHOOL_INFO.suburb}, ${SCHOOL_INFO.city}, dedicated to providing quality education and fostering a disciplined, cohesive learning environment.`
+}
 
 function loadLogoDataUrl(): string | null {
   try {
@@ -39,7 +43,6 @@ function ensureSpace(doc: jsPDF, y: number, needed: number): number {
 /** Draw footer once per page at the end — never call mid-document (avoids overlapping text). */
 function drawPageFooter(doc: jsPDF, pageNum: number, totalPages: number) {
   const pageH = doc.internal.pageSize.getHeight()
-  const footerY = pageH - 8
 
   // Clear the footer band so nothing from the body shows through / stacks.
   doc.setFillColor(255, 255, 255)
@@ -47,16 +50,23 @@ function drawPageFooter(doc: jsPDF, pageNum: number, totalPages: number) {
 
   doc.setDrawColor(LINE.r, LINE.g, LINE.b)
   doc.setLineWidth(0.2)
-  doc.line(MARGIN_L, pageH - 14, MARGIN_R, pageH - 14)
+  doc.line(MARGIN_L, pageH - FOOTER_BAND + 2, MARGIN_R, pageH - FOOTER_BAND + 2)
 
   doc.setFont("helvetica", "normal")
-  doc.setFontSize(7)
+  doc.setFontSize(6.5)
   doc.setTextColor(MUTED.r, MUTED.g, MUTED.b)
 
-  const left = `${SCHOOL_INFO.shortName} — Online Admission Application`
-  const right = `Page ${pageNum} of ${totalPages}`
-  doc.text(left, MARGIN_L, footerY, { maxWidth: CONTENT_W - 28 })
-  doc.text(right, MARGIN_R, footerY, { align: "right" })
+  const lines = [
+    `${SCHOOL_INFO.shortName} · ${BRAND.motto} — Online Admission Application`,
+    SCHOOL_INFO.address,
+    `${SCHOOL_INFO.phone} · WhatsApp ${SCHOOL_INFO.whatsapp} · ${SCHOOL_INFO.email}`,
+    `${SCHOOL_INFO.officeHours} · Page ${pageNum} of ${totalPages}`,
+  ]
+  let fy = pageH - FOOTER_BAND + 6
+  for (const line of lines) {
+    doc.text(line, MARGIN_L, fy, { maxWidth: CONTENT_W })
+    fy += 3.2
+  }
 }
 
 function applyFooters(doc: jsPDF) {
@@ -282,7 +292,15 @@ function drawHeader(doc: jsPDF, logoDataUrl: string | null): number {
   doc.text(fitText(doc, BRAND.motto, textMaxW), textX, mottoY)
 
   // Form title sits fully below the logo + name block (no overlap).
-  let y = Math.max(top + logoSize, mottoY + 4) + 6
+  let y = Math.max(top + logoSize, mottoY + 4) + 3
+
+  doc.setFont("helvetica", "normal")
+  doc.setFontSize(7)
+  doc.setTextColor(MUTED.r, MUTED.g, MUTED.b)
+  const blurb = doc.splitTextToSize(schoolDescription(), CONTENT_W) as string[]
+  doc.text(blurb.slice(0, 3), MARGIN_L, y)
+  y += Math.min(blurb.length, 3) * 3.4 + 4
+
   doc.setFont("helvetica", "bold")
   doc.setFontSize(13)
   doc.setTextColor(INK.r, INK.g, INK.b)
