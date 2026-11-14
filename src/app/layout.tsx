@@ -5,10 +5,9 @@ import { Header } from "@/components/layout/header"
 import { SkipLink } from "@/components/shared/skip-link"
 import { Footer } from "@/components/layout/footer"
 import { ScrollToTop } from "@/components/shared/scroll-to-top"
-import { FestiveDecor } from "@/components/shared/festive-decor"
 import { AsaChat } from "@/components/shared/asa-chat"
 import { WhatsAppFloat } from "@/components/shared/whatsapp-float"
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { BRAND, SCHOOL_INFO } from "@/lib/constants"
 
@@ -73,7 +72,6 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body className="flex min-h-screen min-w-0 flex-col font-sans">
         <SkipLink />
-        <FestiveDecor />
         <Header />
         <main id="main-content" className="flex-1 scroll-mt-28" tabIndex={-1}>
           {children}
