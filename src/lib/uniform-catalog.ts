@@ -24,7 +24,7 @@ export type UniformPriceList = {
 }
 
 /** Bump when any public uniform item image changes so browsers fetch fresh files. */
-export const UNIFORM_IMAGES_VERSION = "41"
+export const UNIFORM_IMAGES_VERSION = "42"
 
 export function uniformItemSrc(path: string): string {
   const base = path.split("?")[0] ?? path
@@ -144,7 +144,7 @@ const GRAY_RED_TIE_IMAGES: UniformItemImage[] = [
 
 const GRAY_RED_SOCKS_IMAGES: UniformItemImage[] = [
   {
-    src: uniformItemSrc("/images/uniform/items/gray-red-socks.png"),
+    src: uniformItemSrc("/images/uniform/items/gray-red-socks.jpg"),
     alt: "Grey school socks with red stripes",
   },
 ]
@@ -307,7 +307,13 @@ export const UNIFORM_PRICE_LISTS: UniformPriceList[] = [
         showImages: true,
         paymentUrl: "https://pay.yoco.com/r/vrP0NK",
       },
-      { id: "gray-red-socks", name: "Gray and Red Socks", price: "R100.00", images: GRAY_RED_SOCKS_IMAGES },
+      {
+        id: "gray-red-socks",
+        name: "Gray and Red Socks",
+        price: "R200.00",
+        images: GRAY_RED_SOCKS_IMAGES,
+        showImages: true,
+      },
       {
         id: "sun-hat",
         name: "Sun hat",

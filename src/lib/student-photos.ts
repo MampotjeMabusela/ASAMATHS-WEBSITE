@@ -19,7 +19,7 @@ export const STUDENT_PHOTOS = {
 } as const
 
 /** Bump when any public site photo is reprocessed so browsers fetch fresh files. */
-export const SITE_PHOTOS_VERSION = "4k6"
+export const SITE_PHOTOS_VERSION = "4k7"
 
 export function photoSrc(path: string): string {
   const base = path.split("?")[0] ?? path
@@ -91,6 +91,97 @@ export const CAMPUS_GALLERY_ITEMS: GalleryItem[] = [
     title: "Here to help",
     caption: "Our office team supports admissions, fees, and family enquiries.",
     alt: "School administrator working at a desk in the Asamaths Institute office with awards displayed nearby.",
+  },
+]
+
+/** School trip to Port Elizabeth (P.E.) — see /public/images/gallery/school-trip-pe. */
+export const SCHOOL_TRIP_PE_PHOTOS = {
+  departureSuitcase: "/images/gallery/school-trip-pe/pe-01-departure-suitcase.jpg",
+  learnerTracksuitParking: "/images/gallery/school-trip-pe/pe-02-learner-tracksuit-parking.jpg",
+  learnerSuitcaseParking: "/images/gallery/school-trip-pe/pe-03-learner-suitcase-parking.jpg",
+  learnerAirportOrangeSuitcase: "/images/gallery/school-trip-pe/pe-04-learner-airport-orange-suitcase.jpg",
+  staffIndoorArchway: "/images/gallery/school-trip-pe/pe-05-staff-indoor-archway.jpg",
+  learnerShellCoast: "/images/gallery/school-trip-pe/pe-06-learner-shell-coast.jpg",
+  learnerAirportPinkLuggage: "/images/gallery/school-trip-pe/pe-07-learner-airport-pink-luggage.jpg",
+  learnerCoastalWalk: "/images/gallery/school-trip-pe/pe-08-learner-coastal-walk.jpg",
+  learnerSandDrawing: "/images/gallery/school-trip-pe/pe-09-learner-sand-drawing.jpg",
+  learnerBeachSitting: "/images/gallery/school-trip-pe/pe-10-learner-beach-sitting.jpg",
+  learnerBeachTurquoise: "/images/gallery/school-trip-pe/pe-11-learner-beach-turquoise.jpg",
+  staffBeachSundress: "/images/gallery/school-trip-pe/pe-12-staff-beach-sundress.jpg",
+} as const
+
+export const SCHOOL_TRIP_PE_GALLERY_ITEMS: GalleryItem[] = [
+  {
+    src: SCHOOL_TRIP_PE_PHOTOS.departureSuitcase,
+    title: "Ready for the journey",
+    caption: "Departing for the school trip to Port Elizabeth.",
+    alt: "Staff member with blue suitcase ready for the Asamaths school trip to Port Elizabeth.",
+  },
+  {
+    src: SCHOOL_TRIP_PE_PHOTOS.learnerTracksuitParking,
+    title: "Travel day",
+    caption: "Learners in school tracksuit arriving for the trip.",
+    alt: "Learner in blue and white Asamaths tracksuit standing in a sunny parking lot before the Port Elizabeth trip.",
+  },
+  {
+    src: SCHOOL_TRIP_PE_PHOTOS.learnerSuitcaseParking,
+    title: "Packed and ready",
+    caption: "Suitcases packed for the Port Elizabeth adventure.",
+    alt: "Learner in blue tracksuit with a black suitcase standing on a crosswalk during the school trip departure.",
+  },
+  {
+    src: SCHOOL_TRIP_PE_PHOTOS.learnerAirportOrangeSuitcase,
+    title: "At the airport",
+    caption: "Checking in and boarding for Port Elizabeth.",
+    alt: "Learner in blue and white school tracksuit holding an orange suitcase at the airport terminal.",
+  },
+  {
+    src: SCHOOL_TRIP_PE_PHOTOS.staffIndoorArchway,
+    title: "Exploring P.E.",
+    caption: "Staff and learners enjoying local venues on the trip.",
+    alt: "Staff member posing in a wooden arched doorway during the Asamaths school trip to Port Elizabeth.",
+  },
+  {
+    src: SCHOOL_TRIP_PE_PHOTOS.learnerShellCoast,
+    title: "Coastal discovery",
+    caption: "Finding shells along the Port Elizabeth shoreline.",
+    alt: "Learner in green school shirt holding a large seashell on a coastal path with the ocean behind.",
+  },
+  {
+    src: SCHOOL_TRIP_PE_PHOTOS.learnerAirportPinkLuggage,
+    title: "Arriving safely",
+    caption: "Happy faces at the terminal with trip luggage.",
+    alt: "Smiling learner in blue and white tracksuit with pink Hello Kitty luggage at the airport baggage claim.",
+  },
+  {
+    src: SCHOOL_TRIP_PE_PHOTOS.learnerCoastalWalk,
+    title: "Coastal walk",
+    caption: "Walking the dunes and paths near the beach.",
+    alt: "Learner in green shirt and blue tracksuit walking a sandy coastal path during the Port Elizabeth trip.",
+  },
+  {
+    src: SCHOOL_TRIP_PE_PHOTOS.learnerSandDrawing,
+    title: "Beach play",
+    caption: "Drawing in the sand by the ocean.",
+    alt: "Learner kneeling on the beach drawing a circle in the sand with the ocean waves behind.",
+  },
+  {
+    src: SCHOOL_TRIP_PE_PHOTOS.learnerBeachSitting,
+    title: "By the waves",
+    caption: "A sunny moment on the Port Elizabeth beach.",
+    alt: "Young learner sitting on the sand in a swimsuit with ocean waves rolling behind during the school trip.",
+  },
+  {
+    src: SCHOOL_TRIP_PE_PHOTOS.learnerBeachTurquoise,
+    title: "Seaside smiles",
+    caption: "Enjoying the beach on the school trip to P.E.",
+    alt: "Learner smiling on the Port Elizabeth beach in turquoise swimwear with the ocean in the background.",
+  },
+  {
+    src: SCHOOL_TRIP_PE_PHOTOS.staffBeachSundress,
+    title: "Beach day",
+    caption: "Sunshine and sea air on the Port Elizabeth trip.",
+    alt: "Staff member in a colourful sundress and sun hat standing on the beach during the school trip to Port Elizabeth.",
   },
 ]
 

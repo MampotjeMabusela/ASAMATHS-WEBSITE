@@ -5,10 +5,9 @@ import { PageIntro } from "@/components/shared/page-intro"
 import { GalleryFeatured } from "@/components/gallery/gallery-featured"
 import { GalleryGrid } from "@/components/gallery/gallery-grid"
 import { PageBanner } from "@/components/shared/page-banner"
-import { CAMPUS_PHOTOS } from "@/lib/student-photos"
+import { CAMPUS_PHOTOS, GALLERY_ITEMS, SCHOOL_TRIP_PE_GALLERY_ITEMS } from "@/lib/student-photos"
 import { CTABanner } from "@/components/sections/cta-banner"
 import { SCHOOL_INFO } from "@/lib/constants"
-import { GALLERY_ITEMS } from "@/lib/student-photos"
 
 export const metadata: Metadata = {
   title: "Gallery",
@@ -44,6 +43,22 @@ export default function GalleryPage() {
           <GalleryFeatured />
 
           <GalleryGrid items={GALLERY_ITEMS} />
+
+          <FadeIn delay={0.2}>
+            <div id="school-trip-pe" className="mt-14 scroll-mt-28">
+              <div className="mb-6 text-center">
+                <p className="text-sm font-semibold uppercase tracking-wider text-primary-600">Highlights</p>
+                <h2 className="mt-1 font-display text-2xl font-bold text-gray-900 sm:text-3xl">
+                  School Trip To P.E
+                </h2>
+                <p className="mx-auto mt-2 max-w-2xl text-sm text-gray-600 sm:text-base">
+                  Moments from our learners&apos; and staff trip to Port Elizabeth — travel day, coastal walks, and
+                  beach time.
+                </p>
+              </div>
+              <GalleryGrid items={SCHOOL_TRIP_PE_GALLERY_ITEMS} />
+            </div>
+          </FadeIn>
 
           <FadeIn delay={0.55}>
             <p className="mt-10 text-center text-gray-600">
