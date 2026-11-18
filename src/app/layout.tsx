@@ -8,6 +8,8 @@ import { ScrollToTop } from "@/components/shared/scroll-to-top"
 import { FestiveDecor } from "@/components/shared/festive-decor"
 import { AsaChat } from "@/components/shared/asa-chat"
 import { WhatsAppFloat } from "@/components/shared/whatsapp-float"
+import Script from "next/script"
+import { ThemeProvider } from "@/components/theme/theme-provider"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { BRAND, SCHOOL_INFO } from "@/lib/constants"
@@ -70,18 +72,23 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
       <body className="flex min-h-screen min-w-0 flex-col font-sans">
-        <SkipLink />
-        <FestiveDecor />
-        <Header />
-        <main id="main-content" className="flex-1 scroll-mt-28" tabIndex={-1}>
-          {children}
-        </main>
-        <Footer />
-        <ScrollToTop />
-        <WhatsAppFloat />
-        <AsaChat />
+        <Script id="asamaths-theme-init" strategy="beforeInteractive">
+          {`(function(){try{var t=localStorage.getItem("asamaths-theme");if(t==="dark"||t==="light"){document.documentElement.classList.toggle("dark",t==="dark");document.documentElement.style.colorScheme=t;}}catch(e){}})();`}
+        </Script>
+        <ThemeProvider>
+          <SkipLink />
+          <FestiveDecor />
+          <Header />
+          <main id="main-content" className="flex-1 scroll-mt-28" tabIndex={-1}>
+            {children}
+          </main>
+          <Footer />
+          <ScrollToTop />
+          <WhatsAppFloat />
+          <AsaChat />
+        </ThemeProvider>
         <Analytics />
         <SpeedInsights />
       </body>

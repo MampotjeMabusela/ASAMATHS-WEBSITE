@@ -16,10 +16,12 @@ export const STUDENT_PHOTOS = {
   mathChalkboardLesson: "/images/students/math-chalkboard-lesson.png",
   productiveCollaborations: "/images/students/productive-collaborations.png",
   classroomCelebration: "/images/students/classroom-celebration.png",
+  /** Homepage Our Core Values — top learners awards group photo */
+  coreValuesAwardsGroup: "/images/gallery/top-performing-learners/tpl-01-group-awards-ceremony.jpg",
 } as const
 
 /** Bump when any public site photo is reprocessed so browsers fetch fresh files. */
-export const SITE_PHOTOS_VERSION = "4k7"
+export const SITE_PHOTOS_VERSION = "4k9"
 
 export function photoSrc(path: string): string {
   const base = path.split("?")[0] ?? path
@@ -182,6 +184,97 @@ export const SCHOOL_TRIP_PE_GALLERY_ITEMS: GalleryItem[] = [
     title: "Beach day",
     caption: "Sunshine and sea air on the Port Elizabeth trip.",
     alt: "Staff member in a colourful sundress and sun hat standing on the beach during the school trip to Port Elizabeth.",
+  },
+]
+
+/** Top performing learners — awards & Mathematics Olympiad (see /public/images/gallery/top-performing-learners). */
+export const TOP_PERFORMING_LEARNERS_PHOTOS = {
+  awardsGroup: "/images/gallery/top-performing-learners/tpl-01-group-awards-ceremony.jpg",
+  mathsOlympiadGroup: "/images/gallery/top-performing-learners/tpl-02-maths-olympiad-group.jpg",
+  learnerTrophy: "/images/gallery/top-performing-learners/tpl-03-learner-trophy.png",
+  lethaboKoetle: "/images/gallery/top-performing-learners/tpl-04-lethabo-koetle.png",
+  karaboLedwaba: "/images/gallery/top-performing-learners/tpl-05-karabo-ledwaba.png",
+  agnesOnyekachi: "/images/gallery/top-performing-learners/tpl-06-agnes-onyekachi.png",
+  reabotsweJanatwala: "/images/gallery/top-performing-learners/tpl-07-reabotswe-janatwala.png",
+  agnesAdegbotu: "/images/gallery/top-performing-learners/tpl-08-agnes-adegbotu.png",
+  beatriceJowelawala: "/images/gallery/top-performing-learners/tpl-09-beatrice-jowelawala.png",
+  mstBagsGroup: "/images/gallery/top-performing-learners/tpl-10-mst-bags-group.png",
+  classroomCertificatesGroup: "/images/gallery/top-performing-learners/tpl-11-classroom-certificates-group.png",
+  meritCertificatesClass: "/images/gallery/top-performing-learners/tpl-12-merit-certificates-class.jpg",
+} as const
+
+export const TOP_PERFORMING_LEARNERS_GALLERY_ITEMS: GalleryItem[] = [
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.awardsGroup,
+    title: "Top learners celebrated",
+    caption: "Proud achievers with certificates at our awards ceremony.",
+    alt: "Group of Asamaths top performing learners in school uniform holding certificates at an outdoor awards celebration.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.mathsOlympiadGroup,
+    title: "Mathematics Olympiad team",
+    caption: "Provincial Mathematics Olympiad winners with trophies and prizes.",
+    alt: "Four Asamaths learners holding Mathematics Olympiad trophies, certificates, and ZENO prize boxes.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.learnerTrophy,
+    title: "Proud champion",
+    caption: "A top learner celebrating with trophy and prize.",
+    alt: "Asamaths learner in school uniform holding a trophy and prize box against a stone wall.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.lethaboKoetle,
+    title: "Lethabo Koetle",
+    caption: "Mathematics Olympiad provincial certificate and trophy.",
+    alt: "Learner Lethabo Koetle in Asamaths uniform holding a Mathematics Olympiad provincial certificate, trophy, and ZENO 1 prize.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.karaboLedwaba,
+    title: "Karabo Ledwaba — 2nd Place",
+    caption: "Mathematics Olympiad provincial 2nd place.",
+    alt: "Learner Karabo Ledwaba smiling with a Mathematics Olympiad 2nd Place provincial certificate and trophy.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.agnesOnyekachi,
+    title: "Agnes A. Onyekachi — 3rd Place",
+    caption: "Mathematics Olympiad provincial 3rd place.",
+    alt: "Learner Agnes A. Onyekachi with a Mathematics Olympiad 3rd Place provincial certificate and trophy.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.reabotsweJanatwala,
+    title: "Reabotswe Janatwala — 1st Place",
+    caption: "Mathematics Olympiad provincial 1st place.",
+    alt: "Learner Reabotswe Janatwala holding a Mathematics Olympiad 1st Place provincial certificate and trophy.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.agnesAdegbotu,
+    title: "Agnes Adegbotu — 5th Place",
+    caption: "Mathematics Olympiad provincial 5th place.",
+    alt: "Learner Agnes Adegbotu with a Mathematics Olympiad 5th Place provincial certificate and trophy.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.beatriceJowelawala,
+    title: "Beatrice Jowelawala — 1st Place",
+    caption: "Mathematics Olympiad provincial 1st place.",
+    alt: "Learner Beatrice Jowelawala with a Mathematics Olympiad 1st Place provincial certificate, trophy, and ZENO 1 prize.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.mstBagsGroup,
+    title: "MST bag recognition",
+    caption: "Top learners receiving MST bags with a staff member.",
+    alt: "Three Asamaths learners in school uniform holding MST bags beside a staff member in school tracksuit.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.classroomCertificatesGroup,
+    title: "Certificate celebration",
+    caption: "Learners recognised with certificates in class.",
+    alt: "Three Asamaths learners holding certificates with a staff member in a classroom.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.meritCertificatesClass,
+    title: "Merit certificate class",
+    caption: "A proud class of merit certificate recipients.",
+    alt: "Large group of Asamaths learners holding Certificate of Merit awards with a staff member in a classroom.",
   },
 ]
 

@@ -116,35 +116,36 @@ export default function AboutPage() {
             </FadeIn>
 
             <FadeIn direction="left" delay={0.2}>
-              <div className="space-y-6">
-                <div id="asa-about-map" className="scroll-mt-28 overflow-hidden rounded-3xl shadow-lg ring-1 ring-primary-100">
-                  <GoogleMap />
-                </div>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {infoCards.map((card) => (
-                    <Card key={card.label} className="border-gray-100 transition-shadow hover:shadow-md">
-                      <CardContent className="flex items-start gap-3 pt-5">
-                        <card.icon className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary-600" />
-                        <div>
-                          <p className="text-xs uppercase tracking-wide text-gray-400">{card.label}</p>
-                          {card.href ? (
-                            <a
-                              href={card.href}
-                              className="rounded-sm text-sm font-medium text-primary-600 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2"
-                            >
-                              {card.value}
-                            </a>
-                          ) : (
-                            <p className="text-sm font-medium text-gray-900">{card.value}</p>
-                          )}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
+              <div id="asa-about-map" className="scroll-mt-28 overflow-hidden rounded-3xl shadow-lg ring-1 ring-primary-100">
+                <GoogleMap />
               </div>
             </FadeIn>
           </div>
+
+          <FadeIn delay={0.25}>
+            <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+              {infoCards.map((card) => (
+                <Card key={card.label} className="border-gray-100 transition-shadow hover:shadow-md">
+                  <CardContent className="flex items-start gap-3 pt-5">
+                    <card.icon className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary-600" />
+                    <div>
+                      <p className="text-xs uppercase tracking-wide text-gray-400">{card.label}</p>
+                      {card.href ? (
+                        <a
+                          href={card.href}
+                          className="rounded-sm text-sm font-medium text-primary-600 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2"
+                        >
+                          {card.value}
+                        </a>
+                      ) : (
+                        <p className="text-sm font-medium text-gray-900">{card.value}</p>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </FadeIn>
         </div>
       </section>
       <CTABanner />

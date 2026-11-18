@@ -29,12 +29,12 @@ export function Values() {
         <FadeIn className="mb-12 grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           <div className="relative aspect-[16/11] overflow-hidden rounded-3xl shadow-xl ring-1 ring-gray-200/80">
             <Image
-              src={photoSrc(STUDENT_PHOTOS.smile)}
-              alt={`Learners in school uniform during a focused classroom lesson at ${SCHOOL_INFO.shortName}, ${SCHOOL_INFO.suburb}`}
+              src={photoSrc(STUDENT_PHOTOS.coreValuesAwardsGroup)}
+              alt={`Top performing learners in school uniform holding certificates at an awards celebration at ${SCHOOL_INFO.shortName}, ${SCHOOL_INFO.suburb}`}
               fill
               placeholder="blur"
               blurDataURL={STUDENT_PHOTO_BLUR_DATA_URL}
-              className="object-cover object-[center_25%]"
+              className="object-cover object-[center_40%]"
               sizes="(max-width:1024px)100vw,50vw"
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-primary-900/30 via-transparent to-transparent" />

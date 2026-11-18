@@ -10,6 +10,11 @@
     scroll-behavior: smooth;
   }
 
+  .dark {
+    --background: 222.2 47% 6%;
+    --foreground: 210 40% 98%;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     :root {
       scroll-behavior: auto;
@@ -17,11 +22,11 @@
   }
 
   * {
-    @apply border-gray-200;
+    @apply border-gray-200 dark:border-primary-800;
   }
 
   body {
-    @apply min-w-0 overflow-x-hidden bg-white text-gray-900 antialiased;
+    @apply min-w-0 overflow-x-hidden bg-white text-gray-900 antialiased dark:bg-primary-950 dark:text-gray-100;
   }
 }
 
@@ -32,11 +37,23 @@
   }
 
   .glass-effect {
-    @apply bg-white/80 backdrop-blur-md;
+    @apply bg-white/80 backdrop-blur-md dark:bg-primary-950/80;
   }
 
   .text-balance {
     text-wrap: balance;
+  }
+
+  /** Gentle dark-mode page surfaces (does not rewrite utility classes). */
+  .dark main {
+    background-color: #0f172a;
+    color: #f3f4f6;
+  }
+
+  .dark main section.bg-gradient-to-br,
+  .dark main section[class*="from-primary-50"],
+  .dark main section[class*="to-white"] {
+    background-image: linear-gradient(to bottom right, #0f172a, #172554) !important;
   }
 }
 

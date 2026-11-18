@@ -5,7 +5,12 @@ import { PageIntro } from "@/components/shared/page-intro"
 import { GalleryFeatured } from "@/components/gallery/gallery-featured"
 import { GalleryGrid } from "@/components/gallery/gallery-grid"
 import { PageBanner } from "@/components/shared/page-banner"
-import { CAMPUS_PHOTOS, GALLERY_ITEMS, SCHOOL_TRIP_PE_GALLERY_ITEMS } from "@/lib/student-photos"
+import {
+  CAMPUS_PHOTOS,
+  GALLERY_ITEMS,
+  SCHOOL_TRIP_PE_GALLERY_ITEMS,
+  TOP_PERFORMING_LEARNERS_GALLERY_ITEMS,
+} from "@/lib/student-photos"
 import { CTABanner } from "@/components/sections/cta-banner"
 import { SCHOOL_INFO } from "@/lib/constants"
 
@@ -43,6 +48,21 @@ export default function GalleryPage() {
           <GalleryFeatured />
 
           <GalleryGrid items={GALLERY_ITEMS} />
+
+          <FadeIn delay={0.15}>
+            <div id="top-performing-learners" className="mt-14 scroll-mt-28">
+              <div className="mb-6 text-center">
+                <p className="text-sm font-semibold uppercase tracking-wider text-primary-600">Achievements</p>
+                <h2 className="mt-1 font-display text-2xl font-bold text-gray-900 sm:text-3xl">
+                  Top Performing Learners
+                </h2>
+                <p className="mx-auto mt-2 max-w-2xl text-sm text-gray-600 sm:text-base">
+                  Celebrating excellence — awards ceremony moments and Mathematics Olympiad provincial achievers.
+                </p>
+              </div>
+              <GalleryGrid items={TOP_PERFORMING_LEARNERS_GALLERY_ITEMS} />
+            </div>
+          </FadeIn>
 
           <FadeIn delay={0.2}>
             <div id="school-trip-pe" className="mt-14 scroll-mt-28">
