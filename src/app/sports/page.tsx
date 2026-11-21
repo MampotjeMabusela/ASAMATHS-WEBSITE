@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import { ArrowRight, Calendar, Info, Trophy } from "lucide-react"
@@ -10,6 +11,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { SCHOOL_INFO } from "@/lib/constants"
 import { TEMPORARY_VISIBILITY } from "@/lib/feature-flags"
+import { photoSrc } from "@/lib/student-photos"
+import { STUDENT_PHOTO_BLUR_DATA_URL } from "@/lib/student-photo-blur"
 import {
   SPORTS_INTRO,
   SPORTS_PROGRAMS,
@@ -51,25 +54,55 @@ export default function SportsPage() {
                 <h2 className="font-display text-2xl font-bold text-gray-900">Sports programmes</h2>
               </FadeIn>
               <div className="grid gap-4 sm:grid-cols-2">
-                {SPORTS_PROGRAMS.map((program, index) => (
-                  <FadeIn key={program.id} delay={0.1 + index * 0.03}>
-                    <Card className="h-full border-gray-100 shadow-sm transition-shadow hover:shadow-md">
-                      <CardHeader className="pb-2">
-                        <CardTitle className="font-display text-lg">{program.name}</CardTitle>
-                        {program.seasons ? (
-                          <Badge variant="secondary" className="mt-2 w-fit text-xs">
-                            {program.seasons}
-                          </Badge>
-                        ) : null}
-                      </CardHeader>
-                      <CardContent>
-                        <CardDescription className="max-w-none text-sm leading-relaxed text-gray-600">
-                          {program.description}
-                        </CardDescription>
-                      </CardContent>
-                    </Card>
-                  </FadeIn>
-                ))}
+                {SPORTS_PROGRAMS.map((program, index) => {
+                  const hasImages = Boolean(program.images?.length)
+                  return (
+                    <FadeIn
+                      key={program.id}
+                      delay={0.1 + index * 0.03}
+                      className={hasImages ? "sm:col-span-2" : undefined}
+                    >
+                      <Card
+                        id={program.id === "netball" ? "asa-sports-netball" : undefined}
+                        className="h-full scroll-mt-28 border-gray-100 shadow-sm transition-shadow hover:shadow-md"
+                      >
+                        <CardHeader className="pb-2">
+                          <CardTitle className="font-display text-lg">{program.name}</CardTitle>
+                          {program.seasons ? (
+                            <Badge variant="secondary" className="mt-2 w-fit text-xs">
+                              {program.seasons}
+                            </Badge>
+                          ) : null}
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                          <CardDescription className="max-w-none text-sm leading-relaxed text-gray-600">
+                            {program.description}
+                          </CardDescription>
+                          {hasImages ? (
+                            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                              {program.images!.map((image) => (
+                                <figure
+                                  key={image.src}
+                                  className="relative aspect-[3/4] overflow-hidden rounded-xl ring-1 ring-primary-100"
+                                >
+                                  <Image
+                                    src={photoSrc(image.src)}
+                                    alt={image.alt}
+                                    fill
+                                    placeholder="blur"
+                                    blurDataURL={STUDENT_PHOTO_BLUR_DATA_URL}
+                                    className="object-cover"
+                                    sizes="(max-width:640px)100vw,(max-width:1024px)50vw,33vw"
+                                  />
+                                </figure>
+                              ))}
+                            </div>
+                          ) : null}
+                        </CardContent>
+                      </Card>
+                    </FadeIn>
+                  )
+                })}
               </div>
             </div>
 

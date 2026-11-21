@@ -1,9 +1,40 @@
+export type SportProgramImage = {
+  src: string
+  alt: string
+}
+
 export type SportProgram = {
   id: string
   name: string
   description: string
   seasons?: string
+  /** Optional programme photos (shown only on that sport’s card). */
+  images?: SportProgramImage[]
 }
+
+/** Netball team photos — see /public/images/sports/netball. */
+export const NETBALL_PHOTOS: SportProgramImage[] = [
+  {
+    src: "/images/sports/netball/netball-01-team-court.jpg",
+    alt: "Asamaths netball learners in neon bibs posing with a coach on the outdoor court.",
+  },
+  {
+    src: "/images/sports/netball/netball-02-team-coaches.jpg",
+    alt: "Asamaths girls netball team and coaches posing together on the sports court.",
+  },
+  {
+    src: "/images/sports/netball/netball-03-match-day-group.jpg",
+    alt: "Asamaths netball team in yellow bibs with coaches and supporters on match day.",
+  },
+  {
+    src: "/images/sports/netball/netball-04-celebration.jpg",
+    alt: "Asamaths netball players in blue uniforms celebrating playfully on the green court.",
+  },
+  {
+    src: "/images/sports/netball/netball-05-green-grey-team.jpg",
+    alt: "Asamaths youth netball team in green and grey kit posing with coaches outdoors.",
+  },
+]
 
 export type SportsFixture = {
   id: string
@@ -36,6 +67,7 @@ export const SPORTS_PROGRAMS: SportProgram[] = [
     description:
       "Popular among foundation and intermediate learners. Skills sessions cover passing, movement, and court positioning, with matches arranged against neighbouring schools where possible.",
     seasons: "Term 2",
+    images: NETBALL_PHOTOS,
   },
   {
     id: "volleyball",
