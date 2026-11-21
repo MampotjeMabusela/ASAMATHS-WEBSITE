@@ -22,6 +22,11 @@ export type Highlight = {
   endDate?: string
   /** 24-hour time HH:mm */
   time?: string
+  /**
+   * When false, the item stays on the Calendar but is hidden from the homepage
+   * Highlights box. Defaults to true.
+   */
+  showInHighlights?: boolean
 }
 
 export type HighlightsWeek = {
@@ -55,12 +60,25 @@ export const HIGHLIGHT_ITEMS: Highlight[] = [
     description: "",
   },
   {
+    id: "academic-none",
+    category: "academic",
+    title: "No Updates",
+    description: "",
+  },
+  {
+    id: "general-none",
+    category: "general",
+    title: "No Updates",
+    description: "",
+  },
+  {
     id: "academic-prize-giving-day",
     category: "academic",
     title: "Prize Giving Day",
     description: "",
     startDate: "2026-10-23",
     endDate: "2026-10-23",
+    showInHighlights: false,
   },
   {
     id: "general-port-elizabeth-trip",
@@ -69,8 +87,13 @@ export const HIGHLIGHT_ITEMS: Highlight[] = [
     description: "",
     startDate: "2026-10-15",
     endDate: "2026-10-18",
+    showInHighlights: false,
   },
 ]
+
+function isShownInHighlights(item: Highlight): boolean {
+  return item.showInHighlights !== false
+}
 
 /** Highlights with week label and update date derived from today. */
 export function getCurrentHighlights(now = new Date()): HighlightsWeek {
@@ -81,6 +104,11 @@ export function getCurrentHighlights(now = new Date()): HighlightsWeek {
     weekLabel: formatWeekLabel(today),
     updatedAt,
     updatedLabel: formatShortDate(today),
-    items: HIGHLIGHT_ITEMS,
+    items: HIGHLIGHT_ITEMS.filter(isShownInHighlights),
   }
+}
+
+/** Full highlight list including calendar-only items (single source for dated events). */
+export function getAllHighlightItems(): Highlight[] {
+  return HIGHLIGHT_ITEMS
 }

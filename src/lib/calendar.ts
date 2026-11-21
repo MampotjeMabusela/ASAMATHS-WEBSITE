@@ -1,6 +1,6 @@
-import { toIsoDate } from "@/lib/dates"
+import { getCurrentDate, toIsoDate } from "@/lib/dates"
 import {
-  getCurrentHighlights,
+  getAllHighlightItems,
   HIGHLIGHT_CATEGORY_LABELS,
   type Highlight,
   type HighlightCategory,
@@ -52,10 +52,12 @@ export function highlightToCalendarEvent(item: Highlight, fallbackDate: string):
   }
 }
 
-/** Calendar events derived from the current Highlights list (single source of truth). */
+/** Calendar events derived from dated Highlights (includes calendar-only items). */
 export function getCalendarEventsFromHighlights(now = new Date()): CalendarEvent[] {
-  const { items, updatedAt } = getCurrentHighlights(now)
-  return items.map((item) => highlightToCalendarEvent(item, updatedAt))
+  const fallbackDate = toIsoDate(getCurrentDate(now))
+  return getAllHighlightItems()
+    .filter((item) => Boolean(item.startDate))
+    .map((item) => highlightToCalendarEvent(item, fallbackDate))
 }
 
 export function formatCalendarMonthLabel(yearMonth: string): string {
