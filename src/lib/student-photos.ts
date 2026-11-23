@@ -202,6 +202,14 @@ export const TOP_PERFORMING_LEARNERS_PHOTOS = {
   classroomCertificatesGroup: "/images/gallery/top-performing-learners/tpl-11-classroom-certificates-group.png",
   meritCertificatesClass: "/images/gallery/top-performing-learners/tpl-12-merit-certificates-class.jpg",
   moleleRemoratile: "/images/gallery/top-performing-learners/tpl-13-molele-remoratile.jpg",
+  grade6Achievement2024: "/images/gallery/top-performing-learners/tpl-14-grade6-achievement-2024.jpg",
+  bestInMathematicsGrade4: "/images/gallery/top-performing-learners/tpl-15-best-in-mathematics-grade4.jpg",
+  mukwelaAckin: "/images/gallery/top-performing-learners/tpl-16-mukwela-ackin.jpg",
+  awardsCertificateLearner: "/images/gallery/top-performing-learners/tpl-17-awards-certificate-learner.jpg",
+  awardsTrophyLearner: "/images/gallery/top-performing-learners/tpl-18-awards-trophy-learner.jpg",
+  awardsCeremonyLearner: "/images/gallery/top-performing-learners/tpl-19-awards-ceremony-learner.jpg",
+  awardsCertificateTrophy: "/images/gallery/top-performing-learners/tpl-20-awards-certificate-trophy.jpg",
+  awardsProudLearner: "/images/gallery/top-performing-learners/tpl-21-awards-proud-learner.jpg",
 } as const
 
 export const TOP_PERFORMING_LEARNERS_GALLERY_ITEMS: GalleryItem[] = [
@@ -282,6 +290,54 @@ export const TOP_PERFORMING_LEARNERS_GALLERY_ITEMS: GalleryItem[] = [
     title: "Molele Remoratile — Most Disciplined Learner",
     caption: "Grade 3 Most Disciplined Learner award, 2024.",
     alt: "Learner Molele Remoratile with an educator at the awards ceremony, holding a Most Disciplined Learner Grade 3 certificate for 2024.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.grade6Achievement2024,
+    title: "Grade 6 Certificate of Achievement",
+    caption: "Proud Grade 6 learner recognised at the 2024 awards ceremony.",
+    alt: "Asamaths Grade 6 learner holding a trophy beside an educator with a Certificate of Achievement for 2024 at the awards ceremony.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.bestInMathematicsGrade4,
+    title: "Best in Mathematics — Grade 4",
+    caption: "Grade 4 Best in Mathematics award with trophies.",
+    alt: "Asamaths Grade 4 learner holding a Best in Mathematics certificate and trophy beside a staff member at the awards ceremony.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.mukwelaAckin,
+    title: "Mukwela Ackin — Most Disciplined Learner",
+    caption: "Grade 5 Most Disciplined Learner award, 2024.",
+    alt: "Learner Mukwela Ackin with an educator at the awards ceremony, holding a Most Disciplined Learner Grade 5 certificate and trophy for 2024.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.awardsCertificateLearner,
+    title: "Awards ceremony recognition",
+    caption: "A learner celebrated with a certificate on stage.",
+    alt: "Asamaths learner and educator holding a certificate together at the outdoor awards ceremony stage.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.awardsTrophyLearner,
+    title: "Trophy and certificate award",
+    caption: "A top learner recognised with certificate and trophy.",
+    alt: "Asamaths learner holding a certificate beside an educator with a trophy at the awards ceremony.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.awardsCeremonyLearner,
+    title: "Proud awards recipient",
+    caption: "Celebrating achievement at the school awards ceremony.",
+    alt: "Asamaths learner holding a certificate beside an educator with a trophy at the balloon-decorated awards stage.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.awardsCertificateTrophy,
+    title: "Certificate and trophy celebration",
+    caption: "A smiling learner with certificate and trophy on stage.",
+    alt: "Asamaths learner smiling while holding a certificate and trophy beside an educator at the awards ceremony.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.awardsProudLearner,
+    title: "Awards stage celebration",
+    caption: "Another proud moment from the awards ceremony.",
+    alt: "Asamaths learner holding a certificate beside an educator with a trophy in front of the awards stage decorations.",
   },
 ]
 
