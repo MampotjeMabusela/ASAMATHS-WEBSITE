@@ -201,6 +201,7 @@ export const TOP_PERFORMING_LEARNERS_PHOTOS = {
   mstBagsGroup: "/images/gallery/top-performing-learners/tpl-10-mst-bags-group.png",
   classroomCertificatesGroup: "/images/gallery/top-performing-learners/tpl-11-classroom-certificates-group.png",
   meritCertificatesClass: "/images/gallery/top-performing-learners/tpl-12-merit-certificates-class.jpg",
+  moleleRemoratile: "/images/gallery/top-performing-learners/tpl-13-molele-remoratile.jpg",
 } as const
 
 export const TOP_PERFORMING_LEARNERS_GALLERY_ITEMS: GalleryItem[] = [
@@ -236,27 +237,27 @@ export const TOP_PERFORMING_LEARNERS_GALLERY_ITEMS: GalleryItem[] = [
   },
   {
     src: TOP_PERFORMING_LEARNERS_PHOTOS.agnesOnyekachi,
-    title: "Agnes A. Onyekachi — 3rd Place",
+    title: "Agnes Adegbolu — 3rd Place",
     caption: "Mathematics Olympiad provincial 3rd place.",
-    alt: "Learner Agnes A. Onyekachi with a Mathematics Olympiad 3rd Place provincial certificate and trophy.",
+    alt: "Learner Agnes Adegbolu with a Mathematics Olympiad 3rd Place provincial certificate and trophy.",
   },
   {
     src: TOP_PERFORMING_LEARNERS_PHOTOS.reabotsweJanatwala,
-    title: "Reabotswe Janatwala — 1st Place",
+    title: "Reabetswe Tauatswala — 1st Place",
     caption: "Mathematics Olympiad provincial 1st place.",
-    alt: "Learner Reabotswe Janatwala holding a Mathematics Olympiad 1st Place provincial certificate and trophy.",
+    alt: "Learner Reabetswe Tauatswala holding a Mathematics Olympiad 1st Place provincial certificate and trophy.",
   },
   {
     src: TOP_PERFORMING_LEARNERS_PHOTOS.agnesAdegbotu,
-    title: "Agnes Adegbotu — 5th Place",
+    title: "Agnes Adegbolu — 5th Place",
     caption: "Mathematics Olympiad provincial 5th place.",
-    alt: "Learner Agnes Adegbotu with a Mathematics Olympiad 5th Place provincial certificate and trophy.",
+    alt: "Learner Agnes Adegbolu with a Mathematics Olympiad 5th Place provincial certificate and trophy.",
   },
   {
     src: TOP_PERFORMING_LEARNERS_PHOTOS.beatriceJowelawala,
-    title: "Beatrice Jowelawala — 1st Place",
+    title: "Reabetswe Tauatswala — 1st Place",
     caption: "Mathematics Olympiad provincial 1st place.",
-    alt: "Learner Beatrice Jowelawala with a Mathematics Olympiad 1st Place provincial certificate, trophy, and ZENO 1 prize.",
+    alt: "Learner Reabetswe Tauatswala with a Mathematics Olympiad 1st Place provincial certificate, trophy, and ZENO 1 prize.",
   },
   {
     src: TOP_PERFORMING_LEARNERS_PHOTOS.mstBagsGroup,
@@ -275,6 +276,12 @@ export const TOP_PERFORMING_LEARNERS_GALLERY_ITEMS: GalleryItem[] = [
     title: "Merit certificate class",
     caption: "A proud class of merit certificate recipients.",
     alt: "Large group of Asamaths learners holding Certificate of Merit awards with a staff member in a classroom.",
+  },
+  {
+    src: TOP_PERFORMING_LEARNERS_PHOTOS.moleleRemoratile,
+    title: "Molele Remoratile — Most Disciplined Learner",
+    caption: "Grade 3 Most Disciplined Learner award, 2024.",
+    alt: "Learner Molele Remoratile with an educator at the awards ceremony, holding a Most Disciplined Learner Grade 3 certificate for 2024.",
   },
 ]
 
