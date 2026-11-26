@@ -39,10 +39,7 @@ import {
   getInquiryInbox,
   getWeb3FormsPublicAccessKey,
 } from "@/lib/web3forms"
-import {
-  EMPTY_APPLICATION_FILES,
-  submitApplicationToWeb3FormsClient,
-} from "@/lib/web3forms-application"
+import { submitApplicationToWeb3FormsClient } from "@/lib/web3forms-application"
 import type { ApplicationFormValues } from "@/types/application"
 import { cn } from "@/lib/utils"
 
@@ -183,11 +180,7 @@ export function ApplicationForm({ formsEnabled = true }: ApplicationFormProps) {
        */
       const publicKey = getWeb3FormsPublicAccessKey()
       if (publicKey) {
-        const result = await submitApplicationToWeb3FormsClient(
-          data,
-          EMPTY_APPLICATION_FILES,
-          ref
-        )
+        const result = await submitApplicationToWeb3FormsClient(data, ref)
         if (!result.ok) {
           throw new Error(
             `${result.detail} You can also email ${inbox} with reference ${ref}.`

@@ -219,7 +219,6 @@ async function postApplicationJson(accessKey: string, data: ApplicationFormValue
  */
 export async function submitApplicationToWeb3FormsClient(
   data: ApplicationFormValues,
-  _files: ApplicationFiles = EMPTY_APPLICATION_FILES,
   reference: string
 ): Promise<{ ok: true } | { ok: false; status?: number; detail: string }> {
   const accessKey = getWeb3FormsPublicAccessKey()
@@ -252,7 +251,6 @@ export async function submitApplicationToWeb3FormsClient(
 
 export async function submitApplicationToWeb3Forms(
   data: ApplicationFormValues,
-  _files: ApplicationFiles = EMPTY_APPLICATION_FILES,
   reference: string
 ): Promise<{ ok: true } | { ok: false; status?: number; detail: string }> {
   const accessKey = getWeb3FormsAccessKey() || getWeb3FormsPublicAccessKey()
