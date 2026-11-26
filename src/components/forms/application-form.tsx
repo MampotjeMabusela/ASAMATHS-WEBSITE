@@ -8,6 +8,7 @@ import {
   ArrowLeft,
   ArrowRight,
   CheckCircle2,
+  Download,
   Loader2,
   User,
   Users,
@@ -96,9 +97,17 @@ type ApplicationFormProps = {
   formsEnabled?: boolean
 }
 
+type SubmittedApplication = {
+  data: ApplicationFormValues
+  reference: string
+}
+
 export function ApplicationForm({ formsEnabled = true }: ApplicationFormProps) {
   const [stepIndex, setStepIndex] = useState(0)
   const [reference, setReference] = useState<string | null>(null)
+  const [submitted, setSubmitted] = useState<SubmittedApplication | null>(null)
+  const [downloadingPdf, setDownloadingPdf] = useState(false)
+  const [pdfError, setPdfError] = useState<string | null>(null)
   const [status, setStatus] = useState<{
     type: "success" | "error" | null
     message: string
@@ -108,6 +117,42 @@ export function ApplicationForm({ formsEnabled = true }: ApplicationFormProps) {
   const inbox = getInquiryInbox()
   // Prefer the public key so the browser can submit (required on Web3Forms Free).
   const configured = formsEnabled || Boolean(getWeb3FormsPublicAccessKey())
+
+  const downloadFilledPdf = useCallback(async (payload: SubmittedApplication) => {
+    setDownloadingPdf(true)
+    setPdfError(null)
+    try {
+      const res = await fetch("/api/application/pdf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/pdf" },
+        body: JSON.stringify({
+          ...payload.data,
+          applicationReference: payload.reference,
+        }),
+      })
+      if (!res.ok) {
+        const json = (await res.json().catch(() => ({}))) as { error?: string }
+        throw new Error(json.error || "Could not download your filled application.")
+      }
+      const blob = await res.blob()
+      const url = URL.createObjectURL(blob)
+      const anchor = document.createElement("a")
+      anchor.href = url
+      anchor.download = `Asamaths-Admission-${payload.reference}.pdf`
+      document.body.appendChild(anchor)
+      anchor.click()
+      anchor.remove()
+      URL.revokeObjectURL(url)
+    } catch (err) {
+      setPdfError(
+        err instanceof Error
+          ? err.message
+          : `Could not download PDF. Email ${inbox} with reference ${payload.reference}.`
+      )
+    } finally {
+      setDownloadingPdf(false)
+    }
+  }, [inbox])
 
   const applicationDefaults = useMemo(() => getApplicationDefaultValues(), [])
   const schoolYears = useMemo(() => getApplicationSchoolYears(), [])
@@ -168,9 +213,12 @@ export function ApplicationForm({ formsEnabled = true }: ApplicationFormProps) {
 
   const onSubmit = async (data: ApplicationFormValues) => {
     setStatus({ type: null, message: "" })
+    setPdfError(null)
 
     const ref = createApplicationReference()
     setReference(ref)
+    const snapshot: SubmittedApplication = { data, reference: ref }
+    setSubmitted(snapshot)
 
     try {
       /**
@@ -253,16 +301,45 @@ export function ApplicationForm({ formsEnabled = true }: ApplicationFormProps) {
           </a>{" "}
           quoting your reference.
         </p>
-        <Button
-          type="button"
-          className="mt-6 bg-green-700 hover:bg-green-800"
-          onClick={() => {
-            setStatus({ type: null, message: "" })
-            setReference(null)
-          }}
-        >
-          Submit another application
-        </Button>
+        <div className="mx-auto mt-6 flex max-w-md flex-col gap-3 sm:flex-row sm:justify-center">
+          {submitted && (
+            <Button
+              type="button"
+              variant="outline"
+              className="gap-2 border-green-600 bg-white text-green-900 hover:bg-green-100"
+              disabled={downloadingPdf}
+              onClick={() => downloadFilledPdf(submitted)}
+            >
+              {downloadingPdf ? (
+                <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
+              ) : (
+                <Download className="h-4 w-4" aria-hidden />
+              )}
+              {downloadingPdf ? "Preparing PDF…" : "Download filled application"}
+            </Button>
+          )}
+          <Button
+            type="button"
+            className="bg-green-700 hover:bg-green-800"
+            onClick={() => {
+              setStatus({ type: null, message: "" })
+              setReference(null)
+              setSubmitted(null)
+              setPdfError(null)
+            }}
+          >
+            Submit another application
+          </Button>
+        </div>
+        <p className="mx-auto mt-3 max-w-md text-xs text-green-700">
+          You can download a PDF copy of what you submitted to keep for your records, or email it to{" "}
+          {inbox} if you want a backup.
+        </p>
+        {pdfError && (
+          <p role="alert" className="mx-auto mt-2 max-w-md text-xs text-red-700">
+            {pdfError}
+          </p>
+        )}
       </div>
     )
   }
@@ -291,10 +368,39 @@ export function ApplicationForm({ formsEnabled = true }: ApplicationFormProps) {
       {status.type === "error" && (
         <div
           role="alert"
-          className="flex items-start gap-2 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700"
+          className="space-y-3 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700"
         >
-          <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
-          {status.message}
+          <div className="flex items-start gap-2">
+            <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
+            <p>{status.message}</p>
+          </div>
+          {submitted && (
+            <div className="pl-7">
+              <p className="mb-2 text-xs text-red-800">
+                You can still download your filled application and email it to{" "}
+                <a href={`mailto:${inbox}`} className="font-medium underline">
+                  {inbox}
+                </a>
+                .
+              </p>
+              <Button
+                type="button"
+                size="sm"
+                variant="outline"
+                className="gap-2 border-red-300 bg-white text-red-900 hover:bg-red-100"
+                disabled={downloadingPdf}
+                onClick={() => downloadFilledPdf(submitted)}
+              >
+                {downloadingPdf ? (
+                  <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
+                ) : (
+                  <Download className="h-4 w-4" aria-hidden />
+                )}
+                {downloadingPdf ? "Preparing PDF…" : "Download filled application"}
+              </Button>
+              {pdfError && <p className="mt-2 text-xs">{pdfError}</p>}
+            </div>
+          )}
         </div>
       )}
 
