@@ -35,7 +35,14 @@ import {
   applicationFormSchema,
   createApplicationReference,
 } from "@/lib/application-schema"
-import { getInquiryInbox } from "@/lib/web3forms"
+import {
+  getInquiryInbox,
+  getWeb3FormsPublicAccessKey,
+} from "@/lib/web3forms"
+import {
+  EMPTY_APPLICATION_FILES,
+  submitApplicationToWeb3FormsClient,
+} from "@/lib/web3forms-application"
 import type { ApplicationFormValues } from "@/types/application"
 import { cn } from "@/lib/utils"
 
@@ -102,7 +109,8 @@ export function ApplicationForm({ formsEnabled = true }: ApplicationFormProps) {
   }>({ type: null, message: "" })
 
   const inbox = getInquiryInbox()
-  const configured = formsEnabled
+  // Prefer the public key so the browser can submit (required on Web3Forms Free).
+  const configured = formsEnabled || Boolean(getWeb3FormsPublicAccessKey())
 
   const applicationDefaults = useMemo(() => getApplicationDefaultValues(), [])
   const schoolYears = useMemo(() => getApplicationSchoolYears(), [])
@@ -168,17 +176,43 @@ export function ApplicationForm({ formsEnabled = true }: ApplicationFormProps) {
     setReference(ref)
 
     try {
-      const body = new FormData()
-      Object.entries(data).forEach(([k, val]) => {
-        if (typeof val === "boolean") body.append(k, val ? "true" : "false")
-        else body.append(k, String(val ?? ""))
-      })
-      body.append("applicationReference", ref)
+      /**
+       * Web3Forms Free requires browser-side submit. Server/API posts return 403
+       * unless the account is paid and the server IP is safelisted — that was
+       * why parents saw "try again later". Contact already submits from the browser.
+       */
+      const publicKey = getWeb3FormsPublicAccessKey()
+      if (publicKey) {
+        const result = await submitApplicationToWeb3FormsClient(
+          data,
+          EMPTY_APPLICATION_FILES,
+          ref
+        )
+        if (!result.ok) {
+          throw new Error(
+            `${result.detail} You can also email ${inbox} with reference ${ref}.`
+          )
+        }
+      } else {
+        // Fallback when only a server-only key is configured (Pro + IP safelist).
+        const body = new FormData()
+        Object.entries(data).forEach(([k, val]) => {
+          if (typeof val === "boolean") body.append(k, val ? "true" : "false")
+          else body.append(k, String(val ?? ""))
+        })
+        body.append("applicationReference", ref)
 
-      const res = await fetch("/api/application", { method: "POST", body })
-      const json = (await res.json()) as { error?: string; message?: string; reference?: string }
-      if (!res.ok) {
-        throw new Error(json.error || `Could not send application. Email ${inbox}.`)
+        const res = await fetch("/api/application", { method: "POST", body })
+        const json = (await res.json()) as {
+          error?: string
+          message?: string
+          reference?: string
+        }
+        if (!res.ok) {
+          throw new Error(
+            json.error || `Could not send application. Email ${inbox} with reference ${ref}.`
+          )
+        }
       }
 
       setStatus({
@@ -199,7 +233,7 @@ export function ApplicationForm({ formsEnabled = true }: ApplicationFormProps) {
           ? `Connection problem. Try again or email ${inbox} and quote ${ref}.`
           : err instanceof Error
             ? err.message
-            : `Failed to send. Please email ${inbox} directly.`,
+            : `Failed to send. Please email ${inbox} with reference ${ref}.`,
       })
     }
   }
@@ -245,7 +279,9 @@ export function ApplicationForm({ formsEnabled = true }: ApplicationFormProps) {
       <div className="rounded-xl border border-amber-200 bg-amber-50 p-5 text-sm text-amber-900">
         <p className="font-medium">Online applications are almost ready</p>
         <p className="mt-2">
-          The form needs a Web3Forms key (same as Contact). Meanwhile, email{" "}
+          The form needs{" "}
+          <code className="rounded bg-amber-100 px-1">NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY</code>{" "}
+          (same key as Contact, registered to {inbox}). Meanwhile, email{" "}
           <a href={`mailto:${inbox}`} className="font-semibold underline">
             {inbox}
           </a>{" "}

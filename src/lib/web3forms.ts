@@ -13,13 +13,21 @@ export function getWeb3FormsAccessKey(): string | null {
   return process.env.WEB3FORMS_ACCESS_KEY?.trim() || null
 }
 
-/** Client-side key — Web3Forms documents this as safe to expose in the browser. */
+/**
+ * Client-side key — Web3Forms documents this as safe to expose in the browser.
+ * Required for Contact and Online Application on the Free plan (browser submit).
+ */
 export function getWeb3FormsPublicAccessKey(): string | null {
   return process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim() || null
 }
 
 export function isWeb3FormsConfigured(): boolean {
   return Boolean(getWeb3FormsAccessKey() || getWeb3FormsPublicAccessKey())
+}
+
+/** True when the browser can submit directly (needed for reliable applications). */
+export function isWeb3FormsBrowserSubmitReady(): boolean {
+  return Boolean(getWeb3FormsPublicAccessKey())
 }
 
 export function buildWeb3FormsPayload(data: ContactFormData, accessKey: string) {

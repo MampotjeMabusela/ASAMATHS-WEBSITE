@@ -114,9 +114,15 @@ export async function POST(request: Request) {
     const reference =
       String(form.get("applicationReference") ?? "").trim() || createApplicationReference()
     const inbox = getInquiryInbox()
+    // Prefer browser submit from ApplicationForm (Web3Forms Free). This route is fallback.
     const result = await submitApplicationWithPdf(parsed.data, files, reference)
 
     if (!result.ok) {
+      console.error("Application Web3Forms failure:", {
+        reference,
+        status: result.status,
+        detail: result.detail,
+      })
       return NextResponse.json(
         {
           error: `${result.detail} You can also email ${inbox} with reference ${reference}.`,

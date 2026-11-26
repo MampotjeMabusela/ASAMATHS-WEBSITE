@@ -2,6 +2,13 @@ import { SCHOOL_INFO } from "@/lib/constants"
 import { WEB3FORMS_SUBMIT_URL, getWeb3FormsAccessKey, getWeb3FormsPublicAccessKey } from "@/lib/web3forms"
 import type { ApplicationFiles, ApplicationFormValues } from "@/types/application"
 
+export const EMPTY_APPLICATION_FILES: ApplicationFiles = {
+  birthCertificate: null,
+  latestReport: null,
+  transferLetter: null,
+  guardianIdCopy: null,
+}
+
 const FILE_FIELD_MAP: Record<keyof ApplicationFiles, string> = {
   birthCertificate: "birth_certificate",
   latestReport: "latest_report",
@@ -153,6 +160,16 @@ async function parseWeb3FormsResponse(res: Response) {
   if (res.ok && json.success) {
     return { ok: true as const }
   }
+  // Free-plan server posts often return 403 ("method not allowed").
+  if (res.status === 403) {
+    return {
+      ok: false as const,
+      status: 403,
+      detail:
+        apiMessage ||
+        "Email service blocked a server submission. The form will retry from your browser.",
+    }
+  }
   return {
     ok: false as const,
     status: res.status,
@@ -160,9 +177,49 @@ async function parseWeb3FormsResponse(res: Response) {
   }
 }
 
+/** JSON payload — same pattern as Contact (reliable on Web3Forms Free from the browser). */
+export function buildApplicationJsonPayload(
+  data: ApplicationFormValues,
+  accessKey: string,
+  reference: string
+) {
+  const learnerName = `${data.learnerFirstName} ${data.learnerLastName}`.trim()
+  return {
+    access_key: accessKey,
+    subject: `Online Application ${reference} — ${learnerName} (${data.gradeApplyingFor})`,
+    from_name: `${SCHOOL_INFO.shortName} Website`,
+    name: `${data.guardian1FirstName} ${data.guardian1LastName}`.trim(),
+    email: data.guardian1Email,
+    phone: data.guardian1Phone,
+    replyto: data.guardian1Email,
+    application_reference: reference,
+    school_year: data.schoolYear,
+    learner_name: learnerName,
+    grade_applying: data.gradeApplyingFor,
+    message: buildApplicationMessage(data, reference),
+    botcheck: "",
+  }
+}
+
+async function postApplicationJson(accessKey: string, data: ApplicationFormValues, reference: string) {
+  const res = await fetch(WEB3FORMS_SUBMIT_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(buildApplicationJsonPayload(data, accessKey, reference)),
+  })
+  return parseWeb3FormsResponse(res)
+}
+
+/**
+ * Browser-side submit (required on Web3Forms Free).
+ * Retries once on network failure so parents are not blocked by a brief blip.
+ */
 export async function submitApplicationToWeb3FormsClient(
   data: ApplicationFormValues,
-  files: ApplicationFiles,
+  _files: ApplicationFiles = EMPTY_APPLICATION_FILES,
   reference: string
 ): Promise<{ ok: true } | { ok: false; status?: number; detail: string }> {
   const accessKey = getWeb3FormsPublicAccessKey()
@@ -170,25 +227,32 @@ export async function submitApplicationToWeb3FormsClient(
     return { ok: false, detail: "Application form is not configured yet." }
   }
 
-  try {
-    const formData = buildApplicationFormData(data, files, accessKey, reference)
-    const res = await fetch(WEB3FORMS_SUBMIT_URL, {
-      method: "POST",
-      body: formData,
-    })
-    return parseWeb3FormsResponse(res)
-  } catch (err) {
-    console.error("Web3Forms application client error:", err)
-    return {
-      ok: false,
-      detail: "Could not reach the email service. Please try again or email the school directly.",
+  let lastError: { ok: false; status?: number; detail: string } | null = null
+
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const result = await postApplicationJson(accessKey, data, reference)
+      if (result.ok) return result
+      lastError = result
+      // Do not retry hard API rejections (invalid key, spam, etc.)
+      if (result.status && result.status >= 400 && result.status !== 408 && result.status !== 429) {
+        return result
+      }
+    } catch (err) {
+      console.error("Web3Forms application client error:", err)
+      lastError = {
+        ok: false,
+        detail: "Could not reach the email service. Please try again or email the school directly.",
+      }
     }
   }
+
+  return lastError ?? { ok: false, detail: "Could not send your application. Please try again." }
 }
 
 export async function submitApplicationToWeb3Forms(
   data: ApplicationFormValues,
-  files: ApplicationFiles,
+  _files: ApplicationFiles = EMPTY_APPLICATION_FILES,
   reference: string
 ): Promise<{ ok: true } | { ok: false; status?: number; detail: string }> {
   const accessKey = getWeb3FormsAccessKey() || getWeb3FormsPublicAccessKey()
@@ -197,12 +261,8 @@ export async function submitApplicationToWeb3Forms(
   }
 
   try {
-    const formData = buildApplicationFormData(data, files, accessKey, reference)
-    const res = await fetch(WEB3FORMS_SUBMIT_URL, {
-      method: "POST",
-      body: formData,
-    })
-    return parseWeb3FormsResponse(res)
+    // Prefer JSON (no attachments) — server FormData + files fails on Free plan.
+    return await postApplicationJson(accessKey, data, reference)
   } catch (err) {
     console.error("Web3Forms application server error:", err)
     return {
